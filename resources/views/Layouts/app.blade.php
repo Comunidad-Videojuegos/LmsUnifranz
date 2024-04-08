@@ -11,3 +11,5 @@
     <h1 class="text-4xl font-extrabold text-red-700 bg-gray-50">EL SISTEMA COMO TAL</h1>
 </body>
 </html>
+
+// NO SE QUE PASA PERO VOY A ENLOQUECER

@@ -9,7 +9,6 @@ class USR_Rol extends Model
 {
   use HasFactory;
   protected $table = 'USR_Rol';
-//   private $date = date('y-m-d');
 
   protected $fillable = ['name', 'createDate', 'updateDate', 'deleteDate'];
 
@@ -18,10 +17,6 @@ class USR_Rol extends Model
     'updateDate' => 'datetime',
     'deleteDate' => 'datetime',
     'name' => 'string'
-  ];
-
-  protected $attributes = [
-    // 'createDate' => $date
   ];
 
   public function userRoles()

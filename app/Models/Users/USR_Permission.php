@@ -14,7 +14,7 @@ class USR_Permission extends Model
     protected $fillable = ['name', 'permissionKey'];
 
     protected $casts = [
-        'name' => 'string',
+        'name' => 'string', // integer, string, datetime
         'permissionKey' => 'string'
     ];
 

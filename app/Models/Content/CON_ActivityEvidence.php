@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class USR_Permission extends Model
+class ActivityEvidence extends Model
 {
     use HasFactory;
 
@@ -31,11 +31,11 @@ class USR_Permission extends Model
 
     public function activity()
     {
-        return $this->belongsTo(CON_Activity::class);
+        return $this->hasMany(CON_Activity::class, 'ActivityId');
     }
 
     public function type()
     {
-        return $this->belongsTo(CON_ActivityType::class);
+        return $this->belongsTo(CON_ActivityType::class, 'TypeId');
     }
 }

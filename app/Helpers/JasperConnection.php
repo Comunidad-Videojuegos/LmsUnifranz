@@ -30,8 +30,8 @@ class JasperConnection
         // LUGAR DE LOS REPORTES DE ENTRADA Y DE SALIDA
         $name_file = time() . '_'. $init_name_file;
         $this->setValueFile = false;
-        $this->inputFile = $dir_proyect . "\\app\\Reports\\";
-        $this->outputFile = $dir_proyect . "\\public\\documents\\$name_file";
+        $this->inputFile = $dir_proyect . "/app/Reports/";
+        $this->outputFile = $dir_proyect . "/public/documents/$name_file";
 
         // CONECTAR A LA BD
         $this->setDatabase();

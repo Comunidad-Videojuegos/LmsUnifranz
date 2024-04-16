@@ -28,7 +28,7 @@ Route::get('/demo/{param}', function (string $param) {
 
     // Definir los parámetros
     $params = array(
-        "LogoEmpresa" => getcwd() . "\\imgs\\google_logo.png",
+        "LogoEmpresa" => getcwd() . "/imgs/google_logo.png",
         "Param1" => $param
     );
 

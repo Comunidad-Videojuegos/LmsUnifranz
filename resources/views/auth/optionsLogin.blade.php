@@ -14,7 +14,7 @@
       <br>
       <div class="flex justify-center flex-col">
         <div class="p-1">
-            <a href="/google-auth/redirect">
+            <a href="/google/auth/redirect">
                 <button class="text-center bg-slate-300 py-2 px-1 w-full rounded-xl border-spacing-0.5 broder-black
                   hover:bg-slate-700 hover:text-white active:bg-slate-900
                   transition-colors duration-150 ease-in-out">

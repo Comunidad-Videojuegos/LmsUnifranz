@@ -1,38 +1,22 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/google-auth/redirect', function () {
-    return Socialite::driver('google')->redirect();
-});
+// REPORTES
+Route::prefix('report')->group(function()
+    {
+        include __DIR__. '/report/demo.report.php';
+    }
+);
 
-Route::get('/google-auth/callback', function () {
-    $user_google = Socialite::driver('google')->stateless()->user();
-    $user = User::updateOrCreate([
-        'google_id' => $user_google->id,
-    ],
-    [
-        'name' => $user_google->name,
-        'email' => $user_google->email,
-    ]);
-    Auth::login($user);
-
-    return redirect('/welcome');
-});
+// RUTAS PARA EL CONSUMO DE API DE GOOGLE
+Route::prefix('google')->group(function()
+    {
+        include __DIR__. '/google/auth.google.php';
+    }
+);
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('auth.optionsLogin');

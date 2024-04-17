@@ -84,6 +84,7 @@ class JasperConnection
                     $this->parameters,
                     $this->connection
                 );
+                print($jasperReader->output());
 
                 // Ejecutar el proceso
                 $jasperReader->execute();

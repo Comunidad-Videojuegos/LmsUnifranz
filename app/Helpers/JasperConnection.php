@@ -48,8 +48,8 @@ class JasperConnection
         $db_name = env('DB_JASPER', 'master');
         $db_user = env('DB_USER_JASPER', 'sa');
         $db_pass = env('DB_PASS_JASPER', '1234');
-        $db_encript = env('DB_ENC_JASPER', 'true');
-        $db_cert = env('DB_TRUST_SERVER_CERTIFICATE', 'true');
+        $db_encript = (env('DB_ENC_JASPER', 'true') == 1 ? "true" : "false");
+        $db_cert = (env('DB_TRUST_SERVER_CERTIFICATE', 'true') == 1 ? "true" : "false");
 
 
         $this->connection = [

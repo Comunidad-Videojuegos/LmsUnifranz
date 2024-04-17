@@ -48,7 +48,8 @@ class JasperConnection
         $db_name = env('DB_JASPER', 'master');
         $db_user = env('DB_USER_JASPER', 'sa');
         $db_pass = env('DB_PASS_JASPER', '1234');
-        $db_encript = env('DB_ENCRYPT', 'true');
+        $db_encript = env('DB_ENC_JASPER', 'true');
+        $db_cert = env('DB_TRUST_SERVER_CERTIFICATE', 'true');
 
 
         $this->connection = [
@@ -57,7 +58,7 @@ class JasperConnection
             "password" => $db_pass,
             "host" => $db_server,
             "database" => $db_name,
-            "jdbc_url" => "jdbc:sqlserver://$db_server;databaseName=$db_name;encrypt=$db_encript",
+            "jdbc_url" => "jdbc:sqlserver://$db_server;databaseName=$db_name;encrypt=$db_encript;trustServerCertificate=$db_cert",
             "jdbc_driver" => "com.microsoft.sqlserver.jdbc.SQLServerDriver"
         ];
     }

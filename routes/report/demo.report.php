@@ -37,5 +37,6 @@ Route::get('/demo/{param}', function (string $param) {
     $jasper->executeReport();
 
     $outputFile = $jasper->getOutputFile();
-    print($outputFile);
+
+    headersPdf($outputFile, $name_file, "pdf");
 });

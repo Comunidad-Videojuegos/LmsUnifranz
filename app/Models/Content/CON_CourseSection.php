@@ -12,19 +12,19 @@ class CourseSection extends Model
     protected $table = 'CON_CourseSection';
 
     protected $fillable = [
-        'CourseId',
-        'Name',
-        'Assistance',
-        'InitDate',
-        'EndDate',
+        'courseid',
+        'name',
+        'assistance',
+        'initdate',
+        'enddate',
     ];
 
     protected $casts = [
-        'CourseId' => 'integer',
-        'Name' => 'string',
-        'Assistance' => 'bit',
-        'InitDate' => 'datetime',
-        'EndDate' => 'datetime',
+        'courseid' => 'integer',
+        'name' => 'string',
+        'assistance' => 'bit',
+        'initdate' => 'datetime',
+        'enddate' => 'datetime',
     ];
     public function CourseSection()
     {

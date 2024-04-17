@@ -12,17 +12,17 @@ class FormFields extends Model
     protected $table = 'CON_FormFields';
 
     protected $fillable = [
-        'TypeId',
-        'FormId',
-        'Question',
-        'OrderNumber'
+        'typeid',
+        'formid',
+        'question',
+        'ordernumber'
     ];
 
     protected $casts = [
-        'TypeId' => 'integer',
-        'FormId' => 'integer',
-        'Question' => 'string',
-        'OrderNumber' => 'integer'
+        'typeid' => 'integer',
+        'formid' => 'integer',
+        'question' => 'string',
+        'ordernumber' => 'integer'
     ];
     public function formfile()
     {
@@ -30,10 +30,10 @@ class FormFields extends Model
     }
     public function typefiled()
     {
-        return $this->belongsTo(CON_FormFieldType::class, 'TypeId');
+        return $this->belongsTo(CON_FormFieldType::class, 'typeid');
     }
     public function form()
     {
-        return $this->belongsTo(CON_Form::class, 'FormId');
+        return $this->belongsTo(CON_Form::class, 'formid');
     }
 }

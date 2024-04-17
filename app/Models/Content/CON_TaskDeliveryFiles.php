@@ -12,20 +12,20 @@ class TaskDeliveryFiles extends Model
     protected $table = 'CON_TaskDeliveryFiles';
 
     protected $fillable = [
-        'DeliveryId',
-        'LinkFile',
-        'TypeFile',
-        'SizeFile'
+        'deliveryid',
+        'linkfile',
+        'typefile',
+        'sizefile'
     ];
 
     protected $casts = [
-        'DeliveryId' => 'integer',
-        'LinkFile' => 'string',
-        'TypeFile' => 'string',
-        'SizeFile' => 'integer'
+        'deliveryid' => 'integer',
+        'linkfile' => 'string',
+        'typefile' => 'string',
+        'sizefile' => 'integer'
     ];
     public function formfile()
     {
-        return $this->belongsTo(RPT_TaskDeliveries::class, 'DeliveryId');
+        return $this->belongsTo(RPT_TaskDeliveries::class, 'deliveryid');
     }
 }

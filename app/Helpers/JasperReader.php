@@ -14,10 +14,13 @@ class JasperReader
 
     function __construct()
     {
-        $this->path_executable = base_path() . '/vendor/bin/'; //Path to executable
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $this->windows = true;
+            $this->path_executable = base_path() . '/vendor/bin/'; //Path to executable
+        }else
+        {
+            $this->path_executable = "/usr/local/bin/";
         }
     }
 

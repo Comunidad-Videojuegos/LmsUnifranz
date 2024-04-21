@@ -81,7 +81,7 @@ class JasperReader
 
     public function execute($run_as_user = false)
     {
-        if ($run_as_user !== false && strlen($run_as_user > 0) && !$this->windows) {
+        if (!$this->windows) {
             $this->the_command = 'su -u ' . escapeshellarg($run_as_user) . " -c " . escapeshellarg($this->the_command);
         }
 

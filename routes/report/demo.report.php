@@ -24,7 +24,7 @@ function headersPdf($output, $name_file, $type)
 Route::get('/demo/{param}', function (string $param) {
 
     $name_file = "Demo";
-    $jasper = new JasperConnection($name_file, array("pdf"));
+    $jasper = new JasperConnection($name_file, "pdf");
 
     // Definir los parámetros
     $params = array(
@@ -32,7 +32,7 @@ Route::get('/demo/{param}', function (string $param) {
         "Param1" => $param
     );
 
-    $jasper->setFileReport("ReportDemo");
+    $jasper->setFileReport("ReportDemoGrafic");
     $jasper->parameters = $params;
     $jasper->executeReport();
 

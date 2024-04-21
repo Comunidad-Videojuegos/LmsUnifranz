@@ -1,7 +1,7 @@
 <?php
 namespace App\Helpers;
 
-use JasperPHP\JasperPHP;
+use App\Helpers\JasperReader;
 
 class JasperConnection
 {
@@ -9,19 +9,20 @@ class JasperConnection
     private bool $setValueFile;
 
     private string $outputFile;
+    private string $format;
 
     public? array $parameters;
     private? array $connection;
 
     public function __construct(
         string $init_name_file,
-        array $formats = null
+        string $format = null
     ) {
         // FORMATO DE REPORTE
-        if ($formats === null) {
-            $this->formats = ['pdf'];
+        if ($format === null) {
+            $this->format = "pdf";
         } else {
-            $this->formats = $formats;
+            $this->format = $format;
         }
 
         // LECTURA DEL APPSETTINGS.JSON
@@ -39,7 +40,7 @@ class JasperConnection
 
     public function getOutputFile() : string
     {
-        return $this->outputFile.'.'.$this->formats[0];
+        return $this->outputFile.'.'.$this->format;
     }
 
     private function setDatabase(): void
@@ -53,13 +54,9 @@ class JasperConnection
 
 
         $this->connection = [
-            "driver" => "generic",
             "username" => $db_user,
             "password" => $db_pass,
-            "host" => $db_server,
-            "database" => $db_name,
-            "jdbc_url" => "jdbc:sqlserver://$db_server;databaseName=$db_name;encrypt=$db_encript;trustServerCertificate=$db_cert",
-            "jdbc_driver" => "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+            "jdbc_url" => "jdbc:sqlserver://$db_server;databaseName=$db_name;encrypt=$db_encript;trustServerCertificate=$db_cert"
         ];
     }
 
@@ -72,19 +69,18 @@ class JasperConnection
     public function executeReport(): bool
     {
         if ($this->setValueFile) {
-            $jasperReader = new JasperPHP();
+            $jasperReader = new JasperReader();
 
             try {
-                // Compilar el archivo de entrada
-                $jasperReader->compile($this->inputFile);
-
                 // Procesar el archivo de entrada
                 $jasperReader->process(
                     $this->inputFile,
                     $this->outputFile,
-                    $this->formats,
+                    $this->format,
                     $this->parameters,
-                    $this->connection
+                    $this->connection['jdbc_url'],
+                    $this->connection['username'],
+                    $this->connection['password'],
                 );
 
                 // Ejecutar el proceso

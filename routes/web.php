@@ -17,14 +17,21 @@ Route::prefix('google')->group(function()
 );
 
 
+// RUTAS DEL ADMINISTRADOR DEL LMS
+
+
+
+// RUTAS DE INICIO
+
 
 Route::get('/', function () {
     return view('auth.optionsLogin');
 });
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/welcome', function () {
-    return view('welcome');
+Route::get('/admin', function () {
+    return view('layouts.app');
 });

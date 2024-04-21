@@ -12,25 +12,25 @@ class Form extends Model
     protected $table = 'CON_Form';
 
     protected $fillable = [
-        'CourseSectionId',
-        'OrderNumber',
-        'CreateUserId',
-        'Duration',
-        'Calification',
-        'CreationDate',
-        'UpdateDate',
-        'DeleteDate',
+        'coursesectionid',
+        'ordernumber',
+        'createuserid',
+        'duration',
+        'calification',
+        'creationdate',
+        'updatedate',
+        'deletedate',
     ];
 
     protected $casts = [
-        'CourseSectionId' => 'integer',
-        'OrderNumber' => 'integer',
-        'CreateUserId' => 'integer',
-        'Duration' => 'time',
-        'Calification' => 'interger',
-        'CreationDate' => 'datetime',
-        'UpdateDate' => 'datetime',
-        'DeleteDate' => 'datetime:nullable',
+        'coursesectionid' => 'integer',
+        'ordernumber' => 'integer',
+        'createuserid' => 'integer',
+        'duration' => 'time',
+        'calification' => 'interger',
+        'creationdate' => 'datetime',
+        'updatedate' => 'datetime',
+        'deletedate' => 'datetime:nullable',
     ];
 
     public function Form()
@@ -40,6 +40,6 @@ class Form extends Model
 
     public function Coursesection()
     {
-        return $this->belongsTo(CON_CourseSection::class, 'CourseSectionId');
+        return $this->belongsTo(CON_CourseSection::class, 'coursesectionid');
     }
 }

@@ -12,34 +12,34 @@ class Task extends Model
     protected $table = 'CON_Task';
 
     protected $fillable = [
-        'CourseSectionId',
-        'Name',
-        'Description',
-        'Deliveries',
-        'Missing',
-        'Calification',
-        'OrderNumber',
-        'CreationDate',
-        'UpdateDate',
-        'DeleteDate',
+        'coursesectionid',
+        'name',
+        'description',
+        'deliveries',
+        'missing',
+        'calification',
+        'ordernumber',
+        'creationdate',
+        'updatedate',
+        'deletedate',
     ];
 
     protected $casts = [
-        'CourseSectionId' => 'integer',
-        'Name' => 'string',
-        'Description' => 'string',
-        'Deliveries' => 'boolean',
-        'Missing' => 'boolean',
-        'Calification' => 'integer',
-        'OrderNumber' => 'integer',
-        'CreationDate' => 'datetime',
-        'UpdateDate' => 'datetime',
-        'DeleteDate' => 'datetime:nullable',
+        'coursesectionid' => 'integer',
+        'name' => 'string',
+        'description' => 'string',
+        'deliveries' => 'boolean',
+        'missing' => 'boolean',
+        'calification' => 'integer',
+        'ordernumber' => 'integer',
+        'creationdate' => 'datetime',
+        'updatedate' => 'datetime',
+        'deletedate' => 'datetime:nullable',
     ];
 
     public function courseSection()
     {
-        return $this->belongsTo(CON_CourseSection::class, 'CourseSectionId');
+        return $this->belongsTo(CON_CourseSection::class, 'coursesectionid');
     }
 
     public function task()

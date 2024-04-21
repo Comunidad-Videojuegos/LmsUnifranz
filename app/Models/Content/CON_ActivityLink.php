@@ -12,22 +12,22 @@ class ActivityLink extends Model
     protected $table = 'CON_ActivityLink';
 
     protected $fillable = [
-        'ActivityId',
-        'Link',
-        'Meeting',
-        'Material',
-        'Test',
+        'activityid',
+        'link',
+        'meeting',
+        'material',
+        'test',
     ];
 
     protected $casts = [
-        'ActivityId' => 'integer',
-        'Link' => 'string',
-        'Meeting' => 'bit',
-        'Material' => 'bit',
-        'Test' => 'bit'
+        'activityid' => 'integer',
+        'link' => 'string',
+        'meeting' => 'bit',
+        'material' => 'bit',
+        'test' => 'bit'
     ];
     public function activityEvidence()
     {
-        return $this->belongsTo(CON_Activity::class, 'ActivityId');
+        return $this->belongsTo(CON_Activity::class, 'activityid');
     }
 }

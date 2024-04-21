@@ -12,19 +12,19 @@ class ActivityEvidenceType extends Model
     protected $table = 'CON_ActivityEvidenceType';
 
     protected $fillable = [
-        'Name',
-        'Description',
-        'CreationDate',
-        'UpdateDate',
-        'DeleteDate',
+        'name',
+        'description',
+        'creationdate',
+        'updatedate',
+        'deletedate',
     ];
 
     protected $casts = [
-        'Name' => 'string',
-        'Description' => 'string',
-        'CreationDate' => 'datetime',
-        'UpdateDate' => 'datetime',
-        'DeleteDate' => 'datetime:nullable',
+        'name' => 'string',
+        'description' => 'string',
+        'creationdate' => 'datetime',
+        'updatedate' => 'datetime',
+        'deletedate' => 'datetime:nullable',
     ];
     public function activityEvidence()
     {

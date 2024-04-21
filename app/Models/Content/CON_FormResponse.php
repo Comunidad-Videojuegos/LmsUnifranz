@@ -12,23 +12,23 @@ class FormResponse extends Model
     protected $table = 'CON_FormResponse';
 
     protected $fillable = [
-        'FormID',
-        'StudentId',
-        'Calification',
-        'Duration',
-        'CreationDate',
-        'UpdateDate',
-        'DeleteDate',
+        'formid',
+        'studentid',
+        'calification',
+        'duration',
+        'creationdate',
+        'updatedate',
+        'deletedate',
     ];
 
     protected $casts = [
-        'CourseSectionId' => 'integer',
-        'StudentId' => 'integer',
-        'Calification' => 'interger',
-        'Duration' => 'time',
-        'CreationDate' => 'datetime',
-        'UpdateDate' => 'datetime',
-        'DeleteDate' => 'datetime:nullable',
+        'formid' => 'integer',
+        'studentid' => 'integer',
+        'calification' => 'interger',
+        'duration' => 'time',
+        'creationdate' => 'datetime',
+        'updatedate' => 'datetime',
+        'deletedate' => 'datetime:nullable',
     ];
 
     public function Formresponse()
@@ -38,6 +38,6 @@ class FormResponse extends Model
 
     public function CONform()
     {
-        return $this->belongsTo(CON_Form::class, 'FormId');
+        return $this->belongsTo(CON_Form::class, 'formid');
     }
 }

@@ -12,19 +12,19 @@ class TaskFiles extends Model
     protected $table = 'CON_TaskFiles';
 
     protected $fillable = [
-        'TaskId',
-        'Name',
-        'CreationDate',
-        'UpdateDate',
-        'DeleteDate',
+        'taskid',
+        'name',
+        'creationdate',
+        'updatedate',
+        'deletedate',
     ];
 
     protected $casts = [
-        'TaskId' => 'interger',
-        'Name' => 'string',
-        'CreationDate' => 'datetime',
-        'UpdateDate' => 'datetime',
-        'DeleteDate' => 'datetime:nullable',
+        'taskid' => 'interger',
+        'name' => 'string',
+        'creationdate' => 'datetime',
+        'updatedate' => 'datetime',
+        'deletedate' => 'datetime:nullable',
     ];
     public function activityEvidence()
     {

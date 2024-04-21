@@ -12,41 +12,41 @@ class Activity extends Model
     protected $table = 'CON_Activity';
 
     protected $fillable = [
-        'CourseSectionId',
-        'ActivityTypeId',
-        'Virtual',
-        'Name',
-        'Description',
-        'ActivityDate',
-        'Duration',
-        'CreationDate',
-        'UpdateDate',
-        'DeleteDate',
-        'Calification',
-        'ForCourseId',
+        'coursesectionid',
+        'activitytypeid',
+        'virtual',
+        'name',
+        'description',
+        'activitydate',
+        'duration',
+        'creationdate',
+        'updatedate',
+        'deletedate',
+        'calification',
+        'forcourseid',
     ];
 
     protected $casts = [
-        'CourseSectionId' => 'integer',
-        'ActivityTypeId' => 'integer',
-        'Virtual' => 'boolean',
-        'Name' => 'string',
-        'Description' => 'string',
-        'ActivityDate' => 'datetime',
-        'Duration' => 'time',
-        'CreationDate' => 'datetime',
-        'UpdateDate' => 'datetime',
-        'DeleteDate' => 'datetime:nullable',
-        'ForCourseId' => 'integer',
+        'coursesectionid' => 'integer',
+        'activitytypeid' => 'integer',
+        'virtual' => 'boolean',
+        'name' => 'string',
+        'description' => 'string',
+        'activitydate' => 'datetime',
+        'duration' => 'time',
+        'creationdate' => 'datetime',
+        'updatedate' => 'datetime',
+        'deletedate' => 'datetime:nullable',
+        'forcourseid' => 'integer',
     ];
 
     public function courseSection()
     {
-        return $this->belongsTo(CON_CourseSection::class, 'CourseSectionId');
+        return $this->belongsTo(CON_CourseSection::class, 'coursesectionid');
     }
 
     public function activityType()
     {
-        return $this->belongsTo(CON_ActivityType::class, 'ActivityTypeId');
+        return $this->belongsTo(CON_ActivityType::class, 'activitytypeid');
     }
 }

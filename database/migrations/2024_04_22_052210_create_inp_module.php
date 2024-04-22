@@ -124,7 +124,7 @@ return new class extends Migration
             $table->foreign('studentId')->references('id')->on('INP_Students');
             $table->foreign('CareerId')->references('id')->on('INP_Career');
         });
-s
+
         Schema::table('INP_CourseSchedule', function(Blueprint $table){
             $table->foreign('CourseId')->references('id')->on('INP_Courses');
         });

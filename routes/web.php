@@ -2,24 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// REPORTES
+Route::prefix('report')->group(function()
+    {
+        include __DIR__. '/report/demo.report.php';
+    }
+);
+
+// RUTAS PARA EL CONSUMO DE API DE GOOGLE
+Route::prefix('google')->group(function()
+    {
+        include __DIR__. '/google/auth.google.php';
+    }
+);
+
+
+// RUTAS DEL ADMINISTRADOR DEL LMS
+
+
+
+// RUTAS DE INICIO
+
 
 Route::get('/', function () {
     return view('auth.optionsLogin');
 });
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/welcome', function () {
-    return view('welcome');
+Route::get('/admin', function () {
+    return view('layouts.app');
 });

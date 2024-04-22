@@ -20,10 +20,10 @@
         </div>
         <div class="py-3">
           <div class="pb-3">
-            <label for="user_name" class="font-mono font-bold">Contraseña:</label>
+            <label for="user_pass" class="font-mono font-bold">Contraseña:</label>
           </div>
           <div class="text-center">
-            <input type="password" name="user_name" id="user_name" placeholder="Ingrese su contraseña"
+            <input type="password" name="user_pass" id="user_pass" placeholder="Ingrese su contraseña"
             class="py-1.5 pl-5 w-72 rounded-lg outline-neutral-500 font-mono">
           </div>
         </div>

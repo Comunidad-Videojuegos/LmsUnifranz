@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* VARIABLES DE CSS */
+@layer
+base {
+    :root {
+      --bg-color: #000;
+      --tx-color: #fff;
+      --txt2-color: #222;
+    }
+}
+
+
+/* ESTILOS PARA EL TOASTIFY */
+.toast
+{
+    background-color: #000 !important;
+    opacity: 1 !important;
+}
+
+.toast.toast-success
+{
+    color: #0f0 !important;
+}
+#toast-container > .toast.toast-info
+{
+    background-image: none !important;
+}
+.toast.toast-error
+{
+    color: #f00 !important;
+}
+
+.toast.toast-info
+{
+    color: #0fa !important;
+}

@@ -13,8 +13,8 @@ return new class extends Migration
     Schema::create('USR_Permission', function (Blueprint $table) {
       $table->id();
     });
-    DB::statement("ALTER TABLE USR_Permission ADD name varchar(30)");
-    DB::statement("ALTER TABLE USR_Permission ADD permissionKey varchar(256)");
+    DB::statement("ALTER TABLE USR_Permission ADD name varchar(30) NOT NULL");
+    DB::statement("ALTER TABLE USR_Permission ADD permissionKey varchar(256) NOT NULL");
 
     Schema::create('USR_Rol', function (Blueprint $table) {
       $table->id();

@@ -6,10 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Unifranz</title>
     @vite('resources/css/app.css')
+
+    {{-- LINKS PARA USAR TOASTR --}}
+    <link rel="shortcut icon" href="{{asset('imgs/unifranz.jpeg')}}" type="image/x-icon">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
 </head>
 <body>
-    <h1 class="text-4xl font-extrabold text-red-700 bg-gray-50">EL SISTEMA COMO TAL</h1>
+    <div class="h-screen flex flex-row">
+        {{-- MENU LATERAL --}}
+        <div class="bg-[var(--bg-color)] w-1/5 min-w-64 rounded-e-2xl">
+
+            {{-- NAVEGACIÓN EN COMPUTADORA --}}
+            <div class="bg-[var(--bg-color)] w-full h-screen flex flex-col justify-between rounded-e-2xl">
+
+                {{-- CABECERA DE NAVEGACION --}}
+                <div class="h-1/4">
+                    <div class="flex-grow h-full pt-10 pb-10">
+                        <img src="{{asset('imgs/unifranz.jpeg')}}" class="object-contain w-full h-full">
+                    </div>
+                </div>
+                <br><br>
+                {{-- CONTENIDO DE NAVEGACION --}}
+                <div class="h-3/4 relative overflow-auto">
+                    {{-- ITEMS NAV --}}
+                    @for ($i = 0; $i < 5; $i++)
+                        <x-nav-item link="#" title="iTEM {{$i}}"/>
+                    @endfor
+                    {{-- <button class="bg-red-900 text-white" onclick="toasini()">Click toast</button> --}}
+                </div>
+            </div>
+
+            {{-- NAVEGACIÓN EN MOBILE --}}
+            <div class="hidden"></div>
+        </div>
+
+        {{-- CONTENIDO QUE TENDRA POR CADA UNO --}}
+        <div class="">
+
+        </div>
+    </div>
+    <script>
+        function toasini()
+        {
+            toastr.info('We do have the Kapua suite available.', 'Turtle Bay Resort', {timeOut: 20000})
+        }
+    </script>
 </body>
 </html>
-
-// NO SE QUE PASA PERO VOY A ENLOQUECER

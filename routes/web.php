@@ -17,9 +17,13 @@ Route::prefix('google')->group(function()
 );
 
 
-// RUTAS DEL ADMINISTRADOR DEL LMS
+// RUTAS DEL USUARIO CONFIG DEL LMS
 
-
+Route::prefix('admin')->group(function()
+    {
+        include __DIR__. '/settings/config.php';
+    }
+);
 
 // RUTAS DE INICIO
 

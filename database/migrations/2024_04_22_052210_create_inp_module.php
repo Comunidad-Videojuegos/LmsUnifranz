@@ -16,11 +16,11 @@ return new class extends Migration
             $table->id();
         });
         DB::statement("ALTER TABLE INP_AdvertType ADD name varchar(20)");
-        DB::statemnet("ALTER TABLE INP_AdvertType ADD Description varchar(50)");
+        DB::statemnet("ALTER TABLE INP_AdvertType ADD description varchar(50)");
 
         Schema::create('INP_Advert', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('TypeId');
+            $table->unsignedBigInteger('typeId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
@@ -29,13 +29,13 @@ return new class extends Migration
         DB::statement("ALTER TABLE INP_Advert ADD name varchar(20)");
         DB::statemnet("ALTER TABLE INP_Advert ADD description varchar(50)");
         DB::statement("ALTER TABLE INP_Advert ADD duration time");
-        DB::statement("ALTER TABLE INP_Advert ADD forstudent bit");
+        DB::statement("ALTER TABLE INP_Advert ADD forStudents bit");
         DB::statement("ALTER TABLE INP_Advert ADD createUserId int");
 
         Schema::create('INP_AdvertForUsers', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('AdvertId');
-            $table->unsignedBigInteger('RolId');
+            $table->unsignedBigInteger('advertId');
+            $table->unsignedBigInteger('rolId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
@@ -57,7 +57,7 @@ return new class extends Migration
         
         Schema::create('INP_Students', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('CareerId');
+            $table->unsignedBigInteger('careerId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
@@ -70,7 +70,7 @@ return new class extends Migration
 
         Schema::create('INP_Courses', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('InstructorId');
+            $table->unsignedBigInteger('instructorId');
         });
         DB::statement("ALTER TABLE INP_Courses ADD referencesId int");
         DB::statement("ALTER TABLE INP_Courses ADD name varchar(50)");
@@ -83,9 +83,9 @@ return new class extends Migration
 
         Schema::create('INP_CourseInscribed', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('CourseId');
-            $table->unsignedBigInteger('StudentId');
-            $table->unsignedBigInteger('CareerId');
+            $table->unsignedBigInteger('courseId');
+            $table->unsignedBigInteger('studentId');
+            $table->unsignedBigInteger('careerId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
@@ -95,7 +95,7 @@ return new class extends Migration
 
         Schema::create('INP_CourseSchedule', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('CourseId');
+            $table->unsignedBigInteger('courseId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
@@ -107,26 +107,26 @@ return new class extends Migration
 
         //Relaciones
         Schema::table('INP_Advert', function(Blueprint $table){
-            $table->foreign('TypeId')->references('id')->on('INP_AdvertType');
+            $table->foreign('typeId')->references('id')->on('INP_AdvertType');
         });
 
         Schema::table('INP_AdvertForUsers', function(Blueprint $table){
-            $table->foreign('AdvertId')->references('id')->on('INP_Advert');
+            $table->foreign('advertId')->references('id')->on('INP_Advert');
         });
 
         //Parte de abajo
         Schema::table('INP_Students', function(Blueprint $table){
-            $table->forign('CareerId')->references('id')->on('INP_Career');
+            $table->forign('careerId')->references('id')->on('INP_Career');
         });
 
         Schema::table('INP_CourseInscribed', function(Blueprint $table){
             $table->foreign('curseId')->references('id')->on('INP_Courses');
             $table->foreign('studentId')->references('id')->on('INP_Students');
-            $table->foreign('CareerId')->references('id')->on('INP_Career');
+            $table->foreign('careerId')->references('id')->on('INP_Career');
         });
 
         Schema::table('INP_CourseSchedule', function(Blueprint $table){
-            $table->foreign('CourseId')->references('id')->on('INP_Courses');
+            $table->foreign('courseId')->references('id')->on('INP_Courses');
         });
     }
 

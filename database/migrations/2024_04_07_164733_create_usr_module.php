@@ -12,6 +12,7 @@ return new class extends Migration
   {
     Schema::create('USR_Permission', function (Blueprint $table) {
       $table->id();
+      $table ->unsignedBigInteger('sectionId');
     });
     DB::statement("ALTER TABLE USR_Permission ADD name varchar(30) NOT NULL");
     DB::statement("ALTER TABLE USR_Permission ADD permissionKey varchar(255) NOT NULL");
@@ -34,11 +35,10 @@ return new class extends Migration
     });
     DB::statement("ALTER TABLE USR_UserRoles ADD color varchar(10) NOT NULL");
 
-    Schema::create('USR_RolPermissions', function (Blueprint $table) {
+    Schema::create('USR_RolPermission', function (Blueprint $table) {
       $table->id();
       $table ->unsignedBigInteger('permissionId');
       $table ->unsignedBigInteger('rolId');
-      $table ->unsignedBigInteger('sectionId');
     });
     Schema::create('USR_AppSection', function(Blueprint $table)
     {
@@ -55,7 +55,7 @@ return new class extends Migration
   // Reverse the migrations.
   public function down(): void
   {
-    Schema::dropIfExists('USR_RolPermissions');
+    Schema::dropIfExists('USR_RolPermission');
     Schema::dropIfExists('USR_UserRoles');
     Schema::dropIfExists('USR_Rol');
     Schema::dropIfExists('USR_Permission');

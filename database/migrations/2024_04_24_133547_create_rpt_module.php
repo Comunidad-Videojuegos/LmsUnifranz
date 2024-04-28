@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -75,20 +76,20 @@ return new class extends Migration
             $table->integer('corrects');
             $table->integer('incorrects');
         });
-        Schema::create('RPT_FormValues', function(Blueprint $table)
+        Schema::create('RPT_FormValue', function(Blueprint $table)
         {
             $table->id();
             $table->unsignedBigInteger('formFieldId');
             $table->unsignedBigInteger('formResponseId');
             $table->string('value');
         });
-        Schema::create('RPT_FormFieldsResponses', function(Blueprint $table)
+        Schema::create('RPT_FormFieldsResponse', function(Blueprint $table)
         {
             $table->id();
             $table->unsignedBigInteger('formFieldId');
             $table->boolean('correct')->default(0);
         });
-        DB::statement("ALTER TABLE RPT_FormFieldsResponses ADD response varchar(100) NOT NULL");
+        DB::statement("ALTER TABLE RPT_FormFieldsResponse ADD response varchar(100) NOT NULL");
 
         Schema::create('RPT_PlanMaterialProgress', function(Blueprint $table)
         {
@@ -116,6 +117,15 @@ return new class extends Migration
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->useCurrent();
         });
+
+        Schema::create('RPT_ActivityAssistance', function(Blueprint $table)
+        {
+            $table->id();
+            $table->unsignedBigInteger('activityId');
+            $table->unsignedBigInteger('studentId');
+            $table->timestamp('entry');
+            $table->timestamp('exit');
+        });
     }
 
 
@@ -128,13 +138,13 @@ return new class extends Migration
         Schema::dropIfExists('RPT_PlatformActivity');
         Schema::dropIfExists('RPT_PlatformActivityType');
 
-        Schema::dropIfExists('RPT_Progress');
+        Schema::dropIfExists('RPT_TaskProgress');
 
         Schema::dropIfExists('RPT_TaskDeliveries');
 
         Schema::dropIfExists('RPT_FormProgress');
-        Schema::dropIfExists('RPT_FormValues');
-        Schema::dropIfExists('RPT_FormFieldsResponses');
+        Schema::dropIfExists('RPT_FormValue');
+        Schema::dropIfExists('RPT_FormFieldsResponse');
 
         Schema::dropIfExists('RPT_PlanMaterialProgress');
 

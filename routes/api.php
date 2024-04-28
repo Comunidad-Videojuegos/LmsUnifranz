@@ -25,6 +25,14 @@ Route::get('/demojson', function () {
     return response()->json($json);
 });
 
+// COURSES
+
+Route::prefix('courses')->group(function()
+    {
+        include __DIR__. '/content/courses.php';
+    }
+);
+
 
 
 // REPORTES

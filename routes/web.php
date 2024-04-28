@@ -11,6 +11,11 @@ Route::prefix('google')->group(function()
 );
 
 // RUTAS DEL USUARIO CONFIG DEL LMS
+
+Route::get('/admin', function () {
+    return view('layouts.app');
+});
+
 Route::prefix('admin')->group(function()
     {
         include __DIR__. '/admin/config.php';
@@ -29,6 +34,9 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/admin', function () {
-    return view('layouts.app');
-});
+
+
+// RUTAS PARA LA APLICACION DE REACT
+Route::get('/{path?}', function() {
+    return view('layouts.react-app');
+})->where('path', '.*')->name('react');

@@ -6,13 +6,12 @@
         (object)['link' => 'permissions', 'title' => 'Permisos', 'icon' => '300'],
         (object)['link' => 'activity', 'title' => 'Actividades', 'icon' => 'activity'],
         (object)['link' => 'config', 'title' => 'Plataforma', 'icon' => '300'],
-        (object)['link' => 'config', 'title' => 'Irregularidades', 'icon' => '300'],
         (object)['link' => 'config', 'title' => 'Desempeño academico', 'icon' => '300'],
         (object)['link' => 'config', 'title' => 'Transmisiones', 'icon' => 'wifi'],
-        (object)['link' => 'config', 'title' => 'Operaciones', 'icon' => '300'],
         (object)['link' => 'config', 'title' => 'Reuniones', 'icon' => '300'],
         (object)['link' => 'config', 'title' => 'Horarios', 'icon' => 'calendar minus fill'],
         (object)['link' => 'config', 'title' => 'Docentes', 'icon' => '300'],
+        (object)['link' => 'config', 'title' => 'Estudiantes', 'icon' => '300'],
     ];
 @endphp
 

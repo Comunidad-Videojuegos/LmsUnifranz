@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/documents
+/public/react-app
 /storage/*.key
 /storage
 /boostrap/cache

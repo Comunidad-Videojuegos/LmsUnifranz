@@ -12,24 +12,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('COL_TypeNotifications', function (Blueprint $table) {
+        Schema::create('COL_TypeNotification', function (Blueprint $table) {
             $table->id();
-            //$table->timestamps();
         });
-        DB::statement("ALTER TABLE COL_TypeNotifications ADD name varchar(50)");
-        DB::statement("ALTER TABLE COL_TypeNotifications ADD color varchar(50)");
+        DB::statement("ALTER TABLE COL_TypeNotification ADD name varchar(50)");
+        DB::statement("ALTER TABLE COL_TypeNotification ADD color varchar(50)");
 
         Schema::create('COL_Notification', function (Blueprint $table)
         {
             $table->id();
-            $table->unsignedBigInteger('TypeNotificationID');
+            $table->unsignedBigInteger('typeNotificationId');
             $table->timestamp('createDate')->useCurrent();
+            $table->boolean('read');
         });
         DB::statement("ALTER TABLE COL_Notification ADD header varchar(50)");
         DB::statement("ALTER TABLE COL_Notification ADD body varchar(100)");
-        //DB::statement("ALTER TABLE COL_Notification ADD TypeNotification");
-        //DB::statement("ALTER TABLE COL_Notification ADD createDate date");
-        DB::statement("ALTER TABLE COL_Notification ADD read varchar(50)");
 
         Schema::create('COL_Forum', function(Blueprint $table)
         {
@@ -52,13 +49,13 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
-        
+
         });
         DB::statement("ALTER TABLE COL_ForumConversation ADD message nvarchar");
         DB::statement("ALTER TABLE COL_ForumConversation ADD views nvarchar");
         DB::statement("ALTER TABLE COL_ForumConversation ADD answers nvarchar");
 
-        Schema::create('COL_ForumFiles', function (Blueprint $table)
+        Schema::create('COL_ForumFile', function (Blueprint $table)
         {
             $table->id();
             $table->unsignedBigInteger('forumId');
@@ -66,25 +63,11 @@ return new class extends Migration
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
         });
-        DB::statement("ALTER TABLE COL_ForumFiles ADD name varchar(50)");
-        DB::statement("ALTER TABLE COL_ForumFiles ADD description varchar(255)");
-        DB::statement("ALTER TABLE COL_ForumFiles ADD typeFile varchar(10)");
-        DB::statement("ALTER TABLE COL_ForumFiles ADD sizeFile varchar(20)");
-        //Relaciones
-        Schema::table('COL_Notification', function (Blueprint $table)
-        {
-            $table->foreign('typeNotificationsId')->references('id')->on('COL_TypeNotifications');
-        });
-
-        Schema::table('COL_ForumConversation', function (Blueprint $table)
-        {
-            $table->foreign('forumId')->references('id')->on('COL_Forum');
-        });
-
-        Schema::table('COL_ForumFiles', function (Blueprint $table)
-        {
-            $table->foreign('forumId')->references('id')->on('COL_Forum');
-        });
+        DB::statement("ALTER TABLE COL_ForumFile ADD name varchar(50)");
+        DB::statement("ALTER TABLE COL_ForumFile ADD description varchar(255)");
+        DB::statement("ALTER TABLE COL_ForumFile ADD typeFile varchar(10)");
+        DB::statement("ALTER TABLE COL_ForumFile ADD sizeFile varchar(20)");
+        DB::statement("ALTER TABLE COL_ForumFile ADD sizeFileType varchar(5)");
     }
 
     /**
@@ -92,10 +75,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('COL_TypeNotifications');
+        Schema::dropIfExists('COL_TypeNotification');
         Schema::dropIfExists('COL_Notification');
         Schema::dropIfExists('COL_Forum');
-        Schema::dropIfExists('COL_ForumFiles');
+        Schema::dropIfExists('COL_ForumFile');
         Schema::dropIfExists('COL_ForumConversation');
     }
 };

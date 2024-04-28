@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
 
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_Login', function (Blueprint $table)
         {
             $table->id();
@@ -19,15 +18,6 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
         });
 
-        // Refs
-        Schema::table('RPT_Login', function (Blueprint $table)
-        {
-            $table->foreign('userId')->references('id')->on('users');
-        });
-
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_PlatformActivityType', function(Blueprint $table)
         {
             $table->id();
@@ -45,16 +35,7 @@ return new class extends Migration
             $table->timestamp('updateDate')->useCurrent();
         });
 
-        // Refs
-        Schema::table('RPT_PlatformActivity', function(Blueprint $table)
-        {
-            $table->foreign('userId')->references('id')->on('users');
-            $table->foreign('typeId')->references('id')->on('RPT_PlatformActivityType');
-        });
 
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_AdvertViewed', function(Blueprint $table)
         {
             $table->id();
@@ -64,16 +45,6 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
         });
 
-        // Refs
-        Schema::table('RPT_AdvertViewed', function(Blueprint $table)
-        {
-            $table->foreign('advertId')->references('id')->on('INP_Advert');
-            $table->foreign('userId')->references('id')->on('users');
-        });
-
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_TaskProgress', function(Blueprint $table)
         {
             $table->id();
@@ -83,15 +54,6 @@ return new class extends Migration
             $table->integer('calificationTotal');
         });
 
-        // Refs
-        Schema::table('RPT_TaskProgress', function(Blueprint $table)
-        {
-            $table->foreign('courseSectionId')->references('id')->on('CON_CourseSection');
-        });
-
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_TaskDeliveries', function(Blueprint $table)
         {
             $table->id();
@@ -105,16 +67,6 @@ return new class extends Migration
             $table->timestamp('deleteDate')->useCurrent();
         });
 
-        // Refs
-        Schema::table('RPT_TaskDeliveries', function(Blueprint $table)
-        {
-            $table->foreign('taskId')->references('id')->on('CON_Task');
-            $table->foreign('studentId')->references('id')->on('users');
-        });
-
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_FormProgress', function(Blueprint $table)
         {
             $table->id();
@@ -138,25 +90,6 @@ return new class extends Migration
         });
         DB::statement("ALTER TABLE RPT_FormFieldsResponses ADD response varchar(100) NOT NULL");
 
-        // Refs
-        Schema::table('RPT_FormProgress', function(Blueprint $table)
-        {
-            $table->foreign('responseId')->references('id')->on('CON_FormResponse');
-        });
-        Schema::table('RPT_FormValues', function(Blueprint $table)
-        {
-            $table->foreign('formFieldId')->references('id')->on('RPT_FormFields');
-            $table->foreign('formResponseId')->references('id')->on('RPT_FormResponse');
-        });
-        Schema::table('RPT_FormFieldsResponses', function(Blueprint $table)
-        {
-            $table->foreign('formFieldId')->references('id')->on('RPT_FormFields');
-        });
-
-
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_PlanMaterialProgress', function(Blueprint $table)
         {
             $table->id();
@@ -165,15 +98,6 @@ return new class extends Migration
             $table->integer('advance');
         });
 
-        // Refs
-        Schema::table('RPT_PlanMaterialProgress', function(Blueprint $table)
-        {
-            $table->foreign('planMaterialId')->references('id')->on('APR_PlanThemeMaterial');
-        });
-
-
-
-        // ------------------------ New Section Table ------------------------
         Schema::create('RPT_CourseAssistanceType', function(Blueprint $table)
         {
             $table->id();
@@ -191,34 +115,6 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->useCurrent();
-        });
-
-        // Refs
-
-        Schema::table('RPT_CourseAssistance', function(Blueprint $table)
-        {
-            $table->foreign('scheduleId')->references('id')->on('INP_CourseSchedule');
-            $table->foreign('studentId')->references('id')->on('users');
-            $table->foreign('typeId')->references('id')->on('RPT_CourseAssistanceType');
-        });
-
-
-        // ------------------------ New Section Table ------------------------
-
-        Schema::table('RPT_ActivityAssistance', function(Blueprint $table)
-        {
-            $table->id();
-            $table->unsignedBigInteger('activityId');
-            $table->unsignedBigInteger('studentId');
-            $table->timestamp('entry')->useCurrent();
-            $table->timestamp('exit')->useCurrent();
-        });
-        // Refs
-
-        Schema::table('RPT_ActivityAssistance', function(Blueprint $table)
-        {
-            $table->foreign('activityId')->references('id')->on('CON_Activity');
-            $table->foreign('studentId')->references('id')->on('users');
         });
     }
 

@@ -2,12 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// REPORTES
-Route::prefix('report')->group(function()
-    {
-        include __DIR__. '/report/demo.report.php';
-    }
-);
 
 // RUTAS PARA EL CONSUMO DE API DE GOOGLE
 Route::prefix('google')->group(function()
@@ -16,17 +10,16 @@ Route::prefix('google')->group(function()
     }
 );
 
-
 // RUTAS DEL USUARIO CONFIG DEL LMS
-
 Route::prefix('admin')->group(function()
     {
-        include __DIR__. '/settings/config.php';
+        include __DIR__. '/admin/config.php';
+        include __DIR__. '/admin/users.php';
+        include __DIR__. '/admin/platform.php';
     }
 );
 
 // RUTAS DE INICIO
-
 
 Route::get('/', function () {
     return view('auth.optionsLogin');

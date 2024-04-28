@@ -24,3 +24,12 @@ Route::get('/demojson', function () {
     ];
     return response()->json($json);
 });
+
+
+
+// REPORTES
+Route::prefix('report')->group(function()
+    {
+        include __DIR__. '/report/demo.report.php';
+    }
+);

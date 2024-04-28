@@ -38,18 +38,18 @@ return new class extends Migration
       $table->id();
       $table ->unsignedBigInteger('permissionId');
       $table ->unsignedBigInteger('rolId');
+      $table ->unsignedBigInteger('sectionId');
+    });
+    Schema::create('USR_AppSection', function(Blueprint $table)
+    {
+        $table->id();
+        $table->string('link', 40);
+        $table->string('name', 40);
+        $table->string('description', 40)->nullable();
+        $table->string('title', 30);
+        $table->string('icon', 30);
     });
 
-    // Relaciones
-    Schema::table('USR_RolPermissions', function (Blueprint $table) {
-      $table->foreign('rolId')->references('id')->on('USR_Rol');
-      $table->foreign('permissionId')->references('id')->on('USR_Permission');
-    });
-
-    Schema::table('USR_UserRoles', function (Blueprint $table) {
-      $table->foreign('rolId')->references('id')->on('USR_Rol');
-      $table->foreign('userId')->references('id')->on('users');
-    });
   }
 
   // Reverse the migrations.
@@ -59,5 +59,6 @@ return new class extends Migration
     Schema::dropIfExists('USR_UserRoles');
     Schema::dropIfExists('USR_Rol');
     Schema::dropIfExists('USR_Permission');
+    Schema::dropIfExists('USR_AppSection');
   }
 };

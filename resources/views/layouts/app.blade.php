@@ -1,10 +1,10 @@
 @php
     $navs = [
         (object)['link' => 'config', 'title' => 'Configuraciones', 'icon' => 'sliders'],
-        (object)['link' => 'config', 'title' => 'Cursos', 'icon' => '200'],
-        (object)['link' => 'config', 'title' => 'Usuarios', 'icon' => 'people fill'],
-        (object)['link' => 'config', 'title' => 'Permisos', 'icon' => '300'],
-        (object)['link' => 'config', 'title' => 'Actividades', 'icon' => 'activity'],
+        (object)['link' => 'courses', 'title' => 'Cursos', 'icon' => '200'],
+        (object)['link' => 'users', 'title' => 'Usuarios', 'icon' => 'people fill'],
+        (object)['link' => 'permissions', 'title' => 'Permisos', 'icon' => '300'],
+        (object)['link' => 'activity', 'title' => 'Actividades', 'icon' => 'activity'],
         (object)['link' => 'config', 'title' => 'Plataforma', 'icon' => '300'],
         (object)['link' => 'config', 'title' => 'Irregularidades', 'icon' => '300'],
         (object)['link' => 'config', 'title' => 'Desempeño academico', 'icon' => '300'],
@@ -47,13 +47,15 @@
                         <img src="{{asset('imgs/unifranz.jpeg')}}" class="object-contain w-full h-full">
                     </div>
                 </div>
+
                 {{-- CONTENIDO DE NAVEGACION --}}
                 <div class="h-3/4 relative overflow-auto">
+
                     {{-- ITEMS NAV --}}
                     @foreach ( $navs as $item)
+                        <x-nav-item link="{{$item->link}}" title="{{$item->title}}" icon="{{$item->icon}}"/>
+                    @endforeach
 
-                    <x-nav-item link="{{$item->link}}" title="{{$item->title}}" icon="{{$item->icon}}"/>
-                    @endforeach ($i = 0; $i < $navs; $i++)
                     {{-- <button class="bg-red-900 text-white" onclick="toasini()">Click toast</button> --}}
                 </div>
             </div>
@@ -63,7 +65,7 @@
         </div>
 
         {{-- CONTENIDO QUE TENDRA POR CADA UNO --}}
-        <div class="">
+        <div class="w-4/5 relative overflow-auto">
             @yield('app-page')
         </div>
     </div>

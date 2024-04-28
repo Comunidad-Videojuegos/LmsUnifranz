@@ -5,5 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/config', function () {
-    return view('settings.config');
+    return view('admin.config');
 })->name('config');

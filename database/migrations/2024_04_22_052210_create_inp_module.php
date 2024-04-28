@@ -39,14 +39,14 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
-        }); 
+        });
         //Parte de Abajo
         Schema::create('INP_Career', function(Blueprint $table){
             $table->id();
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
-        
+
         });
         DB::statement("ALTER TABLE INP_Career ADD referenceId int");
         DB::statement("ALTER TABLE INP_Career ADD name varchar(40)");
@@ -54,7 +54,7 @@ return new class extends Migration
         DB::statement("ALTER TABLE INP_Career ADD descrption varchar(120)");
         DB::statement("ALTER TABLE INP_Career ADD durationYear int");
         DB::statement("ALTER TABLE INP_Career ADD durationMounth int");
-        
+
         Schema::create('INP_Students', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('CareerId');
@@ -143,6 +143,6 @@ return new class extends Migration
         Schema::dropIfExists('INP_CourseIncribed');
         Schema::dropIfExists('INP_Courses');
         Schema::dropIfExists('INP_CoursesSchedule');
-        
+
     }
 };

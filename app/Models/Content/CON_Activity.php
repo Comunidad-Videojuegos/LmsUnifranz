@@ -12,23 +12,23 @@ class Activity extends Model
     protected $table = 'CON_Activity';
 
     protected $fillable = [
-        'coursesectionid',
-        'activitytypeid',
+        'courseSectionId',
+        'typeId',
         'virtual',
         'name',
         'description',
-        'activitydate',
+        'activityDate',
         'duration',
-        'creationdate',
-        'updatedate',
-        'deletedate',
+        'creationDate',
+        'updateDate',
+        'deleteDate',
         'calification',
         'forcourseid',
     ];
 
     protected $casts = [
         'coursesectionid' => 'integer',
-        'activitytypeid' => 'integer',
+        'typeid' => 'integer',
         'virtual' => 'boolean',
         'name' => 'string',
         'description' => 'string',

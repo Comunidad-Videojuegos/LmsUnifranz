@@ -3,6 +3,7 @@
 
 use App\Helpers\JasperConnection;
 use Illuminate\Support\Facades\Route;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 
 function headersPdf($output, $name_file, $type)
@@ -37,6 +38,9 @@ Route::get('/demo/{param}', function (string $param) {
     $jasper->executeReport();
 
     $outputFile = $jasper->getOutputFile();
+    $uploadedFileUrl = Cloudinary::uploadFile($request->file($outputFile)->getRealPath())->getSecurePath();
 
-    headersPdf($outputFile, $name_file, "pdf");
+    return response()->json([
+        "file" => "wedwed"
+    ]);
 });

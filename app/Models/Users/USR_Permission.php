@@ -11,15 +11,21 @@ class USR_Permission extends Model
 
     protected $table = 'USR_Permission';
 
-    protected $fillable = ['name', 'permissionKey'];
+    protected $fillable = ['name', 'permissionKey', 'sectionId'];
 
     protected $casts = [
         'name' => 'string', // integer, string, datetime
-        'permissionKey' => 'string'
+        'permissionKey' => 'string',
+        'sectionId' => 'integer'
     ];
 
     public function rolPermissions()
     {
         return $this->hasMany(USR_RolPermissions::class);
+    }
+
+    public function appSection()
+    {
+        return $this->belongsTo(USR_AppSection::class, 'sectionId');
     }
 }

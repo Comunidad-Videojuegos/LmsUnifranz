@@ -1,18 +1,6 @@
 @php
-    $navs = [
-        (object)['link' => 'config', 'title' => 'Configuraciones', 'icon' => 'sliders'],
-        (object)['link' => 'courses', 'title' => 'Cursos', 'icon' => '200'],
-        (object)['link' => 'users', 'title' => 'Usuarios', 'icon' => 'people fill'],
-        (object)['link' => 'permissions', 'title' => 'Permisos', 'icon' => '300'],
-        (object)['link' => 'activity', 'title' => 'Actividades', 'icon' => 'activity'],
-        (object)['link' => 'config', 'title' => 'Plataforma', 'icon' => '300'],
-        (object)['link' => 'config', 'title' => 'Desempeño academico', 'icon' => '300'],
-        (object)['link' => 'config', 'title' => 'Transmisiones', 'icon' => 'wifi'],
-        (object)['link' => 'config', 'title' => 'Reuniones', 'icon' => '300'],
-        (object)['link' => 'config', 'title' => 'Horarios', 'icon' => 'calendar minus fill'],
-        (object)['link' => 'config', 'title' => 'Docentes', 'icon' => '300'],
-        (object)['link' => 'config', 'title' => 'Estudiantes', 'icon' => '300'],
-    ];
+    use App\Models\Users\USR_AppSection;
+    $sections = USR_AppSection::all();
 @endphp
 
 
@@ -51,8 +39,8 @@
                 <div class="h-3/4 relative overflow-auto">
 
                     {{-- ITEMS NAV --}}
-                    @foreach ( $navs as $item)
-                        <x-nav-item link="{{$item->link}}" title="{{$item->title}}" icon="{{$item->icon}}"/>
+                    @foreach ( $sections as $item)
+                        <x-nav-item link="{{$item->link}}" title="{{$item->name}}" icon="{{$item->icon}}"/>
                     @endforeach
 
                     {{-- <button class="bg-red-900 text-white" onclick="toasini()">Click toast</button> --}}

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('CON_Activity', function (Blueprint $table) {
             $table->id();
             $table ->unsignedBigInteger('courseSectionId');
-            $table ->unsignedBigInteger('activityTypeId');
+            $table ->unsignedBigInteger('typeId');
             $table->boolean('virtual');
             $table->dateTime('activityDate');
             $table->time('duration');

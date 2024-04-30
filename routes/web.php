@@ -18,6 +18,7 @@ Route::get('/admin', function () {
 
 Route::prefix('admin')->group(function()
     {
+        Route::get('/', function () { return redirect('/admin/config'); });
         include __DIR__. '/admin/config.php';
         include __DIR__. '/admin/users.php';
         include __DIR__. '/admin/platform.php';

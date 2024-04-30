@@ -21,7 +21,8 @@ return new class extends Migration
         Schema::create('COL_Notification', function (Blueprint $table)
         {
             $table->id();
-            $table->unsignedBigInteger('typeNotificationId');
+            $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('typeId');
             $table->timestamp('createDate')->useCurrent();
             $table->boolean('read');
         });
@@ -45,6 +46,7 @@ return new class extends Migration
         Schema::create('COL_ForumConversation', function ( Blueprint $table)
         {
             $table->id();
+            $table->unsignedBigInteger('educatorId');
             $table->unsignedBigInteger('forumId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();

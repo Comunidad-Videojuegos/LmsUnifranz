@@ -50,6 +50,15 @@ return new class extends Migration
         $table->string('icon', 30);
     });
 
+    Schema::create('USR_Info', function(Blueprint $table)
+    {
+        $table->unsignedBigInteger('id')->primary();
+    });
+    DB::statement("ALTER TABLE USR_Info ADD names varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD firstName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD lastName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD ci varchar(15)");
+
   }
 
   // Reverse the migrations.
@@ -58,6 +67,7 @@ return new class extends Migration
     Schema::dropIfExists('USR_RolPermission');
     Schema::dropIfExists('USR_UserRoles');
     Schema::dropIfExists('USR_Rol');
+    Schema::dropIfExists('USR_Info');
     Schema::dropIfExists('USR_Permission');
     Schema::dropIfExists('USR_AppSection');
   }

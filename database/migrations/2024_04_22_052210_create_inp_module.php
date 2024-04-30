@@ -56,7 +56,7 @@ return new class extends Migration
         DB::statement("ALTER TABLE INP_Career ADD durationMounth int");
 
         Schema::create('INP_Student', function(Blueprint $table){
-            $table->id();
+            $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('careerId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
@@ -65,8 +65,16 @@ return new class extends Migration
         DB::statement("ALTER TABLE INP_Student ADD referenceId int");
         DB::statement("ALTER TABLE INP_Student ADD firstName varchar(40)");
         DB::statement("ALTER TABLE INP_Student ADD lastName varchar(40)");
-        DB::statement("ALTER TABLE INP_Student ADD email varchar(100)");
         DB::statement("ALTER TABLE INP_Student ADD semester int");
+
+        Schema::create('INP_Instructor', function(Blueprint $table)
+        {
+            $table->unsignedBigInteger('id')->primary();
+        });
+        DB::statement("ALTER TABLE INP_Instructor ADD speciality varchar(40)");
+        DB::statement("ALTER TABLE INP_Instructor ADD type varchar(20)");
+
+
 
         Schema::create('INP_Course', function(Blueprint $table){
             $table->id();
@@ -117,6 +125,7 @@ return new class extends Migration
         Schema::dropIfExists('INP_AdvertForUser');
         Schema::dropIfExists('INP_Career');
         Schema::dropIfExists('INP_Student');
+        Schema::dropIfExists('INP_Instructor');
         Schema::dropIfExists('INP_CourseInscribed');
         Schema::dropIfExists('INP_Course');
         Schema::dropIfExists('INP_CourseSchedule');

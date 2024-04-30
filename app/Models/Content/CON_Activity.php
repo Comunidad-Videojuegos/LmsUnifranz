@@ -47,6 +47,6 @@ class Activity extends Model
 
     public function activityType()
     {
-        return $this->belongsTo(CON_ActivityType::class, 'activitytypeid');
+        return $this->belongsTo(CON_ActivityType::class, 'typeId');
     }
 }

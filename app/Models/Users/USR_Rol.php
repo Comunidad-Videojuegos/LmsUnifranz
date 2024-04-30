@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +19,7 @@ class USR_Rol extends Model
     'name' => 'string'
   ];
 
+  public $timestamps = false;
   public function userRoles()
   {
     return $this->hasMany(USR_UserRoles::class);

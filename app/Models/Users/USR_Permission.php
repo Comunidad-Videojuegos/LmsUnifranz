@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +24,7 @@ class USR_Permission extends Model
         return $this->hasMany(USR_RolPermissions::class);
     }
 
+    public $timestamps = false;
     public function appSection()
     {
         return $this->belongsTo(USR_AppSection::class, 'sectionId');

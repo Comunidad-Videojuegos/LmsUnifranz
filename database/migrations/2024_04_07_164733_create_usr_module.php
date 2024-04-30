@@ -33,7 +33,6 @@ return new class extends Migration
       $table->timestamp('updateDate')->useCurrent();
       $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
     });
-    DB::statement("ALTER TABLE USR_UserRoles ADD color varchar(10) NOT NULL");
 
     Schema::create('USR_RolPermission', function (Blueprint $table) {
       $table->id();
@@ -46,8 +45,8 @@ return new class extends Migration
         $table->string('link', 40);
         $table->string('name', 40);
         $table->string('description', 40)->nullable();
-        $table->string('title', 30);
         $table->string('icon', 30);
+        $table->integer('group')->default(1);
     });
 
     Schema::create('USR_Info', function(Blueprint $table)
@@ -55,6 +54,7 @@ return new class extends Migration
         $table->unsignedBigInteger('id')->primary();
     });
     DB::statement("ALTER TABLE USR_Info ADD names varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD age int");
     DB::statement("ALTER TABLE USR_Info ADD firstName varchar(40)");
     DB::statement("ALTER TABLE USR_Info ADD lastName varchar(40)");
     DB::statement("ALTER TABLE USR_Info ADD ci varchar(15)");

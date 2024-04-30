@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ class USR_RolPermission extends Model
 {
   use HasFactory;
 
-  protected $table = 'USR_RolPermissions';
+  protected $table = 'USR_RolPermission';
 
   protected $fillable = ['permissionId', 'rolId'];
 
@@ -18,6 +18,7 @@ class USR_RolPermission extends Model
     'rolId' => 'integer'
   ];
 
+  public $timestamps = false;
   public function permission()
   {
     return $this->belongsTo(USR_Permission::class, 'permissionId');

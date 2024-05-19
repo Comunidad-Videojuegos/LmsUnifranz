@@ -21,6 +21,7 @@ return new class extends Migration
         Schema::create('INP_Advert', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('typeId');
+            $table->integer('duration');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
@@ -28,7 +29,6 @@ return new class extends Migration
         });
         DB::statement("ALTER TABLE INP_Advert ADD name varchar(20)");
         DB::statement("ALTER TABLE INP_Advert ADD description varchar(50)");
-        DB::statement("ALTER TABLE INP_Advert ADD duration time");
         DB::statement("ALTER TABLE INP_Advert ADD forStudents bit");
         DB::statement("ALTER TABLE INP_Advert ADD createUserId int");
 
@@ -46,26 +46,23 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->double('duration');
 
         });
         DB::statement("ALTER TABLE INP_Career ADD referenceId int");
         DB::statement("ALTER TABLE INP_Career ADD name varchar(40)");
         DB::statement("ALTER TABLE INP_Career ADD initials varchar(10)");
-        DB::statement("ALTER TABLE INP_Career ADD descrption varchar(120)");
-        DB::statement("ALTER TABLE INP_Career ADD durationYear int");
-        DB::statement("ALTER TABLE INP_Career ADD durationMounth int");
+        DB::statement("ALTER TABLE INP_Career ADD description varchar(120)");
 
         Schema::create('INP_Student', function(Blueprint $table){
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('careerId');
+            $table->integer('semester');
+            $table->integer('referenceId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
         });
-        DB::statement("ALTER TABLE INP_Student ADD referenceId int");
-        DB::statement("ALTER TABLE INP_Student ADD firstName varchar(40)");
-        DB::statement("ALTER TABLE INP_Student ADD lastName varchar(40)");
-        DB::statement("ALTER TABLE INP_Student ADD semester int");
 
         Schema::create('INP_Instructor', function(Blueprint $table)
         {
@@ -79,14 +76,14 @@ return new class extends Migration
         Schema::create('INP_Course', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('instructorId');
+            $table->double('calificationTotal');
         });
-        DB::statement("ALTER TABLE INP_Course ADD referencesId int");
+        DB::statement("ALTER TABLE INP_Course ADD referenceId int");
         DB::statement("ALTER TABLE INP_Course ADD name varchar(50)");
         DB::statement("ALTER TABLE INP_Course ADD mandatory bit");
         DB::statement("ALTER TABLE INP_Course ADD initials varchar(5)");
         DB::statement("ALTER TABLE INP_Course ADD description varchar(max)");
         DB::statement("ALTER TABLE INP_Course ADD groupLink varchar(50)");
-        DB::statement("ALTER TABLE INP_Course ADD calificationTotal int");
         DB::statement("ALTER TABLE INP_Course ADD forCourseId int");
 
         Schema::create('INP_CourseInscribed', function(Blueprint $table){
@@ -111,7 +108,6 @@ return new class extends Migration
         DB::statement("ALTER TABLE INP_CourseSchedule ADD schoolDay date");
         DB::statement("ALTER TABLE INP_CourseSchedule ADD classTimeStart time");
         DB::statement("ALTER TABLE INP_CourseSchedule ADD classTimeEnd time");
-        DB::statement("ALTER TABLE INP_CourseSchedule ADD mandatory bit");
 
     }
 

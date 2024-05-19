@@ -11,12 +11,11 @@ class USR_AppSection extends Model
 
     protected $table = 'USR_AppSection';
 
-    protected $fillable = ['link', 'name', 'title','description', 'icon', 'group'];
+    protected $fillable = ['link', 'name', 'description', 'icon', 'group'];
 
     protected $casts = [
         'link' => 'string',
         'name' => 'string', // integer, string, datetime
-        'title' => 'string',
         'description' => 'string',
         'icon' => 'string',
         'group' => 'integer'

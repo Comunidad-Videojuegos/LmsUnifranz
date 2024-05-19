@@ -11,17 +11,18 @@ class USR_Info extends Model
 
   protected $table = 'USR_Info';
 
-  protected $fillable = ['names', 'firstName', 'lastName', 'age', 'ci'];
+  protected $fillable = ['firstName', 'dadLastName', 'momLastName','age', 'ci'];
 
   protected $casts = [
-    'names' => 'string',
     'firstName' => 'string',
-    'lastName' => 'string',
+    'momLastName' => 'string',
+    'dadLastName' => 'string',
     'age' => 'integer',
     'ci' => 'integer',
   ];
 
   public $timestamps = false;
+  
   public function user()
   {
     return $this->belongsTo(User::class, 'id');

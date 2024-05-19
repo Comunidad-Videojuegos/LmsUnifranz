@@ -13,11 +13,6 @@ class activityType extends Model
 
     protected $fillable = ['name', 'decription'];
 
-    protected $casts = [
-        'name' => 'string',
-        'decription' => 'string'
-    ];
-
     public function activityType()
     {
         return $this->hasMany(CON_ActivityType::class);

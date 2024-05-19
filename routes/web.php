@@ -14,7 +14,7 @@ Route::prefix('google')->group(function()
 
 Route::get('/admin', function () {
     return view('layouts.app');
-});
+})->middleware('auth.session');
 
 Route::prefix('admin')->group(function()
     {

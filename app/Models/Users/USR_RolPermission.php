@@ -5,7 +5,7 @@ namespace App\Models\Users;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class USR_RolPermission extends Model
+class RolPermission extends Model
 {
   use HasFactory;
 
@@ -21,11 +21,11 @@ class USR_RolPermission extends Model
   public $timestamps = false;
   public function permission()
   {
-    return $this->belongsTo(USR_Permission::class, 'permissionId');
+    return $this->belongsTo(Permission::class, 'permissionId');
   }
 
   public function rol()
   {
-    return $this->belongsTo(USR_Rol::class, 'rolId');
+    return $this->belongsTo(Rol::class, 'rolId');
   }
 }

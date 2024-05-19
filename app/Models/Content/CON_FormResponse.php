@@ -12,23 +12,13 @@ class FormResponse extends Model
     protected $table = 'CON_FormResponse';
 
     protected $fillable = [
-        'formid',
-        'studentid',
+        'formId',
+        'studentId',
         'calification',
         'duration',
-        'creationdate',
-        'updatedate',
-        'deletedate',
-    ];
-
-    protected $casts = [
-        'formid' => 'integer',
-        'studentid' => 'integer',
-        'calification' => 'interger',
-        'duration' => 'time',
-        'creationdate' => 'datetime',
-        'updatedate' => 'datetime',
-        'deletedate' => 'datetime:nullable',
+        'createDate',
+        'updateDate',
+        'deleteDate',
     ];
 
     public function Formresponse()

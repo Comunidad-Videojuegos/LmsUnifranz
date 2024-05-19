@@ -52,7 +52,7 @@ return new class extends Migration
             $table->unsignedBigInteger('courseSectionId');
             $table->integer('tasksDone');
             $table->integer('tasksNotDone');
-            $table->integer('calificationTotal');
+            $table->double('calificationTotal');
         });
 
         Schema::create('RPT_TaskDeliveries', function(Blueprint $table)
@@ -61,11 +61,11 @@ return new class extends Migration
             $table->unsignedBigInteger('taskId');
             $table->unsignedBigInteger('studentId');
             $table->boolean('viewed');
-            $table->boolean('reViewed');
-            $table->integer('calification');
+            $table->boolean('reviewed');
+            $table->double('calification');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->useCurrent();
+            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
         });
 
         Schema::create('RPT_FormProgress', function(Blueprint $table)
@@ -102,7 +102,7 @@ return new class extends Migration
         Schema::create('RPT_CourseAssistanceType', function(Blueprint $table)
         {
             $table->id();
-            $table->timestamp('deleteDate')->useCurrent();
+            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
         });
         DB::statement("ALTER TABLE RPT_CourseAssistanceType ADD name varchar(20) NOT NULL");
         DB::statement("ALTER TABLE RPT_CourseAssistanceType ADD description varchar(100) NOT NULL");
@@ -115,7 +115,7 @@ return new class extends Migration
             $table->unsignedBigInteger('typeId');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->useCurrent();
+            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
         });
 
         Schema::create('RPT_ActivityAssistance', function(Blueprint $table)

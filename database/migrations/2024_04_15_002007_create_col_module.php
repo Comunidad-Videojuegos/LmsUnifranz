@@ -25,9 +25,9 @@ return new class extends Migration
             $table->unsignedBigInteger('typeId');
             $table->timestamp('createDate')->useCurrent();
             $table->boolean('read');
+            $table->string('body');
         });
         DB::statement("ALTER TABLE COL_Notification ADD header varchar(50)");
-        DB::statement("ALTER TABLE COL_Notification ADD body varchar(100)");
 
         Schema::create('COL_Forum', function(Blueprint $table)
         {
@@ -61,15 +61,14 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('forumId');
+            $table->integer('size');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->useCurrent();
             $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
         });
         DB::statement("ALTER TABLE COL_ForumFile ADD name varchar(50)");
         DB::statement("ALTER TABLE COL_ForumFile ADD description varchar(255)");
-        DB::statement("ALTER TABLE COL_ForumFile ADD typeFile varchar(10)");
-        DB::statement("ALTER TABLE COL_ForumFile ADD sizeFile varchar(20)");
-        DB::statement("ALTER TABLE COL_ForumFile ADD sizeFileType varchar(5)");
+        DB::statement("ALTER TABLE COL_ForumFile ADD type varchar(5)");
     }
 
     /**

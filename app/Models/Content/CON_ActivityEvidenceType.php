@@ -14,18 +14,11 @@ class ActivityEvidenceType extends Model
     protected $fillable = [
         'name',
         'description',
-        'creationdate',
-        'updatedate',
-        'deletedate',
+        'createDate',
+        'updateDate',
+        'deleteDate',
     ];
-
-    protected $casts = [
-        'name' => 'string',
-        'description' => 'string',
-        'creationdate' => 'datetime',
-        'updatedate' => 'datetime',
-        'deletedate' => 'datetime:nullable',
-    ];
+    
     public function activityEvidence()
     {
         return $this->hasMany(CON_ActivityEvidence::class);

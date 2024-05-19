@@ -5,15 +5,16 @@ namespace App\Models\Integration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdvertType extends Model
+class Instructor extends Model
 {
     use HasFactory;
 
-    protected $table = 'INP_AdvertType';
+    protected $table = 'INP_Instructor';
 
     protected $fillable = [
-        'name',
-        'description',
+        'id',
+        'speciality',
+        'type'
     ];
 
 }

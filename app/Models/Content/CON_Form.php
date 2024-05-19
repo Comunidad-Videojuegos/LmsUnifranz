@@ -12,26 +12,16 @@ class Form extends Model
     protected $table = 'CON_Form';
 
     protected $fillable = [
-        'coursesectionid',
-        'ordernumber',
-        'createuserid',
+        'courseSectionId',
+        'orderNumber',
+        'createUserId',
         'duration',
         'calification',
-        'creationdate',
-        'updatedate',
-        'deletedate',
+        'createDate',
+        'updateDate',
+        'deleteDate',
     ];
 
-    protected $casts = [
-        'coursesectionid' => 'integer',
-        'ordernumber' => 'integer',
-        'createuserid' => 'integer',
-        'duration' => 'time',
-        'calification' => 'interger',
-        'creationdate' => 'datetime',
-        'updatedate' => 'datetime',
-        'deletedate' => 'datetime:nullable',
-    ];
 
     public function Form()
     {

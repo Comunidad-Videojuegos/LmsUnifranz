@@ -13,11 +13,6 @@ class FormFieldType extends Model
 
     protected $fillable = ['name', 'color'];
 
-    protected $casts = [
-        'name' => 'string',
-        'color' => 'string'
-    ];
-
     public function formfiletype()
     {
         return $this->hasMany(CON_FormFieldType::class);

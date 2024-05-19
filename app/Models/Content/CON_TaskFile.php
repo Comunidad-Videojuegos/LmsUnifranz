@@ -5,27 +5,20 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TaskFiles extends Model
+class TaskFile extends Model
 {
     use HasFactory;
 
-    protected $table = 'CON_TaskFiles';
+    protected $table = 'CON_TaskFile';
 
     protected $fillable = [
-        'taskid',
+        'taskId',
         'name',
-        'creationdate',
+        'createDate',
         'updatedate',
         'deletedate',
     ];
 
-    protected $casts = [
-        'taskid' => 'interger',
-        'name' => 'string',
-        'creationdate' => 'datetime',
-        'updatedate' => 'datetime',
-        'deletedate' => 'datetime:nullable',
-    ];
     public function activityEvidence()
     {
         return $this->hasMany(CON_TaskFiles::class);

@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models\Learning;
+namespace App\Models\Colaboration;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlanTheme extends Model
+class ForumFile extends Model
 {
     use HasFactory;
 
-    protected $table = 'APR_PlanTheme';
+    protected $table = 'COL_ForumFile';
 
     protected $fillable = [
+        'forumId',
+        'size',
+        'type',
         'name',
         'description',
-        'orderNumber',
-        'planId',
-        'courseSectionId',
         'createDate',
         'updateDate',
         'deleteDate'

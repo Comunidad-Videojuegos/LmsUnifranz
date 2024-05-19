@@ -53,10 +53,10 @@ return new class extends Migration
     {
         $table->unsignedBigInteger('id')->primary();
     });
-    DB::statement("ALTER TABLE USR_Info ADD names varchar(40)");
-    DB::statement("ALTER TABLE USR_Info ADD age int");
     DB::statement("ALTER TABLE USR_Info ADD firstName varchar(40)");
-    DB::statement("ALTER TABLE USR_Info ADD lastName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD momLastName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD dadLastName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD age int");
     DB::statement("ALTER TABLE USR_Info ADD ci varchar(15)");
 
   }

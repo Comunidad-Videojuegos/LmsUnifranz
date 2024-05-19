@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Models\Colaboration;
+namespace App\Models\Reports;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class AdvertViewed extends Model
 {
     use HasFactory;
 
-    protected $table = 'COL_Notification';
+    protected $table = 'RPT_AdvertViewed';
 
     protected $fillable = [
+        'advertId',
         'userId',
-        'typeId',
-        'header',
-        'body',
-        'read',
+        'viewed',
         'createDate'
     ];
 

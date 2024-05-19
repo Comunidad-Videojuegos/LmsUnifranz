@@ -12,24 +12,18 @@ class CourseSection extends Model
     protected $table = 'CON_CourseSection';
 
     protected $fillable = [
-        'courseid',
+        'courseId',
         'name',
         'assistance',
-        'initdate',
-        'enddate',
+        'initDate',
+        'endDate',
     ];
 
-    protected $casts = [
-        'courseid' => 'integer',
-        'name' => 'string',
-        'assistance' => 'bit',
-        'initdate' => 'datetime',
-        'enddate' => 'datetime',
-    ];
     public function CourseSection()
     {
         return $this->hasMany(CON_CourseSection::class);
     }
+
     public function courses()
     {
         return $this->belongsTo(INP_Courses::class);

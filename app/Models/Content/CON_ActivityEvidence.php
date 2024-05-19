@@ -12,30 +12,21 @@ class ActivityEvidence extends Model
     protected $table = 'CON_ActivityEvidence';
 
     protected $fillable = [
-        'activityid',
-        'typeid',
+        'activityId',
+        'typeId',
         'link',
-        'creationdate',
-        'updatedate',
-        'deletedate',
-    ];
-
-    protected $casts = [
-        'activityid' => 'integer',
-        'typeid' => 'integer',
-        'link' => 'string',
-        'creationdate' => 'datetime',
-        'updatedate' => 'datetime',
-        'deletedate' => 'datetime:nullable',
+        'createDate',
+        'updateDate',
+        'deleteDate',
     ];
 
     public function activity()
     {
-        return $this->hasMany(CON_Activity::class, 'activityid');
+        return $this->hasMany(CON_Activity::class, 'activityId');
     }
 
     public function type()
     {
-        return $this->belongsTo(CON_ActivityType::class, 'typeid');
+        return $this->belongsTo(CON_ActivityType::class, 'typeId');
     }
 }

@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Models\Learning;
+namespace App\Models\Integration;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlanTheme extends Model
+class Student extends Model
 {
     use HasFactory;
 
-    protected $table = 'APR_PlanTheme';
+    protected $table = 'INP_Student';
 
     protected $fillable = [
-        'name',
-        'description',
-        'orderNumber',
-        'planId',
-        'courseSectionId',
+        'id',
+        'careerId',
+        'semester',
+        'referenceId',
         'createDate',
         'updateDate',
         'deleteDate'

@@ -5,7 +5,7 @@ namespace App\Models\Users;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class USR_Rol extends Model
+class Rol extends Model
 {
   use HasFactory;
   protected $table = 'USR_Rol';
@@ -22,11 +22,11 @@ class USR_Rol extends Model
   public $timestamps = false;
   public function userRoles()
   {
-    return $this->hasMany(USR_UserRoles::class);
+    return $this->hasMany(UserRoles::class);
   }
 
   public function rolPermissions()
   {
-    return $this->hasMany(USR_RolPermissions::class);
+    return $this->hasMany(RolPermissions::class);
   }
 }

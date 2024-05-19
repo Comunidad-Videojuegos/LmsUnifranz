@@ -21,5 +21,5 @@ Route::get('/auth/callback', function () {
     ]);
     Auth::login($user);
 
-    return redirect('/admin/config');
+    return redirect('/dashboard');
 });

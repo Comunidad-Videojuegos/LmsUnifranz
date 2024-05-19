@@ -5,18 +5,16 @@ namespace App\Models\Reports;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlatformActivity extends Model
+class FormValue extends Model
 {
     use HasFactory;
 
-    protected $table = 'RPT_PlatformActivity';
+    protected $table = 'RPT_FormValue';
 
     protected $fillable = [
-        'userId',
-        'typeId',
-        'amount',
-        'createDate',
-        'updateDate',
+        'formFieldId',
+        'formResponseId',
+        'value'
     ];
 
 }

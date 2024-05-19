@@ -12,37 +12,22 @@ class Activity extends Model
     protected $table = 'CON_Activity';
 
     protected $fillable = [
+        'name',
+        'description',
         'courseSectionId',
         'typeId',
         'virtual',
-        'name',
-        'description',
         'activityDate',
         'duration',
-        'creationDate',
-        'updateDate',
-        'deleteDate',
         'calification',
-        'forcourseid',
-    ];
-
-    protected $casts = [
-        'coursesectionid' => 'integer',
-        'typeid' => 'integer',
-        'virtual' => 'boolean',
-        'name' => 'string',
-        'description' => 'string',
-        'activitydate' => 'datetime',
-        'duration' => 'time',
-        'creationdate' => 'datetime',
-        'updatedate' => 'datetime',
-        'deletedate' => 'datetime:nullable',
-        'forcourseid' => 'integer',
+        'createDate',
+        'updateDate',
+        'deleteDate'
     ];
 
     public function courseSection()
     {
-        return $this->belongsTo(CON_CourseSection::class, 'coursesectionid');
+        return $this->belongsTo(CON_CourseSection::class, 'courseSectionId');
     }
 
     public function activityType()

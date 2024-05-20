@@ -2,12 +2,10 @@
 
 namespace App\Models\Reports;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseAssistanceType extends Model
+class RPT_CourseAssistanceType extends Model
 {
-    use HasFactory;
 
     protected $table = 'RPT_CourseAssistanceType';
 
@@ -16,5 +14,6 @@ class CourseAssistanceType extends Model
         'description',
         'deleteDate',
     ];
+    public $timestamps = false;
 
 }

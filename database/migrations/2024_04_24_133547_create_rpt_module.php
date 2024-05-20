@@ -94,7 +94,7 @@ return new class extends Migration
         Schema::create('RPT_CourseAssistanceType', function(Blueprint $table)
         {
             $table->id();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE RPT_CourseAssistanceType ADD name varchar(20) NOT NULL");
         DB::statement("ALTER TABLE RPT_CourseAssistanceType ADD description varchar(100) NOT NULL");

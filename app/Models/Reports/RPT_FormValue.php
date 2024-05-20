@@ -5,7 +5,7 @@ namespace App\Models\Reports;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormValue extends Model
+class RPT_FormValue extends Model
 {
     use HasFactory;
 
@@ -17,4 +17,5 @@ class FormValue extends Model
         'value'
     ];
 
+    public $timestamps = false;
 }

@@ -8,23 +8,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/demojson', function () {
-    $json = [
-        [
-            "name" => "John Doe",
-            "email"=> "john@example.com",
-            "age" => 30
-        ],
-
-        [
-            "name" => "John Doe",
-            "email"=> "john@example.com",
-            "age" => 30
-        ]
-    ];
-    return response()->json($json);
-});
-
 // COURSES
 
 Route::prefix('courses')->group(function()
@@ -34,10 +17,16 @@ Route::prefix('courses')->group(function()
 );
 
 
-
 // REPORTES
 Route::prefix('report')->group(function()
     {
         include __DIR__. '/report/demo.report.php';
+        include __DIR__. '/report/activity.report.php';
+        include __DIR__. '/report/assistance.report.php';
+        include __DIR__. '/report/form.report.php';
+        include __DIR__. '/report/forum.report.php';
+        include __DIR__. '/report/general.report.php';
+        include __DIR__. '/report/grade.report.php';
+        include __DIR__. '/report/task.report.php';
     }
 );

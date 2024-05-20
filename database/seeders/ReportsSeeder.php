@@ -9,6 +9,11 @@ use App\Models\Reports\RPT_Login;
 use App\Models\Reports\RPT_PlatformActivityType;
 use App\Models\Reports\RPT_PlatformActivity;
 use App\Models\Reports\RPT_PlanMaterialProgress;
+use App\Models\Reports\RPT_FormProgress;
+use App\Models\Reports\RPT_FormValue;
+use App\Models\Reports\RPT_FormFieldsResponse;
+use App\Models\Reports\RPT_CourseAssistanceType;
+use App\Models\Reports\RPT_CourseAssistance;
 
 class ReportsSeeder extends Seeder
 {
@@ -32,5 +37,21 @@ class ReportsSeeder extends Seeder
 
         RPT_PlatformActivity::factory()->count(700)->create();
         RPT_PlanMaterialProgress::factory()->count(4000)->create();
+        RPT_FormProgress::factory()->count(50000)->create();
+        RPT_FormValue::factory()->count(500000)->create();
+        RPT_FormFieldsResponse::factory()->count(70000)->create();
+
+        RPT_CourseAssistanceType::insert([
+            ['name' => 'Asistencia', 'description' => 'Cumplió con la asistencia correctamente'],
+            ['name' => 'Falta', 'description' => 'No vino a clase y sin justificado'],
+            ['name' => 'Falta Justificada', 'description' => 'No vino a clase pero presentó una justificación'],
+            ['name' => 'Llegada Tarde', 'description' => 'Llegó tarde a clase, dentro del margen aceptable'],
+            ['name' => 'Salida Temprana', 'description' => 'Salió antes de que terminara la clase'],
+            ['name' => 'Asistencia Parcial', 'description' => 'Asistió a una parte de la clase, pero no completa'],
+            ['name' => 'Asistencia Remota', 'description' => 'Asistió a la clase de manera remota (por videoconferencia)'],
+            ['name' => 'Asistencia Especial', 'description' => 'Asistencia bajo condiciones especiales acordadas con la institución'],
+        ]);
+
+        RPT_CourseAssistance::factory()->count(500000)->create();
     }
 }

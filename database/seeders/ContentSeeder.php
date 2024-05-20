@@ -17,6 +17,7 @@ use App\Models\Content\CON_ActivityType;
 use App\Models\Content\CON_ActivityLink;
 use App\Models\Content\CON_Activity;
 use App\Models\Content\CON_ActivityEvidenceType;
+use App\Models\Content\CON_ActivityEvidence;
 
 class ContentSeeder extends Seeder
 {
@@ -61,6 +62,6 @@ class ContentSeeder extends Seeder
             ['name' => 'imagen', 'description' => 'Video de la actividad'],
             ['name' => 'transmision', 'description' => 'Transmision en vivo de la actividad virtual']
         ]);
-
+        CON_ActivityEvidence::factory()->count(5000)->create();
     }
 }

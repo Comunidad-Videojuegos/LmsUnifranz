@@ -17,4 +17,5 @@ class RPT_PlanMaterialProgress extends Model
         'advance'
     ];
 
+    public $timestamps = false;
 }

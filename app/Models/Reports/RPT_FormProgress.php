@@ -5,7 +5,7 @@ namespace App\Models\Reports;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormProgress extends Model
+class RPT_FormProgress extends Model
 {
     use HasFactory;
 
@@ -18,4 +18,5 @@ class FormProgress extends Model
         'incorrects'
     ];
 
+    public $timestamps = false;
 }

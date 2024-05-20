@@ -5,7 +5,7 @@ namespace App\Models\Reports;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TaskDeliveries extends Model
+class RPT_TaskDeliveries extends Model
 {
     use HasFactory;
 
@@ -22,4 +22,5 @@ class TaskDeliveries extends Model
         'deleteDate',
     ];
 
+    public $timestamps = false;
 }

@@ -20,8 +20,8 @@ return new class extends Migration
     Schema::create('USR_Rol', function (Blueprint $table) {
       $table->id();
       $table->timestamp('createDate')->useCurrent();
-      $table->timestamp('updateDate')->useCurrent();
-      $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+      $table->timestamp('updateDate')->nullable();
+      $table->timestamp('deleteDate')->nullable();
     });
     DB::statement("ALTER TABLE USR_Rol ADD name varchar(20) NOT NULL");
 
@@ -30,8 +30,8 @@ return new class extends Migration
       $table ->unsignedBigInteger('rolId');
       $table ->unsignedBigInteger('userId');
       $table->timestamp('createDate')->useCurrent();
-      $table->timestamp('updateDate')->useCurrent();
-      $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+      $table->timestamp('updateDate')->nullable();
+      $table->timestamp('deleteDate')->nullable();
     });
 
     Schema::create('USR_RolPermission', function (Blueprint $table) {

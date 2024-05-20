@@ -5,7 +5,7 @@ namespace App\Models\Learning;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Certificate extends Model
+class APR_Certificate extends Model
 {
     use HasFactory;
 
@@ -20,5 +20,6 @@ class Certificate extends Model
         'updateDate',
         'deleteDate'
     ];
+    public $timestamps = false;
 
 }

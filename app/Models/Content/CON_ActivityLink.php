@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Model\Content;
+namespace App\Models\Content;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityLink extends Model
+class CON_ActivityLink extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,8 @@ class ActivityLink extends Model
         'material',
         'test',
     ];
+
+    public $timestamps = false;
 
     public function activityEvidence()
     {

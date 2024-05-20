@@ -5,7 +5,7 @@ namespace App\Models\Reports;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Login extends Model
+class RPT_Login extends Model
 {
     use HasFactory;
 
@@ -18,4 +18,5 @@ class Login extends Model
         'createDate'
     ];
 
+    public $timestamps = false;
 }

@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityEvidence extends Model
+class CON_ActivityEvidence extends Model
 {
     use HasFactory;
 
@@ -19,6 +19,7 @@ class ActivityEvidence extends Model
         'updateDate',
         'deleteDate',
     ];
+    public $timestamps = false;
 
     public function activity()
     {

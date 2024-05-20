@@ -5,7 +5,7 @@ namespace App\Models\Colaboration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NotificationType extends Model
+class COL_NotificationType extends Model
 {
     use HasFactory;
 
@@ -16,4 +16,5 @@ class NotificationType extends Model
         'color'
     ];
 
+    public $timestamps = false;
 }

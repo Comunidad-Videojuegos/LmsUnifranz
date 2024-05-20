@@ -5,7 +5,7 @@ namespace App\Models\Colaboration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ForumConversation extends Model
+class COL_ForumConversation extends Model
 {
     use HasFactory;
 
@@ -13,13 +13,13 @@ class ForumConversation extends Model
 
     protected $fillable = [
         'educatorId',
+        'conversationId',
         'forumId',
         'message',
-        'views',
-        'answers',
         'createDate',
         'updateDate',
         'deleteDate'
     ];
 
+    public $timestamps = false;
 }

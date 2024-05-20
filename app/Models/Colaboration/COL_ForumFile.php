@@ -5,7 +5,7 @@ namespace App\Models\Colaboration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ForumFile extends Model
+class COL_ForumFile extends Model
 {
     use HasFactory;
 
@@ -21,5 +21,6 @@ class ForumFile extends Model
         'updateDate',
         'deleteDate'
     ];
+    public $timestamps = false;
 
 }

@@ -103,10 +103,6 @@ return new class extends Migration
             $table->foreign('userId')->references('id')->on('users');
         });
 
-        Schema::table('RPT_TaskProgress', function(Blueprint $table)
-        {
-            $table->foreign('courseSectionId')->references('id')->on('CON_CourseSection');
-        });
 
         Schema::table('RPT_TaskDeliveries', function(Blueprint $table)
         {
@@ -160,10 +156,18 @@ return new class extends Migration
             $table->foreign('educatorId')->references('id')->on('users');
             $table->foreign('forumId')->references('id')->on('COL_Forum');
         });
+        Schema::table('COL_ForumConversationFile', function (Blueprint $table)
+        {
+            $table->foreign('conversationId')->references('id')->on('COL_ForumConversation');
+        });
 
         Schema::table('COL_ForumFile', function (Blueprint $table)
         {
             $table->foreign('forumId')->references('id')->on('COL_Forum');
+        });
+        Schema::table('COL_Forum', function (Blueprint $table)
+        {
+            $table->foreign('courseSectionId')->references('id')->on('CON_CourseSection');
         });
 
         // ---------------------------------------- MODULO DE APRENDIZAJE REFERENCIAS ----------------------------------------
@@ -312,11 +316,6 @@ return new class extends Migration
             $table->dropForeign('rpt_advertviewed_advertid_foreign');
         });
 
-        Schema::table('RPT_TaskProgress', function(Blueprint $table)
-        {
-            $table->dropForeign('rpt_taskprogress_coursesectionid_foreign');
-        });
-
         Schema::table('RPT_TaskDeliveries', function(Blueprint $table)
         {
             $table->dropForeign('rpt_taskdeliveries_studentid_foreign');
@@ -369,10 +368,19 @@ return new class extends Migration
             $table->dropForeign('col_forumconversation_forumid_foreign');
             $table->dropForeign('col_forumconversation_educatorid_foreign');
         });
+        Schema::table('COL_ForumConversationFile', function (Blueprint $table)
+        {
+            $table->dropForeign('col_forumconversationfile_conversationid_foreign');
+        });
 
         Schema::table('COL_ForumFile', function (Blueprint $table)
         {
             $table->dropForeign('col_forumfile_forumid_foreign');
+        });
+
+        Schema::table('COL_Forum', function (Blueprint $table)
+        {
+            $table->dropForeign('col_forum_coursesectionid_foreign');
         });
 
 

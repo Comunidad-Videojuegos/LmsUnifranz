@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('studentId');
             $table->string('link');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE APR_Certificate ADD name varchar(20)");
         DB::statement("ALTER TABLE APR_Certificate ADD description varchar(50)");
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('courseId');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE APR_PlanLearning ADD name varchar(20)");
         DB::statement("ALTER TABLE APR_PlanLearning ADD description varchar(50)");
@@ -38,8 +38,8 @@ return new class extends Migration
             $table->unsignedBigInteger('planId');
             $table->unsignedBigInteger('courseSectionId');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE APR_PlanTheme ADD name varchar(20)");
         DB::statement("ALTER TABLE APR_PlanTheme ADD description varchar(50)");
@@ -55,7 +55,7 @@ return new class extends Migration
         Schema::create('APR_PlanCalification', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('courseSectionId');
-            $table->double('calification');
+            $table->decimal('calification');
         });
         DB::statement("ALTER TABLE APR_PlanCalification ADD name varchar(20)");
     }

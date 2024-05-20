@@ -5,7 +5,7 @@ namespace App\Models\Integration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseSchedule extends Model
+class INP_CourseSchedule extends Model
 {
     use HasFactory;
 
@@ -14,11 +14,12 @@ class CourseSchedule extends Model
     protected $fillable = [
         'courseId',
         'schoolDay',
-        'classTimeStart',
-        'classTimeEnd',
+        'timeStart',
+        'timeEnd',
         'createDate',
         'updateDate',
         'deleteDate'
     ];
+    public $timestamps = false;
 
 }

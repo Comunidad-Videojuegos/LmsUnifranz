@@ -5,7 +5,7 @@ namespace App\Models\Integration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseInscribed extends Model
+class INP_CourseInscribed extends Model
 {
     use HasFactory;
 
@@ -22,4 +22,5 @@ class CourseInscribed extends Model
         'deleteDate'
     ];
 
+    public $timestamps = false;
 }

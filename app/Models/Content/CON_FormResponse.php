@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormResponse extends Model
+class CON_FormResponse extends Model
 {
     use HasFactory;
 
@@ -20,6 +20,8 @@ class FormResponse extends Model
         'updateDate',
         'deleteDate',
     ];
+
+    public $timestamps = false;
 
     public function Formresponse()
     {

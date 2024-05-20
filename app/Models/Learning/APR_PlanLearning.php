@@ -5,7 +5,7 @@ namespace App\Models\Learning;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlanLearning extends Model
+class APR_PlanLearning extends Model
 {
     use HasFactory;
 
@@ -20,4 +20,5 @@ class PlanLearning extends Model
         'deleteDate'
     ];
 
+    public $timestamps = false;
 }

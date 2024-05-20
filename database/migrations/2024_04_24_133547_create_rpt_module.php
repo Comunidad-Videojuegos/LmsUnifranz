@@ -23,8 +23,8 @@ return new class extends Migration
         {
             $table->id();
         });
-        DB::statement("ALTER TABLE RPT_PlatformActivityType ADD name varchar(20) NOT NULL");
-        DB::statement("ALTER TABLE RPT_PlatformActivityType ADD description varchar(50)");
+        DB::statement("ALTER TABLE RPT_PlatformActivityType ADD name varchar(40) NOT NULL");
+        DB::statement("ALTER TABLE RPT_PlatformActivityType ADD description varchar(100)");
 
         Schema::create('RPT_PlatformActivity', function(Blueprint $table)
         {
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->unsignedBigInteger('typeId');
             $table->integer('amount');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
+            $table->timestamp('updateDate')->nullable();
         });
 
 
@@ -46,14 +46,6 @@ return new class extends Migration
             $table->timestamp('createDate')->useCurrent();
         });
 
-        Schema::create('RPT_TaskProgress', function(Blueprint $table)
-        {
-            $table->id();
-            $table->unsignedBigInteger('courseSectionId');
-            $table->integer('tasksDone');
-            $table->integer('tasksNotDone');
-            $table->double('calificationTotal');
-        });
 
         Schema::create('RPT_TaskDeliveries', function(Blueprint $table)
         {
@@ -62,10 +54,10 @@ return new class extends Migration
             $table->unsignedBigInteger('studentId');
             $table->boolean('viewed');
             $table->boolean('reviewed');
-            $table->double('calification');
+            $table->decimal('calification');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
 
         Schema::create('RPT_FormProgress', function(Blueprint $table)
@@ -114,8 +106,8 @@ return new class extends Migration
             $table->unsignedBigInteger('studentId');
             $table->unsignedBigInteger('typeId');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
 
         Schema::create('RPT_ActivityAssistance', function(Blueprint $table)
@@ -137,8 +129,6 @@ return new class extends Migration
 
         Schema::dropIfExists('RPT_PlatformActivity');
         Schema::dropIfExists('RPT_PlatformActivityType');
-
-        Schema::dropIfExists('RPT_TaskProgress');
 
         Schema::dropIfExists('RPT_TaskDeliveries');
 

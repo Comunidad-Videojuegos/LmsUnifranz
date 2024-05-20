@@ -5,7 +5,7 @@ namespace App\Models\Learning;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlanThemeMaterial extends Model
+class APR_PlanThemeMaterial extends Model
 {
     use HasFactory;
 
@@ -17,4 +17,5 @@ class PlanThemeMaterial extends Model
         'link',
     ];
 
+    public $timestamps = false;
 }

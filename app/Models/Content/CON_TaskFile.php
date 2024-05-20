@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TaskFile extends Model
+class CON_TaskFile extends Model
 {
     use HasFactory;
 
@@ -13,11 +13,13 @@ class TaskFile extends Model
 
     protected $fillable = [
         'taskId',
+        'link',
         'name',
         'createDate',
         'updatedate',
         'deletedate',
     ];
+    public $timestamps = false;
 
     public function activityEvidence()
     {

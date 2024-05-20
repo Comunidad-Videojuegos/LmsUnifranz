@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseSection extends Model
+class CON_CourseSection extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,8 @@ class CourseSection extends Model
         'initDate',
         'endDate',
     ];
+
+    public $timestamps = false;
 
     public function CourseSection()
     {

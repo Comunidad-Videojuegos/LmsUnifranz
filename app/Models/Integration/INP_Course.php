@@ -5,7 +5,7 @@ namespace App\Models\Integration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class INP_Course extends Model
 {
     use HasFactory;
 
@@ -20,10 +20,10 @@ class Course extends Model
         'description',
         'groupLink',
         'calificationTotal',
-        'forCourseId',
         'createDate',
         'updateDate',
         'deleteDate'
     ];
 
+    public $timestamps = false;
 }

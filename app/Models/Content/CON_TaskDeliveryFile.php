@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TaskDeliveryFile extends Model
+class CON_TaskDeliveryFile extends Model
 {
     use HasFactory;
 
@@ -17,6 +17,7 @@ class TaskDeliveryFile extends Model
         'type',
         'size'
     ];
+    public $timestamps = false;
 
     public function formfile()
     {

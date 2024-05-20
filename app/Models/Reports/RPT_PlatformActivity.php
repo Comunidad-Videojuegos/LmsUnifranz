@@ -5,7 +5,7 @@ namespace App\Models\Reports;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlatformActivity extends Model
+class RPT_PlatformActivity extends Model
 {
     use HasFactory;
 
@@ -19,4 +19,5 @@ class PlatformActivity extends Model
         'updateDate',
     ];
 
+    public $timestamps = false;
 }

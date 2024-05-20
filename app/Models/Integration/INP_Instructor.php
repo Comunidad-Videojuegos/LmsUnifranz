@@ -5,7 +5,7 @@ namespace App\Models\Integration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Instructor extends Model
+class INP_Instructor extends Model
 {
     use HasFactory;
 
@@ -17,4 +17,5 @@ class Instructor extends Model
         'type'
     ];
 
+    public $timestamps = false;
 }

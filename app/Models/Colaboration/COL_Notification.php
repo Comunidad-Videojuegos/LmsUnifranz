@@ -5,7 +5,7 @@ namespace App\Models\Colaboration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class COL_Notification extends Model
 {
     use HasFactory;
 
@@ -19,5 +19,6 @@ class Notification extends Model
         'read',
         'createDate'
     ];
+    public $timestamps = false;
 
 }

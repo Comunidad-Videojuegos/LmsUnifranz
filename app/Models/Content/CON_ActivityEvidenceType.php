@@ -2,12 +2,10 @@
 
 namespace App\Models\Content;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityEvidenceType extends Model
+class CON_ActivityEvidenceType extends Model
 {
-    use HasFactory;
 
     protected $table = 'CON_ActivityEvidenceType';
 
@@ -18,7 +16,8 @@ class ActivityEvidenceType extends Model
         'updateDate',
         'deleteDate',
     ];
-    
+    public $timestamps = false;
+
     public function activityEvidence()
     {
         return $this->hasMany(CON_ActivityEvidence::class);

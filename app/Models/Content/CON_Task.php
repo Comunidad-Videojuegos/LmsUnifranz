@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class CON_Task extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,6 @@ class Task extends Model
         'courseSectionId',
         'name',
         'description',
-        'deliveries',
         'missing',
         'calification',
         'orderNumber',
@@ -23,6 +22,7 @@ class Task extends Model
         'updateDate',
         'deleteDate',
     ];
+    public $timestamps = false;
 
 
     public function courseSection()

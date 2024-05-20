@@ -2,13 +2,10 @@
 
 namespace App\Models\Reports;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlatformActivityType extends Model
+class RPT_PlatformActivityType extends Model
 {
-    use HasFactory;
-
     protected $table = 'RPT_PlatformActivityType';
 
     protected $fillable = [
@@ -16,4 +13,5 @@ class PlatformActivityType extends Model
         'description',
     ];
 
+    public $timestamps = false;
 }

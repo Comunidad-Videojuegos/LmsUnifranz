@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Activity extends Model
+class CON_Activity extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,7 @@ class Activity extends Model
     protected $fillable = [
         'name',
         'description',
+        'orderNumber',
         'courseSectionId',
         'typeId',
         'virtual',
@@ -24,6 +25,8 @@ class Activity extends Model
         'updateDate',
         'deleteDate'
     ];
+
+    public $timestamps = false;
 
     public function courseSection()
     {

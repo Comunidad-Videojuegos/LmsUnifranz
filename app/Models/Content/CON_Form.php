@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Form extends Model
+class CON_Form extends Model
 {
     use HasFactory;
 
@@ -22,6 +22,7 @@ class Form extends Model
         'deleteDate',
     ];
 
+    public $timestamps = false;
 
     public function Form()
     {

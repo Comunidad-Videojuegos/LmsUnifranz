@@ -32,42 +32,51 @@ return new class extends Migration
         Schema::create('COL_Forum', function(Blueprint $table)
         {
             $table->id();
+            $table->unsignedBigInteger('courseSectionId');
+            $table->integer('createUserId');
+            $table->integer('orderNumber');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE COL_Forum ADD header varchar(70)");
         DB::statement("ALTER TABLE COL_Forum ADD content varchar(200)");
-        DB::statement("ALTER TABLE COL_Forum ADD createUserId int");
-        DB::statement("ALTER TABLE COL_Forum ADD answer nvarchar");
-        DB::statement("ALTER TABLE COL_Forum ADD views nvarchar");
-        DB::statement("ALTER TABLE COL_Forum ADD orderNumber int");
 
         Schema::create('COL_ForumConversation', function ( Blueprint $table)
         {
             $table->id();
-            $table->unsignedBigInteger('educatorId');
+            $table->unsignedBigInteger('conversationId');
+            $table->unsignedBigInteger('educatorId'); // se supone que es de todos los usuarios de students o instructors
             $table->unsignedBigInteger('forumId');
+            $table->string('message');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
-
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
-        DB::statement("ALTER TABLE COL_ForumConversation ADD message nvarchar");
-        DB::statement("ALTER TABLE COL_ForumConversation ADD views nvarchar");
-        DB::statement("ALTER TABLE COL_ForumConversation ADD answers nvarchar");
+
+        Schema::create('COL_ForumConversationFile', function ( Blueprint $table)
+        {
+            $table->id();
+            $table->unsignedBigInteger('conversationId');
+            $table->string('link');
+            $table->decimal('size');
+            $table->timestamp('createDate')->useCurrent();
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
+        });
+        DB::statement("ALTER TABLE COL_ForumConversationFile ADD type varchar(5)");
 
         Schema::create('COL_ForumFile', function (Blueprint $table)
         {
             $table->id();
             $table->unsignedBigInteger('forumId');
-            $table->integer('size');
+            $table->decimal('size');
             $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->useCurrent();
-            $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE COL_ForumFile ADD name varchar(50)");
-        DB::statement("ALTER TABLE COL_ForumFile ADD description varchar(255)");
+        DB::statement("ALTER TABLE COL_ForumFile ADD description varchar(100)");
         DB::statement("ALTER TABLE COL_ForumFile ADD type varchar(5)");
     }
 
@@ -81,5 +90,6 @@ return new class extends Migration
         Schema::dropIfExists('COL_Forum');
         Schema::dropIfExists('COL_ForumFile');
         Schema::dropIfExists('COL_ForumConversation');
+        Schema::dropIfExists('COL_ForumConversationFile');
     }
 };

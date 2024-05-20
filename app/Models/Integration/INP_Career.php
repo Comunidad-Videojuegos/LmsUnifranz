@@ -2,13 +2,10 @@
 
 namespace App\Models\Integration;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Career extends Model
+class INP_Career extends Model
 {
-    use HasFactory;
-
     protected $table = 'INP_Career';
 
     protected $fillable = [
@@ -22,4 +19,5 @@ class Career extends Model
         'deleteDate'
     ];
 
+    public $timestamps = false;
 }

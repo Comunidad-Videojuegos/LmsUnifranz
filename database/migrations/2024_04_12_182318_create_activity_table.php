@@ -17,12 +17,13 @@ return new class extends Migration
             $table ->unsignedBigInteger('courseSectionId');
             $table ->unsignedBigInteger('typeId');
             $table->boolean('virtual');
+            $table->integer('orderNumber');
             $table->dateTime('activityDate');
-            $table->time('duration');
-            $table->double('calification');
+            $table->decimal('duration');
+            $table->decimal('calification');
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE CON_Activity ADD name varchar(30) NOT NULL");
         DB::statement("ALTER TABLE CON_Activity ADD description varchar(100) NOT NULL");
@@ -34,16 +35,16 @@ return new class extends Migration
             $table ->unsignedBigInteger('typeId');
             $table->string('link');
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
 
         });
 
         Schema::create('CON_ActivityEvidenceType', function (Blueprint $table) {
             $table->id();
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
 
         });
         DB::statement("ALTER TABLE CON_ActivityEvidenceType ADD name varchar(30) NOT NULL");
@@ -81,11 +82,11 @@ return new class extends Migration
             $table ->unsignedBigInteger('courseSectionId');
             $table ->integer('orderNumber');
             $table ->unsignedBigInteger('createUserId');
-            $table->double('duration');
-            $table->double('calification');
+            $table->decimal('duration');
+            $table->decimal('calification');
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
 
         Schema::create('CON_FormField', function (Blueprint $table) {
@@ -106,27 +107,26 @@ return new class extends Migration
             $table->id();
             $table ->unsignedBigInteger('formId');
             $table ->unsignedBigInteger('studentId');
-            $table->double('calification');
-            $table->time('duration');
+            $table->decimal('calification');
+            $table->decimal('duration');
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
         });
 
         Schema::create('CON_Task', function (Blueprint $table) {
             $table->id();
             $table ->unsignedBigInteger('courseSectionId');
-            $table->integer('deliveries');
             $table->boolean('missing');
-            $table->double('calification');
+            $table->decimal('calification');
             $table->integer('orderNumber');
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
 
         });
         DB::statement("ALTER TABLE CON_Task ADD name varchar(50) NOT NULL");
-        DB::statement("ALTER TABLE CON_Task ADD description varchar(255) NOT NULL");
+        DB::statement("ALTER TABLE CON_Task ADD description varchar(100) NOT NULL");
 
 
         Schema::create('CON_TaskDeliveryFile', function (Blueprint $table) {
@@ -141,9 +141,10 @@ return new class extends Migration
         Schema::create('CON_TaskFile', function (Blueprint $table) {
             $table->id();
             $table ->unsignedBigInteger('taskId');
+            $table->string('link');
             $table->dateTime('createDate')->useCurrent();
-            $table->dateTime('updateDate')->useCurrent();
-            $table->dateTime('deleteDate')->default('0001-01-01 00:00:00');
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
 
         });
         DB::statement("ALTER TABLE CON_TaskFile ADD name varchar(50) NOT NULL");

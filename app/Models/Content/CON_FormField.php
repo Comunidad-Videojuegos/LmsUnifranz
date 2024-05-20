@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FormField extends Model
+class CON_FormField extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,7 @@ class FormField extends Model
         'orderNumber'
     ];
 
+    public $timestamps = false;
     public function formfile()
     {
         return $this->hasMany(CON_FormFields::class);

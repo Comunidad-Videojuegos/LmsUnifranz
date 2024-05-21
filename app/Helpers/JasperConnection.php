@@ -2,10 +2,13 @@
 namespace App\Helpers;
 
 use App\Helpers\JasperReader;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 class JasperConnection
 {
     private string $inputFile;
+    private string $init_name_file;
     private bool $setValueFile;
 
     private string $outputFile;
@@ -24,6 +27,8 @@ class JasperConnection
         } else {
             $this->format = $format;
         }
+
+        $this->init_name_file = $init_name_file;
 
         // LECTURA DEL APPSETTINGS.JSON
         $dir_proyect = base_path();
@@ -93,6 +98,17 @@ class JasperConnection
         } else {
             return false;
         }
+    }
+
+    public function publicCloudinary()
+    {
+        $uploadedFileUrl = Cloudinary::uploadFile($this->getOutputFile(), [
+            'public_id' => 'Reports/'. $this->init_name_file
+        ])->getSecurePath();
+
+        unlink($this->getOutputFile());
+
+        return $uploadedFileUrl;
     }
 
 }

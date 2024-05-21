@@ -8,6 +8,7 @@ use App\Http\Controllers\Reports\GeneralReportController;
 Route::controller(GeneralReportController::class)->group(function()
 {
     Route::get('/general/students/for-career', 'studentsForCareer');
+    Route::get('/general/students/for-career/grafic', 'studentsForCareerGrafic');
     Route::get('/general/students/for-course', 'studentsForCourse');
     Route::get('/general/instructors', 'instructors');
     Route::get('/general/activities', 'activities');

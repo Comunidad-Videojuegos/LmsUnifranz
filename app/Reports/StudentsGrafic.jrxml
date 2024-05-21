@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentsGrafic" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e959216-6f15-400c-b924-574905dd42c5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lms-Unifranz"/>
+	<subDataset name="Students" uuid="41632ce5-8dbd-4f8b-ba48-f29d7ca87fbb">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lms-Unifranz"/>
+		<parameter name="InitDate" class="java.lang.String"/>
+		<parameter name="EndDate" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[
+DECLARE @initDate varchar(40) = $P{InitDate};
+DECLARE @endDate varchar(40) = $P{EndDate};
+
+SELECT DISTINCT 
+	COUNT(INS.id) as students,
+	CRR.name as Carrera
+FROM INP_Student AS INS
+inner JOIN INP_CourseInscribed AS CI
+	ON CI.studentId = INS.id
+LEFT JOIN INP_Career AS CRR
+	ON CRR.id = ins.careerId
+INNER JOIN USR_Info AS usi
+	ON USI.id = ins.id
+INNER JOIN users AS u
+	ON u.id = usi.id
+WHERE CI.createDate BETWEEN @initDate and @endDate
+GROUP By CRR.name]]>
+		</queryString>
+		<field name="students" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="students"/>
+			<property name="com.jaspersoft.studio.field.label" value="students"/>
+		</field>
+		<field name="Carrera" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Carrera"/>
+			<property name="com.jaspersoft.studio.field.label" value="Carrera"/>
+		</field>
+		<group name="students">
+			<groupExpression><![CDATA[$F{students}]]></groupExpression>
+		</group>
+		<group name="Carrera">
+			<groupExpression><![CDATA[$F{Carrera}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="InitDate" class="java.lang.String"/>
+	<parameter name="EndDateText" class="java.lang.String"/>
+	<parameter name="EndDate" class="java.lang.String"/>
+	<parameter name="InitDateText" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 1;]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="191" y="10" width="420" height="30" uuid="94b31fa7-e527-4114-8cdc-603379f7b56e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTUDIANTES DE CADA CARRERA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="50" width="30" height="20" uuid="83edeb96-5e04-43ea-ac63-87b384b7ad82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="50" width="30" height="20" uuid="563c5e52-8fe5-4e54-bced-db93a27b4175"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="50" width="120" height="20" uuid="4a06ed22-219d-4099-b9be-7a124e0f2c03"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{InitDateText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="50" width="150" height="20" uuid="f9d6ad69-1e4d-4797-8423-5fed5cc69179"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{EndDateText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="420" splitType="Stretch">
+			<pie3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="90" y="20" width="656" height="400" uuid="d52b0054-656b-4a5e-ab8d-672ed03de33c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="20" minPercentage="120.0">
+					<dataset>
+						<datasetRun subDataset="Students" uuid="cc25e5c7-d42b-489d-acf2-5af30babd10b">
+							<datasetParameter name="EndDate">
+								<datasetParameterExpression><![CDATA[$P{EndDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="InitDate">
+								<datasetParameterExpression><![CDATA[$P{InitDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{Carrera}]]></keyExpression>
+					<valueExpression><![CDATA[$F{students}]]></valueExpression>
+					<labelExpression><![CDATA[$F{Carrera}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</detail>
+</jasperReport>

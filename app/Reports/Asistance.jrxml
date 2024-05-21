@@ -63,10 +63,10 @@ GROUP BY CAT.name]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<staticText>
-				<reportElement x="290" y="20" width="223" height="20" uuid="a0f1d001-74ac-41b4-842a-0d4a59d97c08"/>
-				<textElement>
+				<reportElement x="257" y="20" width="310" height="20" uuid="a0f1d001-74ac-41b4-842a-0d4a59d97c08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ASISTENCIA DE ESTUDIANTES]]></text>
@@ -86,7 +86,7 @@ GROUP BY CAT.name]]>
 				<text><![CDATA[AL:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="640" y="20" width="50" height="20" uuid="4e16ff03-836b-471d-b656-0a3cce73e66f"/>
+				<reportElement x="620" y="20" width="70" height="20" uuid="4e16ff03-836b-471d-b656-0a3cce73e66f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -108,7 +108,7 @@ GROUP BY CAT.name]]>
 				<textFieldExpression><![CDATA[$P{SectionName}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="640" y="40" width="50" height="20" uuid="8ee36595-94a3-4c1d-baf1-aeca5ea56526"/>
+				<reportElement x="620" y="40" width="70" height="20" uuid="8ee36595-94a3-4c1d-baf1-aeca5ea56526"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

@@ -91,15 +91,14 @@
 		<parameter name="EndDate" class="java.lang.String"/>
 		<parameter name="SectionId" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[
-declare @courseSectionId int = $P{SectionId};
+			<![CDATA[declare @courseSectionId int = $P{SectionId};
 
 SELECT 
 	CNT.name, CONCAT(USI.firstName, USI.dadLastName, USI.momLastName) as StudentName,
 	COUNT(INS.id) AS Entregas, 
 	MAX(RPT.calification) as Calificacion,
 	CNT.Calification as Valoracion,
-    LEAST((MAX(RPT.calification) / 100) * CNT.calification, CNT.calification) AS Total
+    (MAX(RPT.calification) / 100) * CNT.calification AS Total
 
 FROM INP_Student AS INS
 INNER JOIN USR_Info AS USI
@@ -163,8 +162,7 @@ ORDER BY INS.id]]>
 		<parameter name="EndDate" class="java.lang.String"/>
 		<parameter name="SectionId" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[
-declare @courseSectionId int = $P{SectionId};
+			<![CDATA[declare @courseSectionId int = $P{SectionId};
 
 
 SELECT 
@@ -172,7 +170,7 @@ SELECT
 	COUNT(INS.id) AS Entregas, 
 	MAX(CNR.calification) as Calificacion,
 	CNF.Calification as Valoracion,
-    LEAST((MAX(CNR.calification) / 100) * CNF.calification, CNF.calification) AS Total
+    (MAX(CNR.calification) / 100) * CNF.calification AS Total
 
 FROM INP_Student AS INS
 INNER JOIN USR_Info AS USI

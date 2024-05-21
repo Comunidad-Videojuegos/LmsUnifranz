@@ -48,4 +48,5 @@ class User extends Authenticatable
   {
     return $this->hasOne(USR_Info::class, 'id');
   }
+
 }

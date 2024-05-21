@@ -164,14 +164,14 @@ END]]>
 		<band height="450" splitType="Stretch">
 			<barChart>
 				<chart evaluationTime="Report" renderType="image" theme="default">
-					<reportElement x="0" y="10" width="800" height="420" uuid="af827058-50f0-48cf-9391-fcd726617855"/>
+					<reportElement x="0" y="10" width="800" height="420" uuid="0e0289f1-ead8-4054-8d74-2228e5ddbc4e"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<dataset>
-						<datasetRun subDataset="TaskStadistics" uuid="6a227d52-807d-44d5-bb42-3ae473de76d4">
+						<datasetRun subDataset="TaskStadistics" uuid="133361f1-8cc0-441e-9c4d-276d61ffefe9">
 							<datasetParameter name="InitDate">
 								<datasetParameterExpression><![CDATA[$P{InitDate}]]></datasetParameterExpression>
 							</datasetParameter>
@@ -187,11 +187,6 @@ END]]>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
 					</dataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{firstName}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{calification}]]></valueExpression>
-					</categorySeries>
 					<categorySeries>
 						<seriesExpression><![CDATA[$F{firstName}]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{firstName}]]></categoryExpression>

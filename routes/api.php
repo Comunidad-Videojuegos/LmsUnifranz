@@ -16,6 +16,12 @@ Route::prefix('courses')->group(function()
     }
 );
 
+// Integration
+Route::prefix('int')->group(function()
+    {
+        include __DIR__. '/integration/student.php';
+    }
+);
 
 // REPORTES
 Route::prefix('report')->group(function()

@@ -13,8 +13,13 @@
                     </button>
                 </div>
                 <div class="px-10 py-4">
-                    <button>
-                        <x-bi-file-pdf-fill width="30px" height="30px"/>
+                    <button class=" flex justify-around w-36" onclick="document.getElementById('reportStudent').showModal()">
+                        <p>Estudiantes</p><x-bi-file-pdf-fill width="30px" height="30px"/>
+                    </button>
+                </div>
+                <div class="px-10 py-4">
+                    <button class=" flex justify-around w-36" onclick="document.getElementById('reportStudent2').showModal()">
+                        <p>Grafica</p><x-bi-file-pdf-fill width="30px" height="30px"/>
                     </button>
                 </div>
             </div>
@@ -162,8 +167,113 @@
     <script>
         function updateRegister(idUser)
         {
-
             document.getElementById('updateUserMod').close();
         }
     </script>
+
+
+    <dialog id="reportStudent" class="p-5 bg-slate-700 rounded-md shadow-xl w-1/3 h-[60vh] text-white">
+        <h1 class="text-xl font-bold mb-4 text-center">Reporte de estudiantes por carrera</h1>
+        <div class="flex justify-around flex-col items-center">
+            <div>
+                <h2 class="py-4 font-bold">Fecha de inicio</h2>
+                <input type="text" id="initDate1" class="text-black py-2 pl-4 rounded-lg w-64">
+            </div>
+            <div>
+                <h2 class="py-4 font-bold">Fecha final</h2>
+                <input type="text" id="endDate1" class="text-black py-2 pl-4 rounded-lg w-64">
+            </div>
+            <div>
+                <h2 class="py-4 font-bold">Tipo</h2>
+                <select name="" id="type1" class="text-black py-2 pl-4 rounded-lg w-64">
+                    <option value="pdf">PDF</option>
+                    <option value="xlsx">XLSX</option>
+                    <option value="docx">WORD</option>
+                </select>
+            </div>
+        </div>
+        <menu class="mt-5 flex justify-end space-x-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="report1">
+                Generar
+            </button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="document.getElementById('reportStudent').close()">
+                Cerrar
+            </button>
+        </menu>
+    </dialog>
+
+
+    <dialog id="reportStudent2" class="p-5 bg-slate-700 rounded-md shadow-xl w-1/3 h-[60vh] text-white">
+        <h1 class="text-xl font-bold mb-4 text-center">Reporte de estudiantes grafica</h1>
+        <div class="flex justify-around flex-col items-center">
+            <div>
+                <h2 class="py-4 font-bold">Fecha de inicio</h2>
+                <input type="text" id="initDate2" class="text-black py-2 pl-4 rounded-lg w-64">
+            </div>
+            <div>
+                <h2 class="py-4 font-bold">Fecha final</h2>
+                <input type="text" id="endDate2" class="text-black py-2 pl-4 rounded-lg w-64">
+            </div>
+            <div>
+                <h2 class="py-4 font-bold">Tipo</h2>
+                <select name="" id="type2" class="text-black py-2 pl-4 rounded-lg w-64">
+                    <option value="pdf">PDF</option>
+                    <option value="xlsx">XLSX</option>
+                    <option value="docx">WORD</option>
+                </select>
+            </div>
+        </div>
+        <menu class="mt-5 flex justify-end space-x-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="report2">
+                Generar
+            </button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="document.getElementById('reportStudent2').close()">
+                Cerrar
+            </button>
+        </menu>
+    </dialog>
+
+    <script>
+        document.getElementById("report1").addEventListener("click", () =>
+        {
+            const finit = document.getElementById("initDate1").value;
+            const fend = document.getElementById("endDate1").value;
+            const type = document.getElementById("type1").value;
+
+
+            fetch(`/api/report/general/students/for-career?type=${type}&initDate=${finit}&endDate=${fend}`)
+            .then(response => response.json())
+            .then(response => {
+            if (response) {
+                window.open(response, "_blank")
+            } else {
+                alert('Error al eliminar la venta');
+            }
+            }).catch(error => console.error('Error:', error));
+
+
+        }, false)
+
+
+        document.getElementById("report2").addEventListener("click", () =>
+        {
+            const finit = document.getElementById("initDate2").value;
+            const fend = document.getElementById("endDate2").value;
+            const type = document.getElementById("type2").value;
+
+
+            fetch(`/api/report/general/students/for-career/grafic?type=${type}&initDate=${finit}&endDate=${fend}`)
+            .then(response => response.json())
+            .then(response => {
+            if (response) {
+                window.open(response, "_blank")
+            } else {
+                alert('Error al eliminar la venta');
+            }
+            }).catch(error => console.error('Error:', error));
+
+
+        }, false)
+    </script>
+
 @endsection

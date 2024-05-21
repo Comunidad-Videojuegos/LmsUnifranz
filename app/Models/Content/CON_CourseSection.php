@@ -4,6 +4,7 @@ namespace App\Models\Content;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Integration\INP_Course;
 
 class CON_CourseSection extends Model
 {
@@ -26,8 +27,8 @@ class CON_CourseSection extends Model
         return $this->hasMany(CON_CourseSection::class);
     }
 
-    public function courses()
+    public function course()
     {
-        return $this->belongsTo(INP_Courses::class);
+        return $this->belongsTo(INP_Course::class, 'courseId');
     }
 }

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Asistance" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69a082ee-dcaa-42d7-b9e5-a26245e63a3d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lms-Unifranz"/>
+	<subDataset name="Assistance" uuid="8f207084-77d0-45ce-bdf7-6340c608500f">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lms-Unifranz"/>
+		<parameter name="InitDate" class="java.lang.String"/>
+		<parameter name="EndDate" class="java.lang.String"/>
+		<parameter name="SectionId" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[
+
+
+declare @sectionId int = $P{SectionId};
+declare @initDate varchar(50) = $P{InitDate};
+declare @endDate varchar(50) = $P{EndDate};
+
+SELECT 
+	COUNT(*) AS cantidad,
+	CAT.name AS Type
+FROM RPT_CourseAssistance AS RPC
+INNER JOIN RPT_CourseAssistanceType AS CAT
+	ON RPC.typeId = CAT.id
+LEFT JOIN USR_Info AS USI
+	ON RPC.studentId = USI.id
+LEFT JOIN INP_CourseSchedule AS INC
+	ON INC.id = RPC.scheduleId
+LEFT JOIN INP_Course AS INS
+	ON INS.id = INC.courseId
+LEFT JOIN CON_CourseSection AS CCS
+	ON INS.id = CCS.courseId
+WHERE CCS.id = @sectionId AND INC.schoolDay BETWEEN @initDate AND @endDate
+GROUP BY CAT.name]]>
+		</queryString>
+		<field name="cantidad" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="cantidad"/>
+			<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		</field>
+		<field name="Type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Type"/>
+			<property name="com.jaspersoft.studio.field.label" value="Type"/>
+		</field>
+		<group name="cantidad">
+			<groupExpression><![CDATA[$F{cantidad}]]></groupExpression>
+		</group>
+		<group name="Type">
+			<groupExpression><![CDATA[$F{Type}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="InitDate" class="java.lang.String"/>
+	<parameter name="EndDateText" class="java.lang.String"/>
+	<parameter name="EndDate" class="java.lang.String"/>
+	<parameter name="InitDateText" class="java.lang.String"/>
+	<parameter name="SectionId" class="java.lang.String"/>
+	<parameter name="SectionName" class="java.lang.String"/>
+	<parameter name="MatName" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 1;]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="290" y="20" width="223" height="20" uuid="a0f1d001-74ac-41b4-842a-0d4a59d97c08"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASISTENCIA DE ESTUDIANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="50" width="30" height="20" uuid="390432b7-4570-497a-a78f-6ab13b88de6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="50" width="30" height="20" uuid="e30e6fff-c54d-4e22-8c0e-18e393f08db6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="20" width="50" height="20" uuid="4e16ff03-836b-471d-b656-0a3cce73e66f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECCION]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="307" y="50" width="90" height="20" uuid="e228804d-10a5-4e3f-9c38-7218e821fe41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{InitDateText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="50" width="104" height="20" uuid="e711c8d6-8294-4bdc-8e64-4c51ffb904c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{EndDateText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="20" width="91" height="20" uuid="412b8a2f-59d2-43ce-ae4d-4a06c0ee20d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{SectionName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="640" y="40" width="50" height="20" uuid="8ee36595-94a3-4c1d-baf1-aeca5ea56526"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="700" y="40" width="91" height="20" uuid="ef4c1d79-4785-4be4-9ca7-1f3caad390af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{MatName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="430" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="120" y="10" width="560" height="400" uuid="8a0c7213-1cf6-4a2b-8513-da81edeb57c1"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="40">
+					<dataset>
+						<datasetRun subDataset="Assistance" uuid="e7e6e461-d974-4370-83c6-b276a86a4399">
+							<datasetParameter name="InitDate">
+								<datasetParameterExpression><![CDATA[$P{InitDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="EndDate">
+								<datasetParameterExpression><![CDATA[$P{EndDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="SectionId">
+								<datasetParameterExpression><![CDATA[$P{SectionId}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{Type}]]></keyExpression>
+					<valueExpression><![CDATA[$F{cantidad}]]></valueExpression>
+					<labelExpression><![CDATA[$F{Type}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</detail>
+</jasperReport>

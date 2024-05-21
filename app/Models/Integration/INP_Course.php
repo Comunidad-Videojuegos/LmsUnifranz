@@ -4,7 +4,7 @@ namespace App\Models\Integration;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Content\CON_CourseSection;
 class INP_Course extends Model
 {
     use HasFactory;
@@ -26,4 +26,10 @@ class INP_Course extends Model
     ];
 
     public $timestamps = false;
+
+    public function courseSections()
+    {
+      return $this->hasMany(CON_CourseSection::class, 'courseId');
+    }
+
 }

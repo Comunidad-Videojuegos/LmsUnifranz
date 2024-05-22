@@ -177,11 +177,11 @@
         <div class="flex justify-around flex-col items-center">
             <div>
                 <h2 class="py-4 font-bold">Fecha de inicio</h2>
-                <input type="text" id="initDate1" class="text-black py-2 pl-4 rounded-lg w-64">
+                <input type="date" id="initDate1" class="text-black py-2 pl-4 rounded-lg w-64">
             </div>
             <div>
                 <h2 class="py-4 font-bold">Fecha final</h2>
-                <input type="text" id="endDate1" class="text-black py-2 pl-4 rounded-lg w-64">
+                <input type="date" id="endDate1" class="text-black py-2 pl-4 rounded-lg w-64">
             </div>
             <div>
                 <h2 class="py-4 font-bold">Tipo</h2>
@@ -208,11 +208,11 @@
         <div class="flex justify-around flex-col items-center">
             <div>
                 <h2 class="py-4 font-bold">Fecha de inicio</h2>
-                <input type="text" id="initDate2" class="text-black py-2 pl-4 rounded-lg w-64">
+                <input type="date" id="initDate2" class="text-black py-2 pl-4 rounded-lg w-64">
             </div>
             <div>
                 <h2 class="py-4 font-bold">Fecha final</h2>
-                <input type="text" id="endDate2" class="text-black py-2 pl-4 rounded-lg w-64">
+                <input type="date" id="endDate2" class="text-black py-2 pl-4 rounded-lg w-64">
             </div>
             <div>
                 <h2 class="py-4 font-bold">Tipo</h2>

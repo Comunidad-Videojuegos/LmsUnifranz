@@ -2,6 +2,6 @@
 
 @section('app-page')
     <h1>
-        CONFIG
+        ESTUDIANTES
     </h1>
 @endsection

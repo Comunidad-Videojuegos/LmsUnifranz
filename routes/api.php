@@ -9,24 +9,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // COURSES
-
-Route::prefix('courses')->group(function()
-    {
-        include __DIR__. '/content/courses.php';
-    }
-);
+// Route::prefix('courses')->group(function()
+//     {
+//         include __DIR__. '/content/courses.php';
+//     }
+// );
 
 // Integration
-Route::prefix('int')->group(function()
-    {
-        include __DIR__. '/integration/student.php';
-    }
-);
+// Route::prefix('int')->group(function()
+//     {
+//         include __DIR__. '/integration/student.php';
+//     }
+// );
 
 // REPORTES
 Route::prefix('report')->group(function()
     {
-        include __DIR__. '/report/demo.report.php';
         include __DIR__. '/report/activity.report.php';
         include __DIR__. '/report/assistance.report.php';
         include __DIR__. '/report/form.report.php';

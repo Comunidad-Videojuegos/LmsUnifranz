@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+
+    public function index()
+    {
+        return view('users.students');
+    }
+
     public function students()
     {
         $studentsWithInfo = INP_Student::with(['info' => function($query) {
@@ -27,4 +33,5 @@ class StudentController extends Controller
 
         return $filteredStudents;
     }
+
 }

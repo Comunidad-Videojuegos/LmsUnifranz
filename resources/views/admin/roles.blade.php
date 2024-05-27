@@ -2,6 +2,6 @@
 
 @section('app-page')
     <h1>
-        CONFIG
+        ROLES
     </h1>
 @endsection

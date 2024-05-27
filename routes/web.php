@@ -10,18 +10,26 @@ Route::prefix('google')->group(function()
     }
 );
 
-// RUTAS DEL USUARIO CONFIG DEL LMS
-
-Route::get('/admin', function () {
-    return view('layouts.app');
-})->middleware('auth.session');
-
+// RUTAS POR DEFECTO
 Route::prefix('admin')->group(function()
     {
         Route::get('/', function () { return redirect('/admin/config'); });
         include __DIR__. '/admin/config.php';
-        include __DIR__. '/admin/users.php';
-        include __DIR__. '/admin/platform.php';
+        include __DIR__. '/admin/permissions.php';
+        include __DIR__. '/admin/roles.php';
+        include __DIR__. '/admin/admins.php';
+
+        include __DIR__. '/content/carreers.php';
+        include __DIR__. '/content/courses.php';
+
+        include __DIR__. '/content/activities.php';
+        include __DIR__. '/content/evidences.php';
+
+        include __DIR__. '/integration/instructors.php';
+        include __DIR__. '/integration/students.php';
+
+        include __DIR__. '/platform/advertesements.php';
+        include __DIR__. '/platform/advertising.php';
     }
 );
 
@@ -29,7 +37,7 @@ Route::prefix('admin')->group(function()
 
 Route::get('/', function () {
     return view('auth.optionsLogin');
-});
+})->name('init-app');
 
 Route::get('/login', function () {
     return view('auth.login');

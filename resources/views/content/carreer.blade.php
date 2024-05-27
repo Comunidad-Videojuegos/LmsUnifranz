@@ -2,6 +2,6 @@
 
 @section('app-page')
     <h1>
-        CONFIG
+        CARRERAS
     </h1>
 @endsection

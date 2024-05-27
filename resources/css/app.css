@@ -9,6 +9,7 @@ base {
     :root {
       --bg-color: #000;
       --tx-color: #fff;
+      --cl-loader: #3ba;
       --txt2-color: #222;
     }
 }
@@ -53,4 +54,13 @@ base {
 
 ::-webkit-scrollbar-thumb {
     background-color: #345; /* Color del thumb */
+}
+
+/* CSS personalizado para ocultar la barra de desplazamiento */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.no-scrollbar {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }

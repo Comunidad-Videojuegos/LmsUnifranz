@@ -2,6 +2,6 @@
 
 @section('app-page')
     <h1>
-        CONFIG
+        EVIDENCES
     </h1>
 @endsection

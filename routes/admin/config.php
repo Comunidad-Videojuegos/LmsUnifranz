@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ConfigController;
 
 
-
-Route::get('/config', function () {
-    return view('admin.config');
-})->name('config');
+Route::controller(ConfigController::class)->group(function()
+{
+    Route::get('/config', 'index')->name('config');
+});

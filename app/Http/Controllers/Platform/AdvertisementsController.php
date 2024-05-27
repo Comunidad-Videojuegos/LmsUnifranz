@@ -10,6 +10,6 @@ class AdvertisementsController extends Controller
 
     public function index()
     {
-        return view('platform.advertisements');
+        return view('advertisements.advertisements');
     }
 }

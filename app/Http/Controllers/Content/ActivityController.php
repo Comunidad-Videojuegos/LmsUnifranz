@@ -9,6 +9,6 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        return view('content.activity');
+        return view('activities.activities');
     }
 }

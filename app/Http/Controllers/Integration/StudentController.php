@@ -14,7 +14,7 @@ class StudentController extends Controller
 
     public function index()
     {
-        return view('users.students');
+        return view('students.students');
     }
 
     public function students()
@@ -22,7 +22,7 @@ class StudentController extends Controller
         $studentsWithInfo = INP_Student::with(['info' => function($query) {
             $query->select('id', 'firstName', 'dadLastName', 'momLastName');
         }])->get();
-
+  
 
         $filteredStudents = $studentsWithInfo->map(function ($student) {
             return [

@@ -9,6 +9,6 @@ class CarreerController extends Controller
 {
     public function index()
     {
-        return view('content.carreer');
+        return view('carreers.carreers');
     }
 }

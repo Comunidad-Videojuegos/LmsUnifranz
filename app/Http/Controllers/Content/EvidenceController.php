@@ -9,6 +9,6 @@ class EvidenceController extends Controller
 {
     public function index()
     {
-        return view('content.evidences');
+        return view('evidences.evidences');
     }
 }

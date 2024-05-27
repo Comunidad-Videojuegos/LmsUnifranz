@@ -42,38 +42,35 @@
 
     {{-- EDITAR ROLES --}}
     <x-modal width="700px" height="400px" title="Editar los roles del usuario" idModal="rolesModal" idCloseModal="closeRolesModal">
+        @include('admins.create-admin')
         <x-slot name="btn_action">
-            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar"/>
+            <x-button-text id="btnRolesUser" color="#fff" bg="#007bff" text="Editar"/>
         </x-slot>
     </x-modal>
 
     {{-- OBTENER REPORTE --}}
-    <x-modal width="400px" height="400px" title="Generar reporte de actividad" idModal="reportModal" idCloseModal="closeReportModal">
+    <x-modal width="400px" height="330px" title="Generar reporte de actividad" idModal="reportModal" idCloseModal="closeReportModal">
+        @include('admins.report-admin')
         <x-slot name="btn_action">
-            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Generar reporte"/>
+            <x-button-text id="btnReportUser" color="#fff" bg="#007bff" text="Generar reporte" function="GenerateReportAdmin"/>
         </x-slot>
     </x-modal>
 
     {{-- ELIMINAR USUARIO --}}
     <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar el usuario?" idModal="deleteModal" idCloseModal="closeDeleteModal">
         <x-slot name="btn_action">
-            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Eliminar"/>
+            <x-button-text id="btnDeleteUser" color="#fff" bg="#007bff" text="Eliminar"/>
         </x-slot>
     </x-modal>
 
-    {{-- LOADING DE OPERACIONES --}}
-    <x-modal width="250px" height="140px" title="" bg="#0000" idModal="loadModal" isClose="true">
-        <x-loader width="250px"/>
-    </x-modal>
 
 
     <script>
+
         function EditUserModal(param)
         {
             const modal = new ModalPrefab("editModal", "closeEditModal");
             modal.openModal();
-            // const modal = new ModalPrefab("loadModal");
-            // modal.openModal();
         }
         function RolesUserModal(param)
         {

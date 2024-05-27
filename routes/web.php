@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('google')->group(function()
     {
         include __DIR__. '/google/auth.google.php';
+        include __DIR__. '/google/auth.session.php';
     }
 );
 
 // RUTAS POR DEFECTO
-Route::prefix('admin')->group(function()
+Route::prefix('admin')->middleware('auth')->group(function()
     {
         Route::get('/', function () { return redirect('/admin/config'); });
         include __DIR__. '/admin/config.php';
@@ -48,4 +49,4 @@ Route::get('/login', function () {
 // RUTAS PARA LA APLICACION DE REACT
 Route::get('/{path?}', function() {
     return view('layouts.react-app');
-})->where('path', '.*')->name('react');
+})->middleware('auth')->where('path', '.*')->name('react');

@@ -25,7 +25,7 @@ class AdminController extends Controller
             ->take($perPage)
             ->get();
 
-        return view('users.admins')
+        return view('admins.admins')
             ->with('users', $users)
             ->with('totalPages', $totalPages)
             ->with('totalUsers', $totalUsers)

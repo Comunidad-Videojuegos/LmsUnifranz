@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('content')->group(function()
     {
         include __DIR__. '/content/courses.php';
+        include __DIR__. '/content/tasks.php';
     }
 );
 

@@ -53,4 +53,49 @@ class TaskController extends Controller
         // Devolver las entregas de tarea en formato JSON
         return response()->json($taskDeliveries);
     }
+
+    public function createTask(Request $request)
+    {
+        // FORM DATA
+        $nameTask = $request->input('name');
+        $instructorId = $request->input('instructorId');
+        $description = $request->input('description');
+        $courseSectionId = $request->input('courseSectionId');
+        $valoration = $request->input('valoration');
+        $orderNumber = $request->input('orderNumber');
+
+        $nameFileTask = $request->input('nameFilesTask', []); // De que trata el archivo adjunto
+        $files = $request->input('files', []);
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
+
+
+    public function addDelivery(Request $request)
+    {
+        // FORM DATA
+        $studentId = $request->input('studentId');
+        $taskId = $request->input('taskId');
+
+        $files = $request->input('files', []);
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
+
+    public function gradeTask(Request $request)
+    {
+        // BODY JSON
+        $calification = $request->input('calification');
+        $taskId = $request->input('taskId');
+
+        return response()->json(["message" => "Actualizado con exito"], 200);
+    }
+
+    public function deleteTask(Request $request)
+    {
+        // QUERY URL
+        $taskId = $request->input('taskId');
+
+        return response()->json(["message" => "Eliminado con exito"], 200);
+    }
 }

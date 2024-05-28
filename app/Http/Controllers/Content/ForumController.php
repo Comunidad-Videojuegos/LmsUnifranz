@@ -118,4 +118,39 @@ class ForumController extends Controller
         }
     }
 
+
+    public function createForum(Request $request)
+    {
+        // FORM DATA
+        $header = $request->input('header');
+        $content = $request->input('content');
+        $instructorId = $request->input('instructorId');
+        $orderNumber = $request->input('orderNumber');
+
+        $nameFile = $request->input('nameFiles', []); // De que trata el archivo adjunto
+        $descFile = $request->input('descFiles', []); // Inf mas detallada del archivo adjunto
+        $files = $request->input('files', []);
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
+
+    public function updateForum(Request $request)
+    {
+        // BODY JSON
+        $forumId = $request->input('forumId');
+        $header = $request->input('header');
+        $content = $request->input('content');
+        $orderNumber = $request->input('orderNumber');
+
+        return response()->json(["message" => "Actualizado correctamente"], 200);
+    }
+
+    public function deleteForum(Request $request)
+    {
+        // BODY JSON
+        $forumId = $request->input('forumId');
+
+        return response()->json(["message" => "Eliminado correctamente"], 200);
+    }
+
 }

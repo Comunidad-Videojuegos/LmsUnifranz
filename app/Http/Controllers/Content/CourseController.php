@@ -96,4 +96,37 @@ class CourseController extends Controller
         return response()->json($results);
     }
 
+    public function addSection(Request $request)
+    {
+        // BODY JSON
+        $initDate = $request->input('initDate');
+        $endDate = $request->input('endDate');
+        $courseId = $request->input('courseId');
+        $assistance = $request->input('assistance'); // para saber si colocar un campo de assistencia
+        $name = $request->input('name');
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
+
+    public function updateSection(Request $request)
+    {
+        // BODY JSON
+        $sectionId = $request->input('sectionId');
+
+        $initDate = $request->input('initDate');
+        $endDate = $request->input('endDate');
+        $courseId = $request->input('courseId');
+        $assistance = $request->input('assistance'); // para saber si colocar un campo de assistencia
+        $name = $request->input('name');
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
+
+    public function deleteSection(Request $request)
+    {
+        // QUERY URL
+        $sectionId = $request->input('sectionId');
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
 }

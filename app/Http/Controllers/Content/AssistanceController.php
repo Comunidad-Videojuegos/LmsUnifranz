@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Integration\INP_CourseSchedule;
 use App\Models\Reports\RPT_CourseAssistance;
+use App\Models\Reports\RPT_CourseAssistanceType;
 
 class AssistanceController extends Controller
 {
@@ -50,4 +51,25 @@ class AssistanceController extends Controller
         // Devolver los resultados en formato JSON
         return response()->json($result);
     }
+
+
+    public function typesAssistance()
+    {
+        $assistanceTypes = RPT_CourseAssistanceType::select('id', 'name', 'description')
+            ->get();
+
+        // Devolver los resultados en formato JSON
+        return response()->json($assistanceTypes);
+    }
+
+    public function makeAssistance(Request $request)
+    {
+        // BODY JSON
+        $studentId = $request->input('studentId');
+        $scheduleId = $request->input('scheduleId');
+        $typeAssistanceId = $request->input('typeAssistanceId');
+
+        return response()->json(["message" => "Agregado correctamente"], 200);
+    }
+
 }

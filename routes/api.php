@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Colaboration\EmailController;
+use App\Http\Controllers\Smtp\EmailController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

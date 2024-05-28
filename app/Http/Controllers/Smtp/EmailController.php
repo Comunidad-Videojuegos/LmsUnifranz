@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Colaboration;
+namespace App\Http\Controllers\Smtp;
 
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;

@@ -50,3 +50,4 @@ Route::get('/login', function () {
 Route::get('/{path?}', function() {
     return view('layouts.react-app');
 })->middleware('auth')->where('path', '.*')->name('react');
+

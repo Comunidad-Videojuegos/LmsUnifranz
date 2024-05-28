@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Colaboration\EmailController;
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -34,3 +36,9 @@ Route::prefix('report')->group(function()
         include __DIR__. '/report/task.report.php';
     }
 );
+
+
+Route::controller(EmailController::class)->group(function()
+{
+    Route::get('/email/send', 'sendEmail');
+});

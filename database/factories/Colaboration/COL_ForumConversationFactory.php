@@ -17,7 +17,7 @@ class COL_ForumConversationFactory extends Factory
     public function definition(): array
     {
         return [
-            'conversationId' => fake()->numberBetween(1, 4000),
+            'conversationId' => fake()->numberBetween(0, 4000),
             'forumId' => fake()->numberBetween(1, 20),
             'educatorId' => fake()->numberBetween(1, 200),
             'message' => fake()->sentence()

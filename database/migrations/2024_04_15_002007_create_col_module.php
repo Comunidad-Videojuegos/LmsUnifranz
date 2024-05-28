@@ -64,7 +64,7 @@ return new class extends Migration
             $table->timestamp('updateDate')->nullable();
             $table->timestamp('deleteDate')->nullable();
         });
-        DB::statement("ALTER TABLE COL_ForumConversationFile ADD type varchar(5)");
+        DB::statement("ALTER TABLE COL_ForumConversationFile ADD type varchar(20)");
 
         Schema::create('COL_ForumFile', function (Blueprint $table)
         {

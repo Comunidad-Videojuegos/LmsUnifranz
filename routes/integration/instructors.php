@@ -6,5 +6,5 @@ use App\Http\Controllers\Integration\InstructorController;
 
 Route::controller(InstructorController::class)->group(function()
 {
-    Route::get('/instructors', 'index')->name('instructors');
+    Route::get('/users/instructors', 'index')->name('instructors');
 });

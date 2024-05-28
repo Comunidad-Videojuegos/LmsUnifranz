@@ -28,4 +28,9 @@ class INP_Student extends Model
     {
       return $this->belongsTo(USR_Info::class, 'id', 'id');
     }
+
+    public function courseInscribed()
+    {
+      return $this->belongsTo(INP_CourseInscribed::class, 'courseId');
+    }
 }

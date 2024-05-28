@@ -8,5 +8,8 @@ use App\Http\Controllers\Content\CourseController;
 
 Route::controller(CourseController::class)->group(function()
 {
-    Route::get('/courses', 'index')->name('courses');
+    Route::get('/content/courses', 'index')->name('courses');
+    Route::get('/courses', 'coursesOfStudent');
+    Route::get('/sections', 'sectionsOfCourse');
+    Route::get('/tasks-forums', 'taskForumOfSection');
 });

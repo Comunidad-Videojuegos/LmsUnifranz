@@ -23,4 +23,17 @@ class INP_CourseInscribed extends Model
     ];
 
     public $timestamps = false;
+
+    public function course()
+    {
+      return $this->belongsTo(INP_Course::class, 'courseId');
+    }
+    public function student()
+    {
+      return $this->belongsTo(INP_Student::class, 'studentId');
+    }
+    public function career()
+    {
+      return $this->belongsTo(INP_Career::class, 'careerId');
+    }
 }

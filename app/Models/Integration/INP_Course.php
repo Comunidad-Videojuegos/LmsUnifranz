@@ -27,9 +27,13 @@ class INP_Course extends Model
 
     public $timestamps = false;
 
-    public function courseSections()
+    public function courseInscribed()
     {
-      return $this->hasMany(CON_CourseSection::class, 'courseId');
+      return $this->hasMany(INP_CourseInscribed::class, 'courseId');
     }
 
+    public function instructor()
+    {
+        return $this->belongsTo(User::class, 'instructorId');
+    }
 }

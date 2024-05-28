@@ -20,4 +20,9 @@ class INP_Career extends Model
     ];
 
     public $timestamps = false;
+
+    public function courseInscribed()
+    {
+      return $this->hasMany(INP_CourseInscribed::class, 'careerId');
+    }
 }

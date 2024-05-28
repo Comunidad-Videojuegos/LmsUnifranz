@@ -26,4 +26,9 @@ class USR_Info extends Model
   {
     return $this->hasOne(INP_Student::class, 'id');
   }
+
+  public function courseInscribed()
+  {
+    return $this->hasMany(INP_CourseInscribed::class, 'studentId');
+  }
 }

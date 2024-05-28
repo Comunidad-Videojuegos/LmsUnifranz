@@ -11,18 +11,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // COURSES
-// Route::prefix('courses')->group(function()
-//     {
-//         include __DIR__. '/content/courses.php';
-//     }
-// );
+Route::prefix('content')->group(function()
+    {
+        include __DIR__. '/content/courses.php';
+    }
+);
 
 // Integration
-// Route::prefix('int')->group(function()
-//     {
-//         include __DIR__. '/integration/student.php';
-//     }
-// );
+Route::prefix('integration')->group(function()
+    {
+        include __DIR__. '/integration/students.php';
+    }
+);
 
 // REPORTES
 Route::prefix('report')->group(function()

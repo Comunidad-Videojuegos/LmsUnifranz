@@ -18,4 +18,9 @@ class INP_Instructor extends Model
     ];
 
     public $timestamps = false;
+    
+    public function info()
+    {
+      return $this->belongsTo(USR_Info::class, 'id', 'id');
+    }
 }

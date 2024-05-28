@@ -15,6 +15,8 @@ Route::prefix('content')->group(function()
     {
         include __DIR__. '/content/courses.php';
         include __DIR__. '/content/tasks.php';
+        include __DIR__. '/content/forums.php';
+        include __DIR__. '/content/assistance.php';
     }
 );
 

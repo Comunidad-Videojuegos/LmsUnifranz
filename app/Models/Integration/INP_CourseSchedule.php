@@ -4,7 +4,7 @@ namespace App\Models\Integration;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use  App\Models\Reports\RPT_CourseAssistance;
 class INP_CourseSchedule extends Model
 {
     use HasFactory;
@@ -22,4 +22,12 @@ class INP_CourseSchedule extends Model
     ];
     public $timestamps = false;
 
+    public function assistances()
+    {
+        return $this->hasMany(RPT_CourseAssistance::class, 'scheduleId');
+    }
+    public function course()
+    {
+        return $this->belongsTo(INP_Course::class, 'courseId');
+    }
 }

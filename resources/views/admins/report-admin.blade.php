@@ -39,7 +39,6 @@
                 window.open(response.data)
         })
         .catch(error => {
-            // Manejar el error
             console.error(error);
         });
 

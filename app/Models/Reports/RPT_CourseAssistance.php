@@ -21,4 +21,8 @@ class RPT_CourseAssistance extends Model
     ];
     public $timestamps = false;
 
+    public function type()
+    {
+        return $this->belongsTo(RPT_CourseAssistanceType::class, 'typeId');
+    }
 }

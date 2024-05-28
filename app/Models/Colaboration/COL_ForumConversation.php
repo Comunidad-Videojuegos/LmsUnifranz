@@ -22,4 +22,16 @@ class COL_ForumConversation extends Model
     ];
 
     public $timestamps = false;
+
+    // Relación para los archivos asociados a esta conversación
+    public function files()
+    {
+        return $this->hasMany(COL_ForumConversationFile::class, 'conversationId');
+    }
+
+    // Relación para las respuestas (conversaciones hijas)
+    public function responses()
+    {
+        return $this->hasMany(COL_ForumConversation::class, 'conversationId');
+    }
 }

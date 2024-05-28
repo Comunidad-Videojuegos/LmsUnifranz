@@ -9,6 +9,7 @@ use App\Models\Content\CON_CourseSection;
 use App\Models\Content\CON_Task;
 use App\Models\Colaboration\COL_Forum;
 use Illuminate\Support\Facades\DB;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class CourseController extends Controller
 {
     public function index()
@@ -104,6 +105,15 @@ class CourseController extends Controller
         $courseId = $request->input('courseId');
         $assistance = $request->input('assistance'); // para saber si colocar un campo de assistencia
         $name = $request->input('name');
+
+        $delivery = CON_CourseSection::create([
+            'initDate' => $initDate,
+            'endDate' => $endDate,
+            'courseId' => $courseId,
+            'assistance' => $assistance,
+            'name' => $name
+        ]);
+
 
         return response()->json(["message" => "Agregado correctamente"], 200);
     }

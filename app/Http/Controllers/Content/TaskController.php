@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Reports\RPT_TaskDeliveries;
 use App\Models\Content\CON_TaskDeliveryFile;
+use App\Models\Content\CON_Task;
+use App\Models\Content\CON_TaskFile;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+// COL_ForumConversationFile
 
 class TaskController extends Controller
 {
@@ -57,17 +62,63 @@ class TaskController extends Controller
     public function createTask(Request $request)
     {
         // FORM DATA
-        $nameTask = $request->input('name');
+        $name = $request->input('name');
         $instructorId = $request->input('instructorId');
         $description = $request->input('description');
         $courseSectionId = $request->input('courseSectionId');
         $valoration = $request->input('valoration');
         $orderNumber = $request->input('orderNumber');
 
-        $nameFileTask = $request->input('nameFilesTask', []); // De que trata el archivo adjunto
-        $files = $request->input('files', []);
+        $nameFileTask = $request->input('nameFilesTask', []);
+        $files = $request->file('files', []);
 
-        return response()->json(["message" => "Agregado correctamente"], 200);
+        try {
+            // Iniciar una transacción
+            DB::beginTransaction();
+
+            $task = CON_Task::create([
+                'courseSectionId' => $courseSectionId,
+                'calification' => $valoration,
+                'orderNumber' => $orderNumber,
+                'missing' => 1,
+                'name' => $name,
+                'description' => $description
+            ]);
+
+            // Si se han adjuntado archivos
+            if (!empty($files)) {
+
+                $filePaths = [];
+                foreach ($files as $file) {
+                    $filePaths[] = $file->store('uploads');
+                }
+
+                for ($i=0; $i < count($filePaths); $i++)
+                {
+                    // Subir archivo a Cloudinary
+                    $uploadedFileUrl = Cloudinary::uploadFile(storage_path('app/'. $filePaths[$i]), [
+                        'public_id' => 'TaskFiles'
+                    ])->getSecurePath();
+
+                    // Insertar en COL_ForumConversationFile
+                    CON_TaskFile::create([
+                        'taskId' => $task->id,
+                        'link' => $uploadedFileUrl,
+                        'name' => $nameFileTask[$i]
+                    ]);
+                }
+            }
+
+            // Confirmar la transacción
+            DB::commit();
+
+            // Respuesta exitosa
+            return response()->json(["message" => "Agregado correctamente"], 200);
+        } catch (\Exception $e) {
+            // Si hay un error, revertir la transacción
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
 
@@ -77,9 +128,61 @@ class TaskController extends Controller
         $studentId = $request->input('studentId');
         $taskId = $request->input('taskId');
 
-        $files = $request->input('files', []);
+        $files = $request->file('files', []);
 
-        return response()->json(["message" => "Agregado correctamente"], 200);
+        try {
+            // Iniciar una transacción
+            DB::beginTransaction();
+
+            $delivery = RPT_TaskDeliveries::create([
+                'taskId' => $taskId,
+                'studentId' => $studentId,
+                'viewed' => 0,
+                'reviewed' => 0,
+                'calification' => 0.0
+            ]);
+
+            // Si se han adjuntado archivos
+            if (!empty($files)) {
+
+                $filePaths = [];
+                foreach ($files as $file) {
+                    $filePaths[] = $file->store('uploads');
+                }
+
+                for ($i=0; $i < count($filePaths); $i++)
+                {
+                    // Subir archivo a Cloudinary
+                    $uploadedFileUrl = Cloudinary::uploadFile(storage_path('app/'. $filePaths[$i]), [
+                        'public_id' => 'DeliveryFiles'
+                    ])->getSecurePath();
+
+                    // Obtener información sobre el archivo subido
+                    $size = $files[$i]->getSize();
+                    $roundedSize = round($size / 1024, 2);
+                    $extension = $files[$i]->getClientOriginalExtension();
+                    $type = $extension;
+
+                    // Insertar en COL_ForumConversationFile
+                    CON_TaskDeliveryFile::create([
+                        'deliveryId' => $delivery->id,
+                        'link' => $uploadedFileUrl,
+                        'size' => $size,
+                        'type' => $type,
+                    ]);
+                }
+            }
+
+            // Confirmar la transacción
+            DB::commit();
+
+            // Respuesta exitosa
+            return response()->json(["message" => "Agregado correctamente"], 200);
+        } catch (\Exception $e) {
+            // Si hay un error, revertir la transacción
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function gradeTask(Request $request)

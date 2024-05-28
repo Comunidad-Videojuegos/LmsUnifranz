@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Colaboration\COL_Forum;
+use App\Models\Colaboration\COL_ForumFile;
 use App\Models\Colaboration\COL_ForumConversation;
 use App\Models\Colaboration\COL_ForumConversationFile;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -125,11 +127,73 @@ class ForumController extends Controller
         $header = $request->input('header');
         $content = $request->input('content');
         $instructorId = $request->input('instructorId');
+        $courseSectionId = $request->input('courseSectionId');
         $orderNumber = $request->input('orderNumber');
 
         $nameFile = $request->input('nameFiles', []); // De que trata el archivo adjunto
         $descFile = $request->input('descFiles', []); // Inf mas detallada del archivo adjunto
-        $files = $request->input('files', []);
+        $files = $request->file('files', []);
+
+
+        try {
+            // Iniciar una transacción
+            DB::beginTransaction();
+
+            // Insertar en COL_ForumConversation
+            $forum = COL_Forum::create([
+                'courseSectionId' => $courseSectionId,
+                'orderNumber' => $orderNumber,
+                'createUserId' => $instructorId,
+                'header' => $header,
+                'content' => $content
+            ]);
+
+            // Si se han adjuntado archivos
+            if (!empty($files)) {// Guardar archivos localmente
+
+                $filePaths = [];
+                foreach ($files as $file) {
+                    $filePaths[] = $file->store('uploads');
+                }
+
+                for ($i=0; $i < count($filePaths); $i++)
+                {
+                    // Subir archivo a Cloudinary
+                    // $uploadedFileUrl = Cloudinary::uploadFile(storage_path('app/'. $filePaths[$i]), [
+                    //     'public_id' => 'ForumFiles'
+                    // ])->getSecurePath();
+
+                    // Obtener información sobre el archivo subido
+                    $size = $files[$i]->getSize();
+                    $roundedSize = round($size / 1024, 2);
+                    $extension = $files[$i]->getClientOriginalExtension();
+                    $type = $extension;
+
+                    // Insertar en COL_ForumConversationFile
+                    COL_ForumFile::create([
+                        'forumId' => $forum->id,
+                        // 'link' => $description,
+                        'size' => $roundedSize,
+                        'name' => $nameFile[$i],
+                        'description' => $descFile[$i],
+                        'type' => $type
+                    ]);
+                }
+            }
+
+            // Confirmar la transacción
+            DB::commit();
+
+            // Respuesta exitosa
+            return response()->json(["message" => "Agregado correctamente"], 200);
+        } catch (\Exception $e) {
+            // Si hay un error, revertir la transacción
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+
+
 
         return response()->json(["message" => "Agregado correctamente"], 200);
     }

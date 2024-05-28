@@ -189,6 +189,7 @@ GROUP BY CNR.formId, CNF.calification]]>
 	<parameter name="StudentId" class="java.lang.String"/>
 	<parameter name="SectionId" class="java.lang.String"/>
 	<parameter name="StudentName" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT 1;]]>
 	</queryString>

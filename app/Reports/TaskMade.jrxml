@@ -137,6 +137,7 @@ END]]>
 	<parameter name="EndDateText" class="java.lang.String"/>
 	<parameter name="EndDate" class="java.lang.String"/>
 	<parameter name="InitDateText" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT 1;]]>
 	</queryString>

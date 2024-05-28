@@ -176,6 +176,10 @@ END]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{EndDateText}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="10" y="3" width="100" height="69" uuid="b7098c19-37df-420a-afe0-1a63f35129fc"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

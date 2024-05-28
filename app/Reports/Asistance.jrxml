@@ -10,10 +10,7 @@
 		<parameter name="EndDate" class="java.lang.String"/>
 		<parameter name="SectionId" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[
-
-
-declare @sectionId int = $P{SectionId};
+			<![CDATA[declare @sectionId int = $P{SectionId};
 declare @initDate varchar(50) = $P{InitDate};
 declare @endDate varchar(50) = $P{EndDate};
 
@@ -56,6 +53,7 @@ GROUP BY CAT.name]]>
 	<parameter name="SectionId" class="java.lang.String"/>
 	<parameter name="SectionName" class="java.lang.String"/>
 	<parameter name="MatName" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT 1;]]>
 	</queryString>
@@ -63,7 +61,7 @@ GROUP BY CAT.name]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
+		<band height="77" splitType="Stretch">
 			<staticText>
 				<reportElement x="257" y="20" width="310" height="20" uuid="a0f1d001-74ac-41b4-842a-0d4a59d97c08"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -119,6 +117,10 @@ GROUP BY CAT.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{MatName}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="30" y="4" width="100" height="69" uuid="a6efd3b1-e6f1-4a0c-a4d1-b47f94e852bb"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

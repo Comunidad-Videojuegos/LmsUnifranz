@@ -36,9 +36,7 @@
 		<parameter name="InitDate" class="java.lang.String"/>
 		<parameter name="EndDate" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[
-
-DECLARE @initDate varchar(40) = $P{InitDate};
+			<![CDATA[DECLARE @initDate varchar(40) = $P{InitDate};
 DECLARE @endDate varchar(40) = $P{EndDate};
 
 SELECT DISTINCT 
@@ -130,6 +128,10 @@ ORDER BY CRR.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{EndDateText}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="10" y="10" width="100" height="69" uuid="cc665a5b-7bd7-4eb7-ba43-b3309bebda6d"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

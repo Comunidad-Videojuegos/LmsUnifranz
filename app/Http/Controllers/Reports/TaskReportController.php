@@ -40,6 +40,7 @@ class TaskReportController extends Controller
             "EndDate" => $endDate,
             "InitDateText" => $initDateText,
             "EndDateText" => $endDateText,
+            "Logo" => getcwd() . "/imgs/unifranz.png"
         );
 
         $jasper->setFileReport($name_file);
@@ -78,6 +79,7 @@ class TaskReportController extends Controller
             "EndDate" => $endDate,
             "InitDateText" => $initDateText,
             "EndDateText" => $endDateText,
+            "Logo" => getcwd() . "/imgs/unifranz.png"
         );
 
         $jasper->setFileReport($name_file);
@@ -118,6 +120,7 @@ class TaskReportController extends Controller
             "EndDate" => $endDate,
             "InitDateText" => $initDateText,
             "EndDateText" => $endDateText,
+            "Logo" => getcwd() . "/imgs/unifranz.png"
         );
 
         $jasper->setFileReport($name_file);

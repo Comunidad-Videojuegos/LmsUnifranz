@@ -119,6 +119,7 @@ END]]>
 	<parameter name="Students" class="java.lang.String"/>
 	<parameter name="EndDateText" class="java.lang.String"/>
 	<parameter name="InitDateText" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT 1;]]>
 	</queryString>
@@ -158,6 +159,10 @@ END]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{EndDateText}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="20" y="5" width="100" height="69" uuid="03ebd0e3-8882-47b9-94ed-fde720dd6998"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

@@ -43,6 +43,7 @@ class GradeReportController extends Controller
             "InitDateText" => $initDateText,
             "EndDateText" => $endDateText,
             "StudentName" => $info->firstName. ' '. $info->dadLastName. ' '. $info->momLastName,
+            "Logo" => getcwd() . "/imgs/unifranz.png"
         );
 
         $jasper->setFileReport($name_file);
@@ -79,7 +80,8 @@ class GradeReportController extends Controller
             "InitDate" => $initDate,
             "EndDate" => $endDate,
             "InitDateText" => $initDateText,
-            "EndDateText" => $endDateText
+            "EndDateText" => $endDateText,
+            "Logo" => getcwd() . "/imgs/unifranz.png"
         );
 
         $jasper->setFileReport($name_file);

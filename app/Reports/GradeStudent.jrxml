@@ -189,6 +189,7 @@ GROUP BY CNR.formId, CNF.calification]]>
 	<parameter name="StudentId" class="java.lang.String"/>
 	<parameter name="SectionId" class="java.lang.String"/>
 	<parameter name="StudentName" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT 1;]]>
 	</queryString>
@@ -233,6 +234,10 @@ GROUP BY CNR.formId, CNF.calification]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{StudentName}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="10" y="10" width="100" height="69" uuid="84b17a7c-9b2f-49d6-b3a7-ee29bea93f95"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

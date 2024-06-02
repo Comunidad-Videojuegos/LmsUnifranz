@@ -21,7 +21,7 @@ class INP_InstructorFactory extends Factory
 
 
         return [
-            'id' => fake()->unique()->numberBetween(151, 200),
+            'id' => fake()->unique()->numberBetween(901, 1000),
             'speciality' => fake()->randomElement($specialities),
             'type' => fake()->randomElement($types),
         ];

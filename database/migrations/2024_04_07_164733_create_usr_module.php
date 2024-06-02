@@ -10,12 +10,6 @@ return new class extends Migration
   // Run the migrations.
   public function up(): void
   {
-    Schema::create('USR_Permission', function (Blueprint $table) {
-      $table->id();
-      $table ->unsignedBigInteger('sectionId');
-    });
-    DB::statement("ALTER TABLE USR_Permission ADD name varchar(30) NOT NULL");
-    DB::statement("ALTER TABLE USR_Permission ADD permissionKey varchar(255) NOT NULL");
 
     Schema::create('USR_Rol', function (Blueprint $table) {
       $table->id();
@@ -23,7 +17,7 @@ return new class extends Migration
       $table->timestamp('updateDate')->nullable();
       $table->timestamp('deleteDate')->nullable();
     });
-    DB::statement("ALTER TABLE USR_Rol ADD name varchar(20) NOT NULL");
+    DB::statement("ALTER TABLE USR_Rol ADD name varchar(50) NOT NULL");
 
     Schema::create('USR_UserRoles', function (Blueprint $table) {
       $table->id();
@@ -34,24 +28,10 @@ return new class extends Migration
       $table->timestamp('deleteDate')->nullable();
     });
 
-    Schema::create('USR_RolPermission', function (Blueprint $table) {
-      $table->id();
-      $table ->unsignedBigInteger('permissionId');
-      $table ->unsignedBigInteger('rolId');
-    });
-    Schema::create('USR_AppSection', function(Blueprint $table)
-    {
-        $table->id();
-        $table->string('link', 40);
-        $table->string('name', 40);
-        $table->string('description', 40)->nullable();
-        $table->string('icon', 30);
-        $table->integer('group')->default(1);
-    });
-
     Schema::create('USR_Info', function(Blueprint $table)
     {
         $table->unsignedBigInteger('id')->primary();
+        $table->string('photo');
     });
     DB::statement("ALTER TABLE USR_Info ADD firstName varchar(40)");
     DB::statement("ALTER TABLE USR_Info ADD momLastName varchar(40)");
@@ -64,11 +44,8 @@ return new class extends Migration
   // Reverse the migrations.
   public function down(): void
   {
-    Schema::dropIfExists('USR_RolPermission');
     Schema::dropIfExists('USR_UserRoles');
     Schema::dropIfExists('USR_Rol');
     Schema::dropIfExists('USR_Info');
-    Schema::dropIfExists('USR_Permission');
-    Schema::dropIfExists('USR_AppSection');
   }
 };

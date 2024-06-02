@@ -3,6 +3,8 @@
 namespace Database\Factories\Content;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -16,6 +18,8 @@ class CON_CourseSectionFactory extends Factory
      */
     public function definition(): array
     {
+        $startDate = '2024-01-01';
+        $endDate = Carbon::now();
 
         $courses = range(1, 200);
         $courseCounts = [];
@@ -41,8 +45,8 @@ class CON_CourseSectionFactory extends Factory
             'courseId' => array_shift($courseIds),
             'assistance' => fake()->boolean(60),
             'name' => 'Hito '. $counter++,
-            'initDate' => now(),
-            'endDate' => now(),
+            'initDate' => fake()->dateTimeBetween($startDate, $endDate),
+            'endDate' => fake()->dateTimeBetween($startDate, $endDate),
         ];
     }
 }

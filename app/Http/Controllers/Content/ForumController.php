@@ -211,7 +211,7 @@ class ForumController extends Controller
 
     public function deleteForum(Request $request)
     {
-        // BODY JSON
+        // FROM QUERY
         $forumId = $request->input('forumId');
 
         return response()->json(["message" => "Eliminado correctamente"], 200);

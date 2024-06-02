@@ -118,7 +118,7 @@ return new class extends Migration
             $table->id();
             $table ->unsignedBigInteger('courseSectionId');
             $table->boolean('missing');
-            $table->decimal('calification');
+            $table->decimal('valoration');
             $table->integer('orderNumber');
             $table->dateTime('createDate')->useCurrent();
             $table->timestamp('updateDate')->nullable();
@@ -149,7 +149,24 @@ return new class extends Migration
         });
         DB::statement("ALTER TABLE CON_TaskFile ADD name varchar(50) NOT NULL");
 
+        Schema::create('CON_TaskGroup', function(Blueprint $table){
+            $table->id();
+            $table->dateTime('createDate')->useCurrent();
+            $table->timestamp('updateDate')->nullable();
+            $table->timestamp('deleteDate')->nullable();
+        });
+        DB::statement("ALTER TABLE CON_TaskGroup ADD name varchar(50) NOT NULL");
+        DB::statement("ALTER TABLE CON_TaskGroup ADD description varchar(100) NOT NULL");
 
+
+
+        Schema::create('CON_TaskGroupStudents', function(Blueprint $table){
+            $table->id();
+            $table ->unsignedBigInteger('groupId');
+            $table ->unsignedBigInteger('studentId');
+            $table->dateTime('createDate')->useCurrent();
+            $table->timestamp('deleteDate')->nullable();
+        });
     }
     /**
      * Reverse the migrations.
@@ -169,5 +186,7 @@ return new class extends Migration
         Schema::dropIfExists('CON_Task');
         Schema::dropIfExists('CON_TaskDeliveryFile');
         Schema::dropIfExists('CON_TaskFile');
+        Schema::dropIfExists('CON_TaskGroup');
+        Schema::dropIfExists('CON_TaskGroupStudents');
     }
 };

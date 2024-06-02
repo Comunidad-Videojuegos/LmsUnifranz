@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Models\Colaboration;
+namespace App\Models\Content;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class COL_ForumFile extends Model
+class CON_TaskGroup extends Model
 {
     use HasFactory;
-
-    protected $table = 'COL_ForumFile';
+    protected $table = 'CON_TaskGroup';
 
     protected $fillable = [
-        'forumId',
-        'link',
-        'size',
-        'type',
         'name',
-        'description'
+        'description',
+        'createDate',
+        'updatedate',
+        'deletedate',
     ];
     public $timestamps = false;
-
 }

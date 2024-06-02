@@ -19,7 +19,7 @@ class COL_ForumConversationFileFactory extends Factory
         $types = ['img', 'png', 'xlsx', 'pdf', 'docx'];
         return [
             'conversationId' => fake()->numberBetween(1, 4000),
-            'link' => fake()->url(),
+            'link' => 'https://res.cloudinary.com/dm0aq4bey/image/upload/v1715195488/Report/BalanceSheet.pdf',
             'size' => fake()->numberBetween(1000, 100000),
             'type' => fake()->randomElement($types)
         ];

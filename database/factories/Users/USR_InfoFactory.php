@@ -22,6 +22,7 @@ class USR_InfoFactory extends Factory
     {
         return [
             'id' => User::factory(),
+            'photo' => 'https://i.pinimg.com/736x/2f/f7/9b/2ff79b39edf0635b9a4309625c57ac76.jpg',
             'firstName' => fake()->name(),
             'momLastName' => fake()->lastName,
             'dadLastName' => fake()->lastName,

@@ -33,7 +33,7 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('courseSectionId');
-            $table->integer('createUserId');
+            $table->decimal('valoration');
             $table->integer('orderNumber');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->nullable();
@@ -46,7 +46,7 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('conversationId');
-            $table->unsignedBigInteger('educatorId'); // se supone que es de todos los usuarios de students o instructors
+            $table->unsignedBigInteger('userId');
             $table->unsignedBigInteger('forumId');
             $table->string('message');
             $table->timestamp('createDate')->useCurrent();
@@ -60,9 +60,6 @@ return new class extends Migration
             $table->unsignedBigInteger('conversationId');
             $table->string('link');
             $table->decimal('size');
-            $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->nullable();
-            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE COL_ForumConversationFile ADD type varchar(20)");
 
@@ -70,10 +67,8 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('forumId');
+            $table->string('link');
             $table->decimal('size');
-            $table->timestamp('createDate')->useCurrent();
-            $table->timestamp('updateDate')->nullable();
-            $table->timestamp('deleteDate')->nullable();
         });
         DB::statement("ALTER TABLE COL_ForumFile ADD name varchar(50)");
         DB::statement("ALTER TABLE COL_ForumFile ADD description varchar(100)");

@@ -18,7 +18,7 @@ class CON_TaskDeliveryFileFactory extends Factory
     {
         $types = ['img', 'png', 'xlsx', 'pdf', 'docx'];
         return [
-            'deliveryId' => fake()->numberBetween(1, 300000),
+            'deliveryId' => fake()->numberBetween(1, 30000),
             'size' => fake()->numberBetween(1000, 300000),
             'type' => fake()->randomElement($types),
             'link' => fake()->url(),

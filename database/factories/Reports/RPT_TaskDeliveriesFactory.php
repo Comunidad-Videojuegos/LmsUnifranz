@@ -17,7 +17,7 @@ class RPT_TaskDeliveriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'studentId' => fake()->numberBetween(1, 150),
+            'studentId' => fake()->numberBetween(1, 900),
             'taskId' => fake()->numberBetween(1, 10000),
             'viewed' => fake()->boolean(20),
             'reviewed' => fake()->boolean(40),

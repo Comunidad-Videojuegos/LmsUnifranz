@@ -33,10 +33,10 @@ class IntegrationSeeder extends Seeder
             ['name' => 'Contaduría Pública', 'referenceId' => 12, 'initials' => 'CON', 'description' => 'Carrera de Unifranz', 'duration' => 4.0]
         ]);
 
-        INP_Student::factory()->count(150)->create();
-        INP_Instructor::factory()->count(50)->create();
+        INP_Student::factory()->count(900)->create();
+        INP_Instructor::factory()->count(100)->create();
         INP_Course::factory()->count(200)->create();
-        INP_CourseInscribed::factory()->count(2000)->create();
+        INP_CourseInscribed::factory()->count(10000)->create();
         INP_CourseSchedule::factory()->count(400)->create();
     }
 }

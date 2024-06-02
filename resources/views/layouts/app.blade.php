@@ -3,7 +3,6 @@
     $sections = USR_AppSection::orderBy('group', 'asc')->get();;
 @endphp
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,15 +57,11 @@
                                 <h3 class="py-5 pl-10 font-bold">Contenido</h3>
                                 @break
                             @case(3)
-                                <h3 class="py-5 pl-10 font-bold">Actividades</h3>
-                                @break
-                            @case(4)
                                 <h3 class="py-5 pl-10 font-bold">Plataforma</h3>
                                 @break
-                            @case(5)
+                            @case(4)
                                 <h3 class="py-5 pl-10 font-bold">Seguridad</h3>
                                 @break
-
                             @default
 
                         @endswitch

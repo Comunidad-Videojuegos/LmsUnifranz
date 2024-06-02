@@ -14,20 +14,9 @@ return new class extends Migration
     {
 
         // ---------------------------------------- MODULO DE USUARIOS RELACIONES ----------------------------------------
-
-        Schema::table('USR_RolPermission', function (Blueprint $table) {
-            $table->foreign('rolId')->references('id')->on('USR_Rol');
-            $table->foreign('permissionId')->references('id')->on('USR_Permission');
-        });
-
         Schema::table('USR_UserRoles', function (Blueprint $table) {
             $table->foreign('rolId')->references('id')->on('USR_Rol');
             $table->foreign('userId')->references('id')->on('users');
-        });
-
-        Schema::table('USR_Permission', function(Blueprint $table)
-        {
-            $table->foreign('sectionId')->references('id')->on('USR_AppSection');
         });
 
         Schema::table('USR_Info', function(Blueprint $table)
@@ -82,6 +71,11 @@ return new class extends Migration
             $table->foreign('taskId')->references('id')->on('CON_Task');
         });
 
+        Schema::table('CON_TaskGroupStudents', function(Blueprint $table)
+        {
+            $table->foreign('studentId')->references('id')->on('INP_Student');
+            $table->foreign('groupId')->references('id')->on('CON_TaskGroup');
+        });
 
         // ---------------------------------------- MODULO DE REPORTES REFERENCIAS ----------------------------------------
 
@@ -102,7 +96,6 @@ return new class extends Migration
             $table->foreign('advertId')->references('id')->on('INP_Advert');
             $table->foreign('userId')->references('id')->on('users');
         });
-
 
         Schema::table('RPT_TaskDeliveries', function(Blueprint $table)
         {
@@ -153,7 +146,7 @@ return new class extends Migration
 
         Schema::table('COL_ForumConversation', function (Blueprint $table)
         {
-            $table->foreign('educatorId')->references('id')->on('users');
+            $table->foreign('userId')->references('id')->on('users');
             $table->foreign('forumId')->references('id')->on('COL_Forum');
         });
         Schema::table('COL_ForumConversationFile', function (Blueprint $table)
@@ -230,19 +223,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('USR_RolPermission', function (Blueprint $table) {
-            $table->dropForeign('usr_rolpermission_rolid_foreign');
-            $table->dropForeign('usr_rolpermission_permissionid_foreign');
-        });
-
         Schema::table('USR_UserRoles', function (Blueprint $table) {
             $table->dropForeign('usr_userroles_rolid_foreign');
             $table->dropForeign('usr_userroles_userid_foreign');
-        });
-
-        Schema::table('USR_Permission', function(Blueprint $table)
-        {
-            $table->dropForeign('usr_permission_sectionid_foreign');
         });
 
         Schema::table('USR_Info', function(Blueprint $table)
@@ -296,8 +279,11 @@ return new class extends Migration
             $table->dropForeign('con_taskfile_taskid_foreign');
         });
 
-
-
+        Schema::table('CON_TaskGroupStudents', function(Blueprint $table)
+        {
+            $table->dropForeign('con_taskgroupstudents_studentId_foreign');
+            $table->dropForeign('con_taskgroupstudents_groupId_foreign');
+        });
 
         Schema::table('RPT_Login', function (Blueprint $table)
         {
@@ -366,7 +352,7 @@ return new class extends Migration
         Schema::table('COL_ForumConversation', function (Blueprint $table)
         {
             $table->dropForeign('col_forumconversation_forumid_foreign');
-            $table->dropForeign('col_forumconversation_educatorid_foreign');
+            $table->dropForeign('col_forumconversation_userid_foreign');
         });
         Schema::table('COL_ForumConversationFile', function (Blueprint $table)
         {

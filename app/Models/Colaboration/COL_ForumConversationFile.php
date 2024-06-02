@@ -15,10 +15,7 @@ class COL_ForumConversationFile extends Model
         'conversationId',
         'link',
         'size',
-        'type',
-        'createDate',
-        'updateDate',
-        'deleteDate'
+        'type'
     ];
 
     public $timestamps = false;

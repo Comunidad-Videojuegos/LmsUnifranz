@@ -75,9 +75,10 @@ return new class extends Migration
         Schema::create('INP_Course', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('instructorId');
-            $table->decimal('calificationTotal');
             $table->string('groupLink');
-            $table->integer('gestion');
+            $table->string('image')->nullable();
+            $table->timestamp('initDuration')->useCurrent();
+            $table->timestamp('endDuration')->useCurrent();
         });
         DB::statement("ALTER TABLE INP_Course ADD referenceId int");
         DB::statement("ALTER TABLE INP_Course ADD name varchar(50)");

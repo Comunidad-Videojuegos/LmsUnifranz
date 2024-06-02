@@ -3,6 +3,7 @@
 namespace Database\Factories\Colaboration;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -16,12 +17,16 @@ class COL_ForumFactory extends Factory
      */
     public function definition(): array
     {
+        $startDate = '2024-01-01';
+        $endDate = Carbon::now();
+
         return [
             'orderNumber' => fake()->numberBetween(1, 20),
             'courseSectionId' => fake()->numberBetween(1, 1000),
-            'createUserId' => fake()->numberBetween(151, 200), // Instructor
             'header' => fake()->text(70),
-            'content' => fake()->text(200)
+            'content' => fake()->text(200),
+            'valoration' => fake()->numberBetween(1, 50),
+            'createDate' => fake()->dateTimeBetween($startDate, $endDate),
         ];
     }
 }

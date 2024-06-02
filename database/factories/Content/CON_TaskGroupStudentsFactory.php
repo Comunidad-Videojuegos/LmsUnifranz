@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CON_TaskFactory extends Factory
+class CON_TaskGroupStudentsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +17,8 @@ class CON_TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'courseSectionId' => fake()->numberBetween(1, 1000),
-            'orderNumber' => fake()->numberBetween(1, 20),
-            'valoration' => fake()->randomFloat(2, 20, 100),
-            'missing' => fake()->boolean(90),
-            'name' => fake()->text(50),
-            'description' => fake()->text(100),
+            'groupId' => fake()->numberBetween(1, 500),
+            'studentId' => fake()->numberBetween(1, 900)
         ];
     }
 }

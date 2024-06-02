@@ -30,6 +30,6 @@ class ColaborationSeeder extends Seeder
         COL_Forum::factory()->count(3000)->create();
         COL_ForumFile::factory()->count(3100)->create();
         COL_ForumConversation::factory()->count(4000)->create();
-        COL_ForumConversationFile::factory()->count(4300)->create();
+        COL_ForumConversationFile::factory()->count(4100)->create();
     }
 }

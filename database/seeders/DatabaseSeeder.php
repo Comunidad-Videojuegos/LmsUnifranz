@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
             IntegrationSeeder::class,
             ContentSeeder::class,
             ColaborationSeeder::class,
-            LearningSeeder::class,
-            ReportsSeeder::class
+            // LearningSeeder::class,
+            // ReportsSeeder::class
         ]);
     }
 }

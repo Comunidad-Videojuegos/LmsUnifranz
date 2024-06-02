@@ -17,7 +17,7 @@ class CON_TaskFileFactory extends Factory
     public function definition(): array
     {
         return [
-            'taskId' => fake()->numberBetween(1, 4000),
+            'taskId' => fake()->numberBetween(1, 10000),
             'link' => fake()->url(),
             'name' => fake()->text(50)
         ];

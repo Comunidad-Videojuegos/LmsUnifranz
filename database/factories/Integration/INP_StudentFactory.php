@@ -16,7 +16,7 @@ class INP_StudentFactory extends Factory
     {
 
         return [
-            'id' => fake()->unique()->numberBetween(1, 150),
+            'id' => fake()->unique()->numberBetween(1, 900),
             'careerId' => fake()->numberBetween(1, 12),
             'semester' => fake()->numberBetween(1, 12),
             'referenceId' => 1

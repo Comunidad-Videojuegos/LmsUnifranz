@@ -5,9 +5,8 @@ namespace App\Models\Users;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Rol extends Model
+class USR_Rol extends Model
 {
-  use HasFactory;
   protected $table = 'USR_Rol';
 
   protected $fillable = ['name', 'createDate', 'updateDate', 'deleteDate'];

@@ -3,11 +3,12 @@
 namespace Database\Factories\Content;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CON_TaskFactory extends Factory
+class CON_TaskGroupFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,13 +17,13 @@ class CON_TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $startDate = '2024-02-01';
+        $endDate = Carbon::now();
+
         return [
-            'courseSectionId' => fake()->numberBetween(1, 1000),
-            'orderNumber' => fake()->numberBetween(1, 20),
-            'valoration' => fake()->randomFloat(2, 20, 100),
-            'missing' => fake()->boolean(90),
             'name' => fake()->text(50),
             'description' => fake()->text(100),
+            'createDate' => fake()->dateTimeBetween($startDate, $endDate)
         ];
     }
 }

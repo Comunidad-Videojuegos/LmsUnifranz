@@ -18,7 +18,7 @@ class INP_CourseInscribedFactory extends Factory
     {
         return [
             'courseId' => fake()->numberBetween(1, 200),
-            'studentId' => fake()->numberBetween(1, 150),
+            'studentId' => fake()->numberBetween(1, 900),
             'careerId' => fake()->numberBetween(1, 12),
             'status' => fake()->sentence(),
             'noteTotal' => fake()->randomFloat(2, 20, 100)

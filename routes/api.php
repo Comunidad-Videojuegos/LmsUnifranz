@@ -41,7 +41,16 @@ Route::prefix('report')->group(function()
 );
 
 
-Route::controller(EmailController::class)->group(function()
-{
-    Route::get('/email/send', 'sendEmail');
+Route::get('/mail/notification', function () {
+    return view('mail.notification');
+})->name('mail.notification');
+
+Route::get('/mail/alert', function () {
+    return view('mail.alert');
+})->name('mail.alert');
+
+Route::controller(EmailController::class)->group(function() {
+    Route::post('/api/mail/notification', 'sendNotification')->name('api.mail.notification');
+    Route::post('/api/mail/alert', 'sendAlert')->name('api.mail.alert');
 });
+

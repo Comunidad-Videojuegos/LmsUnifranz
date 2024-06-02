@@ -13,14 +13,14 @@ class HelloMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $name;
+    public $messageContent;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($name)
+    public function __construct($messageContent)
     {
-        $this->name = $name;
+        $this->messageContent = $messageContent;
     }
 
     /**
@@ -29,7 +29,7 @@ class HelloMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Hello Mail',
+            subject: $this->messageContent['title'],
         );
     }
 
@@ -41,7 +41,8 @@ class HelloMail extends Mailable
         return new Content(
             view: 'mail.hello',
             with: [
-                'name' => $this->name,
+                'name' => $this->messageContent['name'],
+                'message' => $this->messageContent['message'],
             ],
         );
     }

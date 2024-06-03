@@ -25,7 +25,7 @@ class COL_ForumFactory extends Factory
             'courseSectionId' => fake()->numberBetween(1, 1000),
             'header' => fake()->text(70),
             'content' => fake()->text(200),
-            'valoration' => fake()->numberBetween(1, 50),
+            'valoration' => fake()->optional()->numberBetween(1, 50),
             'createDate' => fake()->dateTimeBetween($startDate, $endDate),
         ];
     }

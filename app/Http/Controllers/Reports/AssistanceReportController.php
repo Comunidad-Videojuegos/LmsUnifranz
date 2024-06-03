@@ -50,7 +50,21 @@ class AssistanceReportController extends Controller
         $jasper->parameters = $params;
         $jasper->executeReport();
 
-        return response()->json($jasper->publicCloudinary());
+        try {
+            $outputBytes = $jasper->getOutputBytes();
+            $outputFilePath = $jasper->getOutputFile();
+            $mimeType = mime_content_type($outputFilePath);
+            $fileName = basename($outputFilePath);
+
+            return response($outputBytes)
+                ->header('Content-Type', $mimeType)
+                ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"')
+                ->header('Content-Length', filesize($outputFilePath));
+        } catch (Exception $e) {
+            Log::error('Error al generar el reporte: ' . $e->getMessage());
+
+            return response()->json(['error' => 'Error al generar el reporte'], 500);
+        }
     }
 
     public function forStudent()

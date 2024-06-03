@@ -1,6 +1,7 @@
 @php
-    use App\Models\Users\USR_AppSection;
-    $sections = USR_AppSection::orderBy('group', 'asc')->get();;
+    use App\Models\Users\USR_UserRoles;
+    $userId = auth()->user()->id;
+    $sections = USR_UserRoles::where('userId', $userId)->get();
 @endphp
 
 <!DOCTYPE html>
@@ -41,17 +42,14 @@
                 {{-- CONTENIDO DE NAVEGACION --}}
                 <div class="h-3/4 relative overflow-auto">
 
-                    {{-- Agrupar las secciones por el campo 'group' --}}
-                    @php
-                        $groupedSections = $sections->groupBy('group');
-                    @endphp
-
                     {{-- ITEMS NAV --}}
-                    @foreach ($groupedSections as $group => $groupSections)
+                    @foreach ($sections as $app)
 
-                        @switch($group)
+                        @switch($app->rolId)
                             @case(1)
-                                <h3 class="py-5 pl-10 font-bold">Usuarios</h3>
+                                @include('auth.app-users')
+                                @include('auth.app-content')
+                                @include('auth.app-security')
                                 @break
                             @case(2)
                                 <h3 class="py-5 pl-10 font-bold">Contenido</h3>
@@ -62,17 +60,14 @@
                             @case(4)
                                 <h3 class="py-5 pl-10 font-bold">Seguridad</h3>
                                 @break
+                            @case(5)
+                                <h3 class="py-5 pl-10 font-bold">Seguridad</h3>
+                                @break
+                            @case(6)
+                                @break
                             @default
 
                         @endswitch
-
-                        @foreach ($groupSections as $item)
-                            <x-nav-item
-                                link="{{ $item->link }}"
-                                title="{{ $item->name }}"
-                                icon="{{ $item->icon }}"
-                            />
-                        @endforeach
                     @endforeach
 
                     <form class="py-10 text-red-600" action="{{ route('logout') }}" method="POST">
@@ -101,6 +96,12 @@
         {{-- LOADING DE OPERACIONES --}}
         <x-modal width="250px" height="140px" title="" bg="#0000" idModal="loadModal" isClose="true">
             <x-loader width="250px"/>
+        </x-modal>
+
+
+        {{-- PREVIEW REPORTS --}}
+        <x-modal width="800px" height="500px" title="" bg="#0000" idModal="previewModal" isClose="true">
+            <iframe id="reportPreview" style="width:100%; height:500px;"></iframe>
         </x-modal>
     </div>
     <script>
@@ -155,6 +156,7 @@
                 this.msg_sucess = "";
 
                 this.modal = new ModalPrefab("loadModal");
+                this.previewModal = new ModalPrefab("previewModal");
 
                 // Interceptor para manejar modales de carga
                 this.axios.interceptors.request.use((config) => {
@@ -175,6 +177,7 @@
                         // Ocultar modal de carga y manejar el error
                         this.hideLoadingModal();
                         this.showErrorMsg(error);
+                        this.hideAllModals();
                         return Promise.reject(error);
                     }
                 );
@@ -222,6 +225,15 @@
                 return this.axios.get(url, { params });
             }
 
+            async getReport(url)
+            {
+                const response = await this.axios.get(url, { responseType: 'blob' });
+                const blob = new Blob([response.data], { type: response.headers['content-type'] });
+                const blobUrl = URL.createObjectURL(blob);
+                document.getElementById('reportPreview').src = blobUrl;
+                this.previewModal.openModal();
+            }
+
             post(url, data) {
                 return this.axios.post(url, data);
             }
@@ -244,5 +256,26 @@
         }
     </script>
 
+    {{-- CASO DE PREVIEW MODAL --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const previewModal = document.getElementById('previewModal');
+
+            if (previewModal) {
+                previewModal.addEventListener('click', function (event) {
+                    const modalContent = previewModal.querySelector('.modal-content');
+
+                    // Si el click es fuera del contenido del modal, cerramos el modal
+                    if (!modalContent.contains(event.target)) {
+                        previewModal.classList.remove('open');
+                        previewModal.classList.add('close');
+                        previewModal.addEventListener('animationend', () => {
+                            previewModal.close();
+                        }, { once: true });
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

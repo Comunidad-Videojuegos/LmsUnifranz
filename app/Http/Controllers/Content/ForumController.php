@@ -44,7 +44,7 @@ class ForumController extends Controller
         // FORMDATA
         $conversationId = $request->input('conversationId');
         $message = $request->input('message');
-        $files = $request->file('files', []);
+        $files = $request->file('files[]', []);
 
         try {
             // Iniciar una transacción
@@ -126,6 +126,7 @@ class ForumController extends Controller
         // FORM DATA
         $header = $request->input('header');
         $content = $request->input('content');
+        $valoration = $request->input('valoration');
         $instructorId = $request->input('instructorId');
         $courseSectionId = $request->input('courseSectionId');
         $orderNumber = $request->input('orderNumber');
@@ -143,6 +144,7 @@ class ForumController extends Controller
             $forum = COL_Forum::create([
                 'courseSectionId' => $courseSectionId,
                 'orderNumber' => $orderNumber,
+                'valoration' => $valoration,
                 'createUserId' => $instructorId,
                 'header' => $header,
                 'content' => $content

@@ -33,7 +33,7 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('courseSectionId');
-            $table->decimal('valoration');
+            $table->decimal('valoration')->nullable();
             $table->integer('orderNumber');
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->nullable();

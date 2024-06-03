@@ -17,10 +17,11 @@ class AdminController extends Controller
         $perPage = 10; // Número de usuarios por página
         $offset = ($pageNumber - 1) * $perPage;
 
-        $totalUsers = User::count();
+        $totalUsers = User::whereHas('userRoles')->count();
         $totalPages = ceil($totalUsers / $perPage);
-
+        
         $users = User::with('userInfo')
+            ->whereHas('userRoles')
             ->skip($offset)
             ->take($perPage)
             ->get();

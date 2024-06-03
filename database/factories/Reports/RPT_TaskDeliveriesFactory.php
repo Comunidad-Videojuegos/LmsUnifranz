@@ -21,7 +21,7 @@ class RPT_TaskDeliveriesFactory extends Factory
             'taskId' => fake()->numberBetween(1, 10000),
             'viewed' => fake()->boolean(20),
             'reviewed' => fake()->boolean(40),
-            'calification' => fake()->randomFloat(2, 20, 100)
+            'calification' => fake()->optional()->randomFloat(2, 20, 100)
         ];
     }
 }

@@ -18,9 +18,8 @@
     </div>
 </div>
 
-
 <script>
-    function GenerateReportAdmin()
+    async function GenerateReportAdmin()
     {
         const type = document.getElementById("selectedTypeFile").value;
         const initDate = document.getElementById("InitDate").value;
@@ -31,16 +30,6 @@
         axiosInstance.setMessageError("No se pudo generar el reporte");
         axiosInstance.setMessageSuccess("El reporte se genero con exito");
 
-        axiosInstance.get(`/report/general/students/for-career/grafic?type=${type}&initDate=${initDate}&endDate=${endDate}`)
-        .then(response => {
-            if(type == "pdf")
-                window.open(response.data, '_blank')
-            else
-                window.open(response.data)
-        })
-        .catch(error => {
-            console.error(error);
-        });
-
+        await axiosInstance.getReport(`/report/general/students/for-career/grafic?type=${type}&initDate=${initDate}&endDate=${endDate}`);
     }
 </script>

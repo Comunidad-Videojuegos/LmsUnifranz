@@ -40,7 +40,7 @@ class TaskController extends Controller
         $studentId = $request->input('studentId');
 
         // Obtener las entregas de tarea
-        $taskDeliveries = RPT_TaskDeliveries::select('id', 'viewed', 'reviewed', 'calification')
+        $taskDeliveries = RPT_TaskDeliveries::select('id', 'calification')
             ->where('taskId', $taskId)
             ->where('studentId', $studentId)
             ->get();
@@ -78,7 +78,7 @@ class TaskController extends Controller
 
             $task = CON_Task::create([
                 'courseSectionId' => $courseSectionId,
-                'calification' => $valoration,
+                'valoration' => $valoration,
                 'orderNumber' => $orderNumber,
                 'missing' => 1,
                 'name' => $name,

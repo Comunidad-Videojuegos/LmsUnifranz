@@ -111,20 +111,15 @@ class JasperConnection
         return $uploadedFileUrl;
     }
 
-    public function getOutputBytes(): array {
-        // Verificar si el archivo de salida existe
-        if (file_exists($this->outputFilePath)) {
-            // Leer el archivo y obtener su contenido como cadena
-            $fileContents = file_get_contents($this->outputFilePath);
-            if ($fileContents === false) {
-                // Manejar el caso donde la lectura del archivo falla
-                throw new Exception('Error al leer el archivo de salida.');
-            }
-            // Convertir la cadena a un array de bytes
-            return array_map('ord', str_split($fileContents));
-        } else {
-            // Manejar el caso donde el archivo de salida no existe
-            throw new Exception('El archivo de salida no fue encontrado.');
+    public function getOutputBytes() {
+        if (empty($this->getOutputFile())) {
+            throw new Exception('El archivo de salida no está definido.');
         }
+
+        $file = file_get_contents($this->getOutputFile());
+
+        // unlink($this->getOutputFile());
+
+        return $file;
     }
 }

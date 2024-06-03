@@ -12,9 +12,30 @@ use Illuminate\Support\Facades\DB;
 class StudentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('students.students');
+        $pageNumber = $request->input('pageNumber');
+
+        if(!$pageNumber) $pageNumber = 1;
+
+        $perPage = 10; // Número de usuarios por página
+        $offset = ($pageNumber - 1) * $perPage;
+
+        // Contar el total de usuarios que tienen estudiantes
+        $totalUsers = User::whereHas('students')->count();
+        $totalPages = ceil($totalUsers / $perPage);
+
+        $users = User::with('userInfo')
+            ->whereHas('students')
+            ->skip($offset)
+            ->take($perPage)
+            ->get();
+
+        return view('students.students')
+            ->with('users', $users)
+            ->with('totalPages', $totalPages)
+            ->with('totalUsers', $totalUsers)
+            ->with('pageNumber', $pageNumber);
     }
 
     public function students()
@@ -22,7 +43,7 @@ class StudentController extends Controller
         $studentsWithInfo = INP_Student::with(['info' => function($query) {
             $query->select('id', 'firstName', 'dadLastName', 'momLastName');
         }])->get();
-  
+
 
         $filteredStudents = $studentsWithInfo->map(function ($student) {
             return [

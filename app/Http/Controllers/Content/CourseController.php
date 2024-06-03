@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Integration\INP_Course;
 use App\Models\Integration\INP_CourseInscribed;
 use App\Models\Content\CON_CourseSection;
 use App\Models\Content\CON_Task;
@@ -12,9 +13,25 @@ use Illuminate\Support\Facades\DB;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('courses.courses');
+        $pageNumber = $request->input('pageNumber', 1);
+        $perPage = 10;
+        $offset = ($pageNumber - 1) * $perPage;
+
+        $totalCareers = INP_Course::count();
+        $totalPages = ceil($totalCareers / $perPage);
+
+        $courses = INP_Course::select('id', 'name', 'initials')
+            ->skip($offset)
+            ->take($perPage)
+            ->get();
+
+        return view('courses.courses')
+            ->with('courses', $courses)
+            ->with('totalPages', $totalPages)
+            ->with('totalCareers', $totalCareers)
+            ->with('pageNumber', $pageNumber);
     }
 
     public function coursesOfStudent(Request $request)

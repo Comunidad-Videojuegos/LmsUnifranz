@@ -98,12 +98,12 @@ class CourseController extends Controller
         $sectionId = $request->input('sectionId');
 
         // Obtener los resultados de CON_Task
-        $taskResults = CON_Task::select('id', 'calification', 'orderNumber', 'name', 'description')
+        $taskResults = CON_Task::select('id', 'valoration', 'orderNumber', 'name', 'description')
         ->where('courseSectionId', $sectionId)
         ->selectRaw("'TAREA' as type");
 
         // Obtener los resultados de COL_Forum
-        $forumResults = COL_Forum::select('id', DB::raw('0 as calification'), 'orderNumber', 'header as name', 'content as description')
+        $forumResults = COL_Forum::select('id', 'valoration', 'orderNumber', 'header', 'content')
         ->where('courseSectionId', $sectionId)
         ->selectRaw("'FORO' as type");
 

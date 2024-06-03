@@ -5,9 +5,9 @@
         title="Roles"
         icon="bi bi-shield-lock-fill"
     />
-    <x-nav-item
+    {{-- <x-nav-item
         link="config"
         title="Configuracion"
         icon="bi bi-gear-fill"
-    />
+    /> --}}
 </div>

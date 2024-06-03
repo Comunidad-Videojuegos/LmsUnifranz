@@ -52,18 +52,19 @@
                                 @include('auth.app-security')
                                 @break
                             @case(2)
-                                <h3 class="py-5 pl-10 font-bold">Contenido</h3>
+                                @include('auth.app-users')
                                 @break
                             @case(3)
-                                <h3 class="py-5 pl-10 font-bold">Plataforma</h3>
+                                @include('auth.app-users')
                                 @break
                             @case(4)
-                                <h3 class="py-5 pl-10 font-bold">Seguridad</h3>
+                                @include('auth.app-content')
                                 @break
                             @case(5)
-                                <h3 class="py-5 pl-10 font-bold">Seguridad</h3>
+                                @include('auth.app-content')
                                 @break
                             @case(6)
+                                @include('auth.app-security')
                                 @break
                             @default
 

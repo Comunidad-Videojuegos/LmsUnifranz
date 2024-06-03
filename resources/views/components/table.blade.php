@@ -15,7 +15,13 @@
             <tr>
                 {{-- CAMPOS --}}
                 @for ($i = 1; $i < count($field); $i++)
-                    <td class="text-center py-3 border-t-[1px]">{{$field[$i]}}</td>
+                    @if ($hasIcon && $i == 1)
+                        <td class="text-center py-3 border-t-[1px] flex justify-center items-center">
+                            <img src="{{$field[1]}}" alt="" class=" w-14 rounded-full">
+                        </td>
+                    @else
+                        <td class="text-center py-3 border-t-[1px]">{{$field[$i]}}</td>
+                    @endif
                 @endfor
 
                 {{-- BUTTONS --}}

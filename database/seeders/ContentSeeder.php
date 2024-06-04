@@ -31,8 +31,8 @@ class ContentSeeder extends Seeder
         CON_CourseSection::factory()->count(1000)->create();
         CON_Task::factory()->count(10000)->create();
         CON_TaskFile::factory()->count(12000)->create();
-        RPT_TaskDeliveries::factory()->count(30000)->create();
-        CON_TaskDeliveryFile::factory()->count(40000)->create();
+        RPT_TaskDeliveries::factory()->count(200000)->create();
+        CON_TaskDeliveryFile::factory()->count(250000)->create();
         CON_TaskGroup::factory()->count(500)->create();
         CON_TaskGroupStudents::factory()->count(2000)->create();
         // CON_Form::factory()->count(4000)->create();

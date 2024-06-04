@@ -13,7 +13,7 @@ class USR_Info extends Model
 
   protected $table = 'USR_Info';
 
-  protected $fillable = ['id', 'firstName', 'dadLastName', 'momLastName','age', 'ci'];
+  protected $fillable = ['id', 'firstName', 'photo', 'dadLastName', 'momLastName','age', 'ci'];
 
   public $timestamps = false;
 

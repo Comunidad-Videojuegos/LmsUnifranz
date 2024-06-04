@@ -51,16 +51,16 @@
     </x-modal>
 
     {{-- AGREGAR --}}
-    <x-modal width="700px" height="450px" title="Agregar nuevo administrador" idModal="addModal" idCloseModal="closeAddModal">
-        @include('admins.update-user')
+    <x-modal width="700px" height="550px" title="Agregar nuevo administrador" idModal="addModal" idCloseModal="closeAddModal">
+        @include('admins.create-admin')
         <x-slot name="btn_action">
-            <x-button-text id="btnAdd" color="#fff" bg="#007bff" text="Agregar"/>
+            <x-button-text id="btnAdd" color="#fff" bg="#007bff" text="Agregar" function="CreateAdmin"/>
         </x-slot>
     </x-modal>
 
     {{-- EDITAR ROLES --}}
-    <x-modal width="700px" height="400px" title="Editar los roles del usuario" idModal="rolesModal" idCloseModal="closeRolesModal">
-        @include('admins.create-admin')
+    <x-modal width="400px" height="400px" title="Editar los roles del usuario" idModal="rolesModal" idCloseModal="closeRolesModal">
+        @include('admins.roles-admin')
         <x-slot name="btn_action">
             <x-button-text id="btnRolesUser" color="#fff" bg="#007bff" text="Editar"/>
         </x-slot>
@@ -98,6 +98,30 @@
         }
         function RolesUserModal(param)
         {
+            let array = JSON.parse(param);
+            fetch(`/api/admin-general/roles/list`)
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem("rolesCount", data.length)
+                let show_roles = document.getElementById("show-roles");
+                show_roles.innerHTML = "";
+                data.forEach(rol => {
+                    show_roles.innerHTML += `
+                        <div class="flex justify-between w-full py-2">
+                            <p>${rol.name}</p>
+                            <input type="checkbox" class="rounded-lg outline-none w-10" id="rol_${rol.id}"/>
+                        </div>
+                    `;
+                })
+            })
+
+            fetch(`/api/admin-general/roles/admin?userId=${array[0]}`)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(rol => {
+                    document.getElementById("rol_" + rol.rolId).checked = true;
+                });
+            })
             const modal = new ModalPrefab("rolesModal", "closeRolesModal");
             modal.openModal();
         }
@@ -108,6 +132,16 @@
         }
         function AddModal(param)
         {
+            fetch(`/api/admin-general/roles/list`)
+            .then(response => response.json())
+            .then(data => {
+                let optionsRol = document.getElementById("optionsRol");
+                optionsRol.innerHTML = "";
+                data.forEach(rol => {
+                    optionsRol.innerHTML += `<option value="${rol.id}">${rol.name}</option>`;
+                })
+            })
+
             const modal = new ModalPrefab("addModal", "closeAddModal");
             modal.openModal();
         }

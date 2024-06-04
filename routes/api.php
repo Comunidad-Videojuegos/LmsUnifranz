@@ -13,6 +13,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('admin-general')->group(function()
     {
         include __DIR__. '/admin/user.php';
+        include __DIR__. '/admin/admins.php';
+        include __DIR__. '/admin/roles.php';
     }
 );
 

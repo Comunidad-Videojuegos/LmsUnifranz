@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users\USR_Rol;
+use App\Models\Users\USR_UserRoles;
 
 class RolController extends Controller
 {
@@ -26,7 +27,17 @@ class RolController extends Controller
             ->with('roles', $roles)
             ->with('totalPages', $totalPages)
             ->with('pageNumber', $pageNumber);
+    }
 
+    public function roles()
+    {
+        return USR_Rol::select('id', 'name')
+            ->get();
+    }
 
+    public function rolesAdmin(Request $request)
+    {
+        $userId = $request->input("userId");
+        return USR_UserRoles::where('userId', $userId)->get();
     }
 }

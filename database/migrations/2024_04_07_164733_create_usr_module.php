@@ -31,7 +31,7 @@ return new class extends Migration
     Schema::create('USR_Info', function(Blueprint $table)
     {
         $table->unsignedBigInteger('id')->primary();
-        $table->string('photo');
+        $table->string('photo')->nullable();
     });
     DB::statement("ALTER TABLE USR_Info ADD firstName varchar(40)");
     DB::statement("ALTER TABLE USR_Info ADD momLastName varchar(40)");

@@ -18,6 +18,25 @@ class UserController extends Controller
             ->with('users', $users);
     }
 
+    public function userInfo(Request $request)
+    {
+        $user = User::with('userInfo')->where('id', $request->input('idUser'))->first();
+
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
+        return response()->json([
+            'id' => $user->id,
+            'email' => $user->email,
+            'firstName' => $user->userInfo->firstName,
+            'dadLastName' => $user->userInfo->dadLastName,
+            'momLastName' => $user->userInfo->momLastName,
+            'ci' => $user->userInfo->ci,
+            'age' => $user->userInfo->age,
+        ]);
+    }
+
     public function create()
     {
         //
@@ -50,21 +69,56 @@ class UserController extends Controller
             ->with('users', $users);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         return view('admin.users');
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, int $id)
+    public function update(Request $request)
     {
 
+        // Obtener el ID de usuario del cuerpo de la solicitud
+        $userId = $request->input('idUser');
+
+        // Buscar al usuario por su ID
+        $user = User::find($userId);
+
+        // Verificar si el usuario existe
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
+        // Actualizar el email del usuario si se proporciona en la solicitud
+        if ($request->has('email')) {
+            $user->email = $request->input('email');
+            $user->save();
+        }
+
+        // Actualizar los detalles del usuario en la tabla UserInfo
+        $userInfo = $user->userInfo;
+
+        if ($userInfo) {
+            // Actualizar los detalles de UserInfo si se proporcionan en la solicitud
+            if ($request->has('firstName')) {
+                $userInfo->firstName = $request->input('firstName');
+            }
+            if ($request->has('dadLastName')) {
+                $userInfo->dadLastName = $request->input('dadLastName');
+            }
+            if ($request->has('momLastName')) {
+                $userInfo->momLastName = $request->input('momLastName');
+            }
+            if ($request->has('ci')) {
+                $userInfo->ci = $request->input('ci');
+            }
+            if ($request->has('age')) {
+                $userInfo->age = $request->input('age');
+            }
+
+            // Guardar los cambios en UserInfo
+            $userInfo->save();
+        }
+        return response()->json("Se actualizo correctamente");
     }
 
     /**

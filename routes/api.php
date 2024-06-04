@@ -9,6 +9,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// GENERAL
+Route::prefix('admin-general')->group(function()
+    {
+        include __DIR__. '/admin/user.php';
+    }
+);
 
 // COURSES
 Route::prefix('content')->group(function()

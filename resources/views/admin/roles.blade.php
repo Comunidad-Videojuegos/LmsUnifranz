@@ -24,9 +24,9 @@
             </div>
 
             <div class="flex-1 px-8 flex justify-end">
-                <button class="bg-[#456] py-3 px-6 rounded-2xl">
+                {{-- <button class="bg-[#456] py-3 px-6 rounded-2xl">
                     Agregar
-                </button>
+                </button> --}}
             </div>
         </div>
         <div class="h-[80vh] relative overflow-auto py-7 px-5">

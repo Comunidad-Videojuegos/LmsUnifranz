@@ -69,7 +69,7 @@
                 {{ $slot }}
             </div>
             <div class="flex justify-end">
-                <div class="mx-2">
+                <div class="mx-2 flex justify-around h-10">
                     @isset($btn_action)
                         {{ $btn_action }}
                     @endisset

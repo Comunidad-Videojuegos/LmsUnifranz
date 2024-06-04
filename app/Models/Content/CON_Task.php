@@ -16,7 +16,7 @@ class CON_Task extends Model
         'name',
         'description',
         'missing',
-        'calification',
+        'valoration',
         'orderNumber',
         'createDate',
         'updateDate',

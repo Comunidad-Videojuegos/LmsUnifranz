@@ -14,10 +14,9 @@ class COL_Forum extends Model
     protected $fillable = [
         'header',
         'content',
-        'createUserId',
+        'valoration',
         'courseSectionId',
         'orderNumber',
-        'description',
         'createDate',
         'updateDate',
         'deleteDate'

@@ -48,7 +48,7 @@
     </x-modal>
 
     {{-- ELIMINAR --}}
-    <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar el usuario?" idModal="deleteModal" idCloseModal="closeDeleteModal">
+    <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar este curso?" idModal="deleteModal" idCloseModal="closeDeleteModal">
         <x-slot name="btn_action">
             <x-button-text id="btnDeleteUser" color="#fff" bg="#007bff" text="Eliminar"/>
         </x-slot>

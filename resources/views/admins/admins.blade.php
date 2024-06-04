@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @php
-    $titles = ['Perfil', 'Nombre', 'Email', 'Editar', 'Roles', 'Actividad','Eliminar'];
+    $titles = ['Perfil', 'Nombre', 'Email', 'Editar', 'Roles','Eliminar'];
     $fields = $users->map(function($user) {
         return [
             $user->id,
@@ -15,7 +15,6 @@
     $buttons = [
         ['bi bi-pencil-square', '#278', '#fff', 'EditUserModal'],
         ['bi bi-pen-fill', '#670', '#fff', 'RolesUserModal'],
-        ['bi bi-file-earmark-medical-fill', '#27a', '#fff', 'ReportUserModal'],
         ['bi bi-trash3-fill', '#700', '#fff', 'DeleteUserModal'],
     ];
 @endphp
@@ -29,9 +28,9 @@
             </div>
 
             <div class="flex-1 px-8 flex justify-end">
-                <button class="bg-[#456] py-3 px-6 rounded-2xl">
-                    Agregar
-                </button>
+                <div class="px-5">
+                    <x-button-text text="Agregar" bg="#456" color="#fff" id="btn_add" function="AddModal"/>
+                </div>
             </div>
         </div>
         <div class="h-[80vh] relative overflow-auto py-7 px-5">
@@ -44,9 +43,18 @@
 
 
     {{-- EDITAR ADMIN --}}
-    <x-modal width="700px" height="400px" title="Editar informacion del usuario" idModal="editModal" idCloseModal="closeEditModal">
+    <x-modal width="700px" height="450px" title="Editar informacion del usuario" idModal="editModal" idCloseModal="closeEditModal">
+        @include('admins.update-user')
         <x-slot name="btn_action">
-            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar"/>
+            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar" function="UpdateUser"/>
+        </x-slot>
+    </x-modal>
+
+    {{-- AGREGAR --}}
+    <x-modal width="700px" height="450px" title="Agregar nuevo administrador" idModal="addModal" idCloseModal="closeAddModal">
+        @include('admins.update-user')
+        <x-slot name="btn_action">
+            <x-button-text id="btnAdd" color="#fff" bg="#007bff" text="Agregar"/>
         </x-slot>
     </x-modal>
 
@@ -58,16 +66,8 @@
         </x-slot>
     </x-modal>
 
-    {{-- OBTENER REPORTE --}}
-    <x-modal width="400px" height="330px" title="Generar reporte de actividad" idModal="reportModal" idCloseModal="closeReportModal">
-        @include('admins.report-admin')
-        <x-slot name="btn_action">
-            <x-button-text id="btnReportUser" color="#fff" bg="#007bff" text="Generar reporte" function="GenerateReportAdmin"/>
-        </x-slot>
-    </x-modal>
-
     {{-- ELIMINAR USUARIO --}}
-    <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar el usuario?" idModal="deleteModal" idCloseModal="closeDeleteModal">
+    <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar el administrador?" idModal="deleteModal" idCloseModal="closeDeleteModal">
         <x-slot name="btn_action">
             <x-button-text id="btnDeleteUser" color="#fff" bg="#007bff" text="Eliminar"/>
         </x-slot>
@@ -79,6 +79,20 @@
 
         function EditUserModal(param)
         {
+            let array = JSON.parse(param);
+            localStorage.setItem("idUserSystem", array[0])
+            fetch(`/api/admin-general/user-info?idUser=${array[0]}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("email_user").value = data.email;
+                document.getElementById("names_user").value = data.firstName;
+                document.getElementById("ci_user").value = data.ci;
+
+                document.getElementById("ap_fa_user").value = data.dadLastName;
+                document.getElementById("ap_ma_user").value = data.momLastName;
+                document.getElementById("age_user").value = data.age;
+            })
+
             const modal = new ModalPrefab("editModal", "closeEditModal");
             modal.openModal();
         }
@@ -87,14 +101,14 @@
             const modal = new ModalPrefab("rolesModal", "closeRolesModal");
             modal.openModal();
         }
-        function ReportUserModal(param)
-        {
-            const modal = new ModalPrefab("reportModal", "closeReportModal");
-            modal.openModal();
-        }
         function DeleteUserModal(param)
         {
             const modal = new ModalPrefab("deleteModal", "closeDeleteModal");
+            modal.openModal();
+        }
+        function AddModal(param)
+        {
+            const modal = new ModalPrefab("addModal", "closeAddModal");
             modal.openModal();
         }
     </script>

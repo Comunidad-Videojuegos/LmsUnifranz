@@ -62,7 +62,7 @@
     <x-modal width="400px" height="400px" title="Editar los roles del usuario" idModal="rolesModal" idCloseModal="closeRolesModal">
         @include('admins.roles-admin')
         <x-slot name="btn_action">
-            <x-button-text id="btnRolesUser" color="#fff" bg="#007bff" text="Editar"/>
+            <x-button-text id="btnRolesUser" color="#fff" bg="#007bff" text="Editar" function="UpdateRoles"/>
         </x-slot>
     </x-modal>
 
@@ -99,6 +99,7 @@
         function RolesUserModal(param)
         {
             let array = JSON.parse(param);
+            localStorage.setItem("idUserSystem", array[0])
             fetch(`/api/admin-general/roles/list`)
             .then(response => response.json())
             .then(data => {

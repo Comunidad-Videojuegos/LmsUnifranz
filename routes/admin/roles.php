@@ -9,4 +9,6 @@ Route::controller(RolController::class)->group(function()
     Route::get('/roles', 'index')->name('roles');
     Route::get('/roles/list', 'roles');
     Route::get('/roles/admin', 'rolesAdmin');
+    Route::put('/roles/admin', 'updateRolesAdmin');
+    Route::put('/rol', 'updateRol');
 });

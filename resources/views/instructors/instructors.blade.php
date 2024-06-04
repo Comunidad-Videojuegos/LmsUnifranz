@@ -50,10 +50,10 @@
     </x-modal>
 
     {{-- AGREGAR --}}
-    <x-modal width="700px" height="450px" title="Agregar nuevo instructor" idModal="addModal" idCloseModal="closeAddModal">
-        @include('admins.update-user')
+    <x-modal width="700px" height="550px" title="Agregar nuevo instructor" idModal="addModal" idCloseModal="closeAddModal">
+        @include('instructors.create-instructor')
         <x-slot name="btn_action">
-            <x-button-text id="btnAdd" color="#fff" bg="#007bff" text="Agregar"/>
+            <x-button-text id="btnAdd" color="#fff" bg="#007bff" text="Agregar" function="CreateInstructor"/>
         </x-slot>
     </x-modal>
 

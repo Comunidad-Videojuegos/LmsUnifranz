@@ -30,9 +30,9 @@
                 <div class="px-5">
                     <x-button-text text="Agregar" bg="#456" color="#fff" id="btn_add" function="AddModal"/>
                 </div>
-                <div class="px-5">
+                {{-- <div class="px-5">
                     <x-button-text text="Importar" bg="#2d572c" color="#fff" id="btn_xlsx" function="XlsxModal"/>
-                </div>
+                </div> --}}
                 <div class="px-5">
                     <x-button-icon icon="bi bi-file-pdf-fill" bg="#456" color="#fff" function="ReportModal" width="100px" height="40px"/>
                 </div>
@@ -57,16 +57,16 @@
 
 
     {{-- AGREGAR --}}
-    <x-modal width="700px" height="450px" title="Agregar nuevo estudiante" idModal="addModal" idCloseModal="closeAddModal">
-        @include('admins.update-user')
+    <x-modal width="700px" height="550px" title="Agregar nuevo estudiante" idModal="addModal" idCloseModal="closeAddModal">
+        @include('students.create-student')
         <x-slot name="btn_action">
-            <x-button-text id="btnAddStudent" color="#fff" bg="#007bff" text="Agregar"/>
+            <x-button-text id="btnAddStudent" color="#fff" bg="#007bff" text="Agregar" function="CreateStudent"/>
         </x-slot>
     </x-modal>
 
     {{-- AGREGAR --}}
-    <x-modal width="400px" height="250px" title="Agregar estudantes por lote" idModal="xlsxModal" idCloseModal="closeXlsxModal">
-        {{-- @include('admins.update-user') --}}
+    {{-- <x-modal width="400px" height="250px" title="Agregar estudantes por lote" idModal="xlsxModal" idCloseModal="closeXlsxModal">
+
         <div class="w-full flex justify-around items-center">
             <p>Selecciona un excel</p>
             <input type="file" accept=".xlsx, .xls">
@@ -74,7 +74,7 @@
         <x-slot name="btn_action">
             <x-button-text id="btnAdd" color="#fff" bg="#007bff" text="Agregar por lote"/>
         </x-slot>
-    </x-modal>
+    </x-modal> --}}
 
     {{-- OBTENER REPORTE --}}
     <x-modal width="450px" height="330px" title="Reporte de estudiantes" idModal="reportModal" idCloseModal="closeReportModal">
@@ -130,6 +130,15 @@
         }
         function AddModal(param)
         {
+            fetch(`/api/admin-general/careers`)
+            .then(response => response.json())
+            .then(data => {
+                let optionsRol = document.getElementById("optionsCareer");
+                optionsRol.innerHTML = "";
+                data.forEach(career => {
+                    optionsRol.innerHTML += `<option value="${career.id}">${career.name}</option>`;
+                })
+            })
             const modal = new ModalPrefab("addModal", "closeAddModal");
             modal.openModal();
         }

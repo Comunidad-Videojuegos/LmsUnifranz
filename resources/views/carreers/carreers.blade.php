@@ -26,7 +26,7 @@
             </div>
 
             <div class="flex-1 px-8 flex justify-end">
-                <button class="bg-[#456] py-3 px-6 rounded-2xl">
+                <button class="bg-[#456] py-3 px-6 rounded-2xl" onclick="AddModal()">
                     Agregar
                 </button>
             </div>
@@ -41,9 +41,18 @@
 
 
     {{-- EDITAR --}}
-    <x-modal width="700px" height="400px" title="Editar informacion del usuario" idModal="editModal" idCloseModal="closeEditModal">
+    <x-modal width="500px" height="550px" title="Editar informacion de carrera" idModal="editModal" idCloseModal="closeEditModal">
+        @include('carreers.update-career')
         <x-slot name="btn_action">
-            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar"/>
+            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar" function="UpdateCareer"/>
+        </x-slot>
+    </x-modal>
+
+    {{-- AGREGAR --}}
+    <x-modal width="500px" height="550px" title="Crear nueva carrera" idModal="addModal" idCloseModal="closeAddModal">
+        @include('carreers.create-career')
+        <x-slot name="btn_action">
+            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar" function="CreateCareer"/>
         </x-slot>
     </x-modal>
 
@@ -60,12 +69,30 @@
 
         function EditUserModal(param)
         {
+            let array = JSON.parse(param);
+            localStorage.setItem("idCareerSystem", array[0])
+
+            fetch(`/api/admin-general/career-info?id=${array[0]}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("name_car").value = data.name;
+                document.getElementById("desc_car").value = data.description;
+                document.getElementById("ini_car").value = data.initials;
+                document.getElementById("dur_car").value = data.duration;
+            })
+
+
             const modal = new ModalPrefab("editModal", "closeEditModal");
             modal.openModal();
         }
         function DeleteUserModal(param)
         {
             const modal = new ModalPrefab("deleteModal", "closeDeleteModal");
+            modal.openModal();
+        }
+        function AddModal()
+        {
+            const modal = new ModalPrefab("addModal", "closeAddModal");
             modal.openModal();
         }
     </script>

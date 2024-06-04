@@ -16,7 +16,6 @@ class TaskController extends Controller
 {
     public function tasksDeliveried(Request $request)
     {
-        $v = $request->input('v');
         $studentId = $request->input('studentId');
 
         $results = RPT_TaskDeliveries::selectRaw('COUNT(*) as entregas')
@@ -26,8 +25,6 @@ class TaskController extends Controller
             ->leftJoin('CON_CourseSection', 'CON_Task.courseSectionId', '=', 'CON_CourseSection.id')
             ->leftJoin('INP_Course', 'CON_CourseSection.courseId', '=', 'INP_Course.id')
             ->where('RPT_TaskDeliveries.studentId', $studentId)
-            ->where('RPT_TaskDeliveries.viewed', $v)
-            ->where('RPT_TaskDeliveries.reviewed', $v)
             ->groupBy('RPT_TaskDeliveries.taskId', 'CON_Task.name', 'CON_Task.description', 'INP_Course.name')
             ->get();
 

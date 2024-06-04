@@ -12,7 +12,7 @@ class COL_ForumConversation extends Model
     protected $table = 'COL_ForumConversation';
 
     protected $fillable = [
-        'educatorId',
+        'userId',
         'conversationId',
         'forumId',
         'message',

@@ -18,18 +18,23 @@ class ForumController extends Controller
     {
         $forumId = $request->input('forumId');
 
-        $conversations = COL_ForumConversation::select('id', 'message')
-            ->where('forumId', $forumId)
-            ->whereNull('deleteDate')
-            ->with([
-                'files:id,conversationId,link,size,type',
-                'responses' => function ($query) {
-                    $query->select('id', 'message', 'conversationId')
-                        ->with(['files:id,conversationId,link,size']);
-                }
-            ])
-            ->take(1000)
-            ->get();
+        $conversations = COL_ForumConversation::select('id', 'message', 'conversationId')
+        ->where('forumId', $forumId)
+        ->whereNull('deleteDate')
+        ->with([
+            'files:id,conversationId,link,size,type',
+            'responses' => function ($query) {
+                $query->select('id', 'message', 'conversationId')
+                    ->with(['files:id,conversationId,link,size', 'responses' => function ($query) {
+                        $query->select('id', 'message', 'conversationId')
+                            ->with(['files:id,conversationId,link,size']);
+                    }])
+                    ->orderBy('conversationId', 'asc');
+            }
+        ])
+        ->orderBy('conversationId', 'asc')
+        ->take(1000)
+        ->get();
 
         return response()->json($conversations);
     }
@@ -44,7 +49,7 @@ class ForumController extends Controller
         // FORMDATA
         $conversationId = $request->input('conversationId');
         $message = $request->input('message');
-        $files = $request->file('files[]', []);
+        $files = $request->file('files', []);
 
         try {
             // Iniciar una transacción
@@ -53,7 +58,7 @@ class ForumController extends Controller
             // Insertar en COL_ForumConversation
             $conversation = COL_ForumConversation::create([
                 'conversationId' => $conversationId,
-                'educatorId' => $userId,
+                'userId' => $userId,
                 'forumId' => $forumId,
                 'message' => $message
             ]);

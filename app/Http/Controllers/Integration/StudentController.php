@@ -55,4 +55,26 @@ class StudentController extends Controller
         return $filteredStudents;
     }
 
+    public function studentsForCareer(Request $request)
+    {
+
+        $students = INP_Student::whereHas('courseInscriptions', function($query) use ($request){
+            $query->where('courseId', $request->input('courseId'));
+        })->with(['info', 'user'])
+          ->get();
+
+        $results = $students->map(function($student) {
+            return [
+                'id' => $student->info->id,
+                'firstName' => $student->info->firstName,
+                'dadLastName' => $student->info->dadLastName,
+                'momLastName' => $student->info->momLastName,
+                'email' => $student->user->email,
+                'photo' => $student->info->photo,
+            ];
+        });
+
+        return $results;
+    }
+
 }

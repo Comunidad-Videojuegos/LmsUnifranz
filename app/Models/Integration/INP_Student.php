@@ -29,8 +29,13 @@ class INP_Student extends Model
       return $this->belongsTo(USR_Info::class, 'id', 'id');
     }
 
-    public function courseInscribed()
+    public function user()
     {
-      return $this->belongsTo(INP_CourseInscribed::class, 'courseId');
+        return $this->hasOne(User::class, 'id', 'id');
+    }
+
+    public function courseInscriptions()
+    {
+      return $this->belongsTo(INP_CourseInscribed::class, 'id', 'studentId');
     }
 }

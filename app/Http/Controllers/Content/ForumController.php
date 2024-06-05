@@ -13,7 +13,6 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ForumController extends Controller
 {
-
     public function forumConversation(Request $request)
     {
         $forumId = $request->input('forumId');
@@ -38,7 +37,6 @@ class ForumController extends Controller
 
         return response()->json($conversations);
     }
-
 
     public function addMessageConversation(Request $request)
     {
@@ -124,7 +122,6 @@ class ForumController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
 
     public function createForum(Request $request)
     {

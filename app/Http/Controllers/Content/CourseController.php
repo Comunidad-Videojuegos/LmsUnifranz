@@ -37,6 +37,7 @@ class CourseController extends Controller
     public function coursesOfStudent(Request $request)
     {
         $studentId = $request->input("studentId");
+        $gestionId = $request->input("gestionId");
 
         // Consulta inicial
         $results = INP_CourseInscribed::join('INP_Course', 'INP_CourseInscribed.courseId', '=', 'INP_Course.id')
@@ -48,6 +49,7 @@ class CourseController extends Controller
                 'INP_Course.image as courseImage'
             )
             ->where('INP_CourseInscribed.studentId', $studentId)
+            ->where('INP_Course.gestionId', $gestionId)
             ->whereYear('INP_CourseInscribed.createDate', 2024)
             ->get();
 

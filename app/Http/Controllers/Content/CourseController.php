@@ -61,7 +61,7 @@ class CourseController extends Controller
             'Química'
         ];
 
-        $enhancedResults = $results->map(function ($item) use ($materiaNombres, $materiaImagen) {
+        $enhancedResults = $results->map(function ($item) {
             return [
                 'courseId' => $item->courseId,
                 'instructorName' => $item->instructorName,

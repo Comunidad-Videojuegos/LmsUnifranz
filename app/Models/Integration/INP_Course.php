@@ -18,6 +18,7 @@ class INP_Course extends Model
         'mandatory',
         'initials',
         'description',
+        'image',
         'groupLink',
         'calificationTotal',
         'createDate',

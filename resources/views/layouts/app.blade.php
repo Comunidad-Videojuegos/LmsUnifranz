@@ -146,7 +146,7 @@
         class AxiosInstance {
             constructor() {
                 this.axios = axios.create({
-                    baseURL: 'http://127.0.0.1:8000/api',
+                    baseURL: '/api',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Content-Type': 'application/json'

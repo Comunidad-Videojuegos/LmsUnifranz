@@ -43,7 +43,9 @@ class CourseController extends Controller
             ->join('USR_Info', 'INP_Course.instructorId', '=', 'USR_Info.id')
             ->select(
                 'INP_Course.id as courseId',
-                'USR_Info.firstName as instructorName'
+                'USR_Info.firstName as instructorName',
+                'INP_Course.name as courseName',
+                'INP_Course.image as courseImage'
             )
             ->where('INP_CourseInscribed.studentId', $studentId)
             ->whereYear('INP_CourseInscribed.createDate', 2024)
@@ -59,15 +61,13 @@ class CourseController extends Controller
             'Química'
         ];
 
-        $materiaImagen = 'https://static.vecteezy.com/system/resources/thumbnails/022/645/069/small/illustration-painting-of-love-riding-on-bicycle-generate-ai-photo.jpg';
-
         $enhancedResults = $results->map(function ($item) use ($materiaNombres, $materiaImagen) {
             return [
                 'courseId' => $item->courseId,
                 'instructorName' => $item->instructorName,
-                'materiaNombre' => $materiaNombres[array_rand($materiaNombres)],
-                'materiaImagen' => $materiaImagen,
-                'advance' => rand(0, 100)
+                'materiaNombre' => $item->courseName,
+                'materiaImagen' => $item->courseImage,
+                'advance' => 65
             ];
         });
 

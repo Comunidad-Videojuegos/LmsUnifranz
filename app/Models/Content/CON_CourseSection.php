@@ -16,6 +16,7 @@ class CON_CourseSection extends Model
         'courseId',
         'name',
         'assistance',
+        'valoration',
         'initDate',
         'endDate',
     ];

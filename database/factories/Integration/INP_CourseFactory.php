@@ -17,18 +17,15 @@ class INP_CourseFactory extends Factory
      */
     public function definition(): array
     {
-        $initDuration = fake()->dateTimeBetween('2024-02-01', '2024-06-30');
-        $endDuration = fake()->dateTimeBetween($initDuration, '2024-06-30');
 
         return [
             'instructorId' => fake()->numberBetween(901, 1000),
+            'gestionId' => fake()->numberBetween(1, 9),
             'referenceId' => fake()->numberBetween(1, 200),
             'name' => fake()->words(3, true),
             'mandatory' => fake()->boolean(90),
             'initials' => fake()->lexify('????'),
             'description' => fake()->sentence(),
-            'initDuration' => $initDuration,
-            'endDuration' => $endDuration,
             'groupLink' => fake()->url()
         ];
     }

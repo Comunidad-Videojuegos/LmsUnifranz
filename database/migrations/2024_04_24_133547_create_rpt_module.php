@@ -54,7 +54,7 @@ return new class extends Migration
             $table->unsignedBigInteger('studentId');
             $table->boolean('viewed');
             $table->boolean('reviewed');
-            $table->decimal('calification');
+            $table->decimal('calification')->nullable();
             $table->timestamp('createDate')->useCurrent();
             $table->timestamp('updateDate')->nullable();
             $table->timestamp('deleteDate')->nullable();

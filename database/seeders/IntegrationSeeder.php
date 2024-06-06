@@ -10,6 +10,7 @@ use App\Models\Integration\INP_Instructor;
 use App\Models\Integration\INP_Course;
 use App\Models\Integration\INP_CourseInscribed;
 use App\Models\Integration\INP_CourseSchedule;
+use App\Models\Integration\INP_Gestion;
 
 class IntegrationSeeder extends Seeder
 {
@@ -18,6 +19,22 @@ class IntegrationSeeder extends Seeder
      */
     public function run(): void
     {
+        INP_Gestion::insert([
+            ['year' => 2020, 'part' => 1, 'initDuration' => '2020-02-01', 'endDuration' => '2020-06-15'],
+            ['year' => 2020, 'part' => 2, 'initDuration' => '2020-08-01', 'endDuration' => '2020-12-15'],
+
+            ['year' => 2021, 'part' => 1, 'initDuration' => '2021-02-01', 'endDuration' => '2021-06-15'],
+            ['year' => 2021, 'part' => 2, 'initDuration' => '2021-08-01', 'endDuration' => '2021-12-15'],
+
+            ['year' => 2022, 'part' => 1, 'initDuration' => '2022-02-01', 'endDuration' => '2022-06-15'],
+            ['year' => 2022, 'part' => 2, 'initDuration' => '2022-08-01', 'endDuration' => '2022-12-15'],
+
+            ['year' => 2023, 'part' => 1, 'initDuration' => '2023-02-01', 'endDuration' => '2023-06-15'],
+            ['year' => 2023, 'part' => 2, 'initDuration' => '2023-08-01', 'endDuration' => '2023-12-15'],
+
+            ['year' => 2024, 'part' => 1, 'initDuration' => '2024-02-01', 'endDuration' => '2024-06-15']
+        ]);
+
         INP_Career::insert([
             ['name' => 'Ingeniería en sistemas', 'referenceId' => 1, 'initials' => 'SIS', 'description' => 'Carrera de Unifranz', 'duration' => 4.5],
             ['name' => 'Ingeniería Civil', 'referenceId' => 2, 'initials' => 'CIV', 'description' => 'Carrera de Unifranz', 'duration' => 5.0],

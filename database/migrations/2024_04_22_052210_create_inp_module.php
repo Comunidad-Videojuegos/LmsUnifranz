@@ -70,15 +70,22 @@ return new class extends Migration
         DB::statement("ALTER TABLE INP_Instructor ADD speciality varchar(40)");
         DB::statement("ALTER TABLE INP_Instructor ADD type varchar(20)");
 
+        Schema::create('INP_Gestion', function(Blueprint $table)
+        {
+            $table->id();
+            $table->integer('year');
+            $table->integer('part');
+            $table->timestamp('initDuration')->useCurrent();
+            $table->timestamp('endDuration')->useCurrent();
+        });
 
 
         Schema::create('INP_Course', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('instructorId');
+            $table->unsignedBigInteger('gestionId');
             $table->string('groupLink');
             $table->string('image')->nullable();
-            $table->timestamp('initDuration')->useCurrent();
-            $table->timestamp('endDuration')->useCurrent();
         });
         DB::statement("ALTER TABLE INP_Course ADD referenceId int");
         DB::statement("ALTER TABLE INP_Course ADD name varchar(50)");
@@ -123,6 +130,7 @@ return new class extends Migration
         Schema::dropIfExists('INP_Student');
         Schema::dropIfExists('INP_Instructor');
         Schema::dropIfExists('INP_CourseInscribed');
+        Schema::dropIfExists('INP_Gestion');
         Schema::dropIfExists('INP_Course');
         Schema::dropIfExists('INP_CourseSchedule');
 

@@ -44,6 +44,7 @@ class CON_CourseSectionFactory extends Factory
         return [
             'courseId' => array_shift($courseIds),
             'assistance' => fake()->boolean(60),
+            'valoration' => fake()->numberBetween(0, 100),
             'name' => 'Hito '. $counter++,
             'initDate' => fake()->dateTimeBetween($startDate, $endDate),
             'endDate' => fake()->dateTimeBetween($startDate, $endDate),

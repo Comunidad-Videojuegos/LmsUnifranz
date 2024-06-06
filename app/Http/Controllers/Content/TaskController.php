@@ -144,7 +144,7 @@ class TaskController extends Controller
 
                 $filePaths = [];
                 foreach ($files as $file) {
-                    $filePaths[] = $file->store('uploads');
+                    $filePaths[] = $file->store('uploads');     
                 }
 
                 for ($i=0; $i < count($filePaths); $i++)

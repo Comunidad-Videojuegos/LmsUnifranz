@@ -71,6 +71,7 @@ return new class extends Migration
             $table->id();
             $table ->unsignedBigInteger('courseId');
             $table->boolean('assistance');
+            $table->decimal('valoration');
             $table->dateTime('initDate')->useCurrent();
             $table->dateTime('endDate')->useCurrent();
         });

@@ -212,6 +212,11 @@ return new class extends Migration
             $table->foreign('careerId')->references('id')->on('INP_Career');
         });
 
+        Schema::table('INP_Course', function(Blueprint $table){
+            $table->foreign('gestionId')->references('id')->on('INP_Gestion');
+            $table->foreign('instructorId')->references('id')->on('INP_Instructor');
+        });
+
         Schema::table('INP_CourseSchedule', function(Blueprint $table){
             $table->foreign('courseId')->references('id')->on('INP_Course');
         });
@@ -232,8 +237,6 @@ return new class extends Migration
         {
             $table->dropForeign('usr_info_id_foreign');
         });
-
-
 
 
         Schema::table('CON_Activity', function (Blueprint $table) {
@@ -410,6 +413,11 @@ return new class extends Migration
 
         Schema::table('INP_Instructor', function(Blueprint $table){
             $table->dropForeign('inp_instructor_id_foreign');
+        });
+
+        Schema::table('INP_Course', function(Blueprint $table){
+            $table->dropForeign('inp_course_gestionid_foreign');
+            $table->dropForeign('inp_course_instructorid_foreign');
         });
 
         Schema::table('INP_CourseInscribed', function(Blueprint $table){

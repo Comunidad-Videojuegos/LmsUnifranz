@@ -24,9 +24,9 @@ class ForumController extends Controller
             'files:id,conversationId,link,size,type',
             'responses' => function ($query) {
                 $query->select('id', 'message', 'conversationId')
-                    ->with(['files:id,conversationId,link,size', 'responses' => function ($query) {
+                    ->with(['files:id,conversationId,link,size,type', 'responses' => function ($query) {
                         $query->select('id', 'message', 'conversationId')
-                            ->with(['files:id,conversationId,link,size']);
+                            ->with(['files:id,conversationId,link,size,type']);
                     }])
                     ->orderBy('conversationId', 'asc');
             }

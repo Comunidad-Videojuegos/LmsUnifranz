@@ -20,7 +20,6 @@ class INP_Course extends Model
         'description',
         'image',
         'groupLink',
-        'calificationTotal',
         'createDate',
         'updateDate',
         'deleteDate'

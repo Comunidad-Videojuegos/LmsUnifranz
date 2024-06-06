@@ -137,6 +137,52 @@ class CourseController extends Controller
         return response()->json(["message" => "Agregado correctamente"], 200);
     }
 
+    public function updateCourse(Request $request)
+    {
+        $courseId = $request->input('id');
+        $instructorId = $request->input('instructorId');
+        $name = $request->input('name');
+        $mandatory = $request->input('mandatory');
+        $initials = $request->input('initials');
+        $description = $request->input('description');
+        $image = $request->file('image');
+        $groupLink = $request->input('groupLink');
+
+
+        try
+        {
+            $course = INP_Course::find($courseId);
+
+            $course->name = $name;
+            $course->instructorId = $instructorId;
+            $course->mandatory = $mandatory;
+            $course->initials = $initials;
+            $course->description = $description;
+            $course->groupLink = $groupLink;
+            $course->updateDate = now();
+
+            if(!empty($image))
+            {
+                $filePath = $file->store('uploads');
+
+                $uploadedFileUrl = Cloudinary::uploadFile(storage_path('app/' . $filePath), [
+                    'public_id' => 'Course'
+                ])->getSecurePath();
+
+                $course->image = $uploadedFileUrl;
+            }
+
+            $course->image = $image;
+            $course->save();
+
+            // Respuesta exitosa
+            return response()->json(["message" => "Agregado correctamente"], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+    }
+
     public function updateSection(Request $request)
     {
         // BODY JSON

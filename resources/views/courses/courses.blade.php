@@ -34,7 +34,7 @@
         <div class="h-[80vh] relative overflow-auto py-7 px-5">
             <div class="rounded-2xl">
                 <x-table :titles="$titles" :fields="$fields" :buttons="$buttons" :hasIcon=false
-                    :pageNumber="$pageNumber" link="carreers" :totalPages="$totalPages" />
+                    :pageNumber="$pageNumber" link="courses" :totalPages="$totalPages" />
             </div>
         </div>
     </div>

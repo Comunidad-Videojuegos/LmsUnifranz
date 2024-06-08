@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class USR_InfoFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Define the model's default state.-
      *
      * @return array<string, mixed>
      */

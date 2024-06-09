@@ -13,15 +13,16 @@
             <x-input-text placeholder="Nombre completo" id="ini_cur"  width="300px"/>
         </div>
         <div>
-            <h3 class="py-4">Intructor:</h3>
-            <x-input-text placeholder="Instructor" id="ins_cur"  width="300px"/>
+            <h3 class="py-4">Docente:</h3>
+            <select name="" id="ins_cur" class="w-[300px] p-2 outline-none rounded-lg outline-blue-400 text-black">
+            </select>
         </div>
 
     </div>
-    <div class="flex-1 flex flex-col justify-around items-center">
-        <div>
+    <div class="flex-1 flex flex-col justify-around items-left">
+        <div class="left">
             <h3 class="py-4">¿Es obligatorio?:</h3>
-            <x-input-text placeholder="Carnet de identidad" id="man_cur"  width="300px"/>
+            <input type="checkbox" class="p-4 w-[20px] h-[20px] scale-150" id="man_cur">
         </div>
         <div>
             <h3 class="py-4">Link del grupo del curso:</h3>

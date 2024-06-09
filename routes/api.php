@@ -31,6 +31,7 @@ Route::prefix('content')->group(function()
 // Integration
 Route::prefix('integration')->group(function()
     {
+        include __DIR__. '/integration/instructors.php';
         include __DIR__. '/integration/students.php';
         include __DIR__. '/integration/gestions.php';
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Integration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Integration\INP_Instructor;
 
 class InstructorController extends Controller
 {
@@ -32,5 +33,21 @@ class InstructorController extends Controller
             ->with('totalPages', $totalPages)
             ->with('totalUsers', $totalUsers)
             ->with('pageNumber', $pageNumber);
+    }
+    public function instructors()
+    {
+        $studentsWithInfo = INP_Instructor::with(['info' => function($query) {
+            $query->select('id', 'firstName', 'dadLastName', 'momLastName');
+        }])->get();
+
+
+        $filteredStudents = $studentsWithInfo->map(function ($student) {
+            return [
+                'id' => $student->id,
+                'name' => $student->info->firstName . $student->info->dadLastName. $student->info->momLastName,
+            ];
+        });
+
+        return $filteredStudents;
     }
 }

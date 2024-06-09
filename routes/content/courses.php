@@ -12,6 +12,7 @@ Route::controller(CourseController::class)->group(function()
     Route::get('/courses', 'coursesOfStudent');
     Route::get('/sections', 'sectionsOfCourse');
     Route::get('/tasks-forums', 'taskForumOfSection');
+    Route::get('/course-info', 'courseInfo');
     Route::post('/add-section', 'addSection');
     Route::put('/update-section', 'updateSection');
     Route::delete('/delete-section', 'deleteSection');

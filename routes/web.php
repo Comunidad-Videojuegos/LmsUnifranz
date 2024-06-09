@@ -14,7 +14,7 @@ Route::prefix('google')->group(function()
 // RUTAS POR DEFECTO
 Route::prefix('admin')->middleware('auth')->group(function()
     {
-        Route::get('/', function () { return redirect('/admin/config'); });
+        Route::get('/', function () { return redirect('/admin/admins'); });
         include __DIR__. '/admin/config.php';
         include __DIR__. '/admin/permissions.php';
         include __DIR__. '/admin/roles.php';

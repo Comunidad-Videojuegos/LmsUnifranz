@@ -4,6 +4,7 @@ namespace App\Models\Integration;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Users\USR_Info;
 
 class INP_Instructor extends Model
 {
@@ -18,9 +19,10 @@ class INP_Instructor extends Model
     ];
 
     public $timestamps = false;
-    
+
     public function info()
     {
       return $this->belongsTo(USR_Info::class, 'id', 'id');
     }
+
 }

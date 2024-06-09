@@ -34,6 +34,19 @@ class CourseController extends Controller
             ->with('pageNumber', $pageNumber);
     }
 
+    public function courseInfo(Request $request)
+    {
+        $courseId = $request->input('id');
+
+        $course = INP_Course::where('id', $courseId)->first();
+
+        if ($course) {
+            return response()->json($course);
+        } else {
+            return response()->json(['error' => 'Curso no encontrado'], 404);
+        }
+    }
+
     public function coursesOfStudent(Request $request)
     {
         $studentId = $request->input("studentId");

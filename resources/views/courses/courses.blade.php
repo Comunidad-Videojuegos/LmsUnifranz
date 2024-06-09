@@ -61,6 +61,33 @@
 
         function EditUserModal(param)
         {
+            let array = JSON.parse(param);
+            localStorage.setItem("idCourseSystem", array[0])
+
+            fetch(`/api/integration/instructors`)
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById('ins_cur').innerHTML = "";
+                data.forEach((instructor) =>
+                {
+                    document.getElementById('ins_cur').innerHTML += `
+                        <option value="${instructor.id}">${instructor.name}</option>
+                    `;
+                })
+            })
+
+            fetch(`/api/content/course-info?id=${array[0]}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('name_cur').value = data.name;
+                document.getElementById('desc_cur').value = data.description;
+                document.getElementById('lin_cur').value = data.groupLink;
+                document.getElementById('man_cur').checked = data.mandatory;
+                document.getElementById('ini_cur').value = data.initials;
+                document.getElementById('ins_cur').value = data.instructorId;
+            })
+
             const modal = new ModalPrefab("editModal", "closeEditModal");
             modal.openModal();
         }

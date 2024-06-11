@@ -30,7 +30,7 @@
         </div>
         <div>
             <h3 class="py-4">Imagen:</h3>
-            <x-input-file placeholder="Carnet de identidad" id="img_cur"  width="300px" accept="image/*"/>
+            <x-input-file id="img_cur"  width="300px" accept="image/*"/>
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
         formData.append("description", document.getElementById("desc_cur").value);
         formData.append("initials", document.getElementById("ini_cur").value);
         formData.append("instructorId", document.getElementById("ins_cur").value);
-        formData.append("mandatory", document.getElementById("man_cur").value);
+        formData.append("mandatory", document.getElementById("man_cur").checked);
         formData.append("groupLink", document.getElementById("lin_cur").value);
 
         const imageInput = document.getElementById("img_cur");

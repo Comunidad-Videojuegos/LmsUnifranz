@@ -19,10 +19,7 @@ class INP_Course extends Model
         'initials',
         'description',
         'image',
-        'groupLink',
-        'createDate',
-        'updateDate',
-        'deleteDate'
+        'groupLink'
     ];
 
     public $timestamps = false;

@@ -172,11 +172,10 @@ class CourseController extends Controller
             $course->initials = $initials;
             $course->description = $description;
             $course->groupLink = $groupLink;
-            $course->updateDate = now();
 
             if(!empty($image))
             {
-                $filePath = $file->store('uploads');
+                $filePath = $image->store('uploads');
 
                 $uploadedFileUrl = Cloudinary::uploadFile(storage_path('app/' . $filePath), [
                     'public_id' => 'Course'
@@ -184,12 +183,10 @@ class CourseController extends Controller
 
                 $course->image = $uploadedFileUrl;
             }
-
-            $course->image = $image;
             $course->save();
 
             // Respuesta exitosa
-            return response()->json(["message" => "Agregado correctamente"], 200);
+            return response()->json(["message" => "Actualizado correctamente"], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

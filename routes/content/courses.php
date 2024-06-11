@@ -16,5 +16,5 @@ Route::controller(CourseController::class)->group(function()
     Route::post('/add-section', 'addSection');
     Route::put('/update-section', 'updateSection');
     Route::delete('/delete-section', 'deleteSection');
-    Route::put('/course', 'updateCourse');
+    Route::post('/course', 'updateCourse');
 });

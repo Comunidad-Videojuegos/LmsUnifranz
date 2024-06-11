@@ -44,7 +44,7 @@
     <x-modal width="800px" height="550px" title="Editar informacion del curso" idModal="editModal" idCloseModal="closeEditModal">
         @include('courses.update-course')
         <x-slot name="btn_action">
-            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar"/>
+            <x-button-text id="btnEditUser" color="#fff" bg="#007bff" text="Editar" function="UpdateCourse"/>
         </x-slot>
     </x-modal>
 

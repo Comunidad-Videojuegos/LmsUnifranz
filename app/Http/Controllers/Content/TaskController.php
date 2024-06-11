@@ -129,15 +129,9 @@ class TaskController extends Controller
                 $url = $this->host . $this->service_email . "notification";
                 $response = $this->callOtherService($url, $data);
 
-                // Check response from the other service
-                if ($response['status'] !== 200) {
-                    return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'], 200);
-                }
-
-
             }catch(\Exception $e)
             {
-
+                return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'], 200);
             }
 
             // Respuesta exitosa
@@ -214,9 +208,38 @@ class TaskController extends Controller
 
     public function gradeTask(Request $request)
     {
-        // BODY JSON
-        $calification = $request->input('calification');
-        $taskId = $request->input('taskId');
+        $taskDelivery = RPT_TaskDeliveries::find($request->input('deliveryId'));
+        // Actualizar los campos
+        $taskDelivery->calification = $request->input('calification');
+
+        // Guardar los cambios
+        $taskDelivery->save();
+
+        // ENVIO DE CORREO ELECTRONICO
+        try
+        {
+            // Data to send to the other service
+            $data = [
+                'user' => "callelazodeynarluis@gmail.com",
+                'name' => "",
+                'title' => "El docente a calificado la tarea",
+                'message' => "Se agrego una tarea, para poder ver esa tarea ingresa al siguiente enlace",
+                'userId' => 3
+            ];
+            $url = $this->host . $this->service_email . "notification";
+            $response = $this->callOtherService($url, $data);
+
+            // Check response from the other service
+            if ($response['status'] !== 200) {
+                return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'. $url], 200);
+            }
+
+
+        }catch(\Exception $e)
+        {
+            return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'], 200);
+        }
+
 
         return response()->json(["message" => "Actualizado con exito"], 200);
     }

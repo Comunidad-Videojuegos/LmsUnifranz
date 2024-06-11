@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="{{asset('/imgs/unifranz.png')}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LMS UNIFRANZ</title>
-    <script type="module" crossorigin src="{{asset('/assets/index-DjkHdfBP.js')}}"></script>
+    <script type="module" crossorigin src="{{asset('/assets/index-CMp_BSCX.js')}}"></script>
     <link rel="stylesheet" crossorigin href="{{asset('/assets/index-BfqBuZLq.css')}}">
   </head>
   <body>

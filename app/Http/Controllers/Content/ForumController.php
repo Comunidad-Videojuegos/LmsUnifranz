@@ -13,29 +13,45 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ForumController extends Controller
 {
+
+
+
     public function forumConversation(Request $request)
     {
         $forumId = $request->input('forumId');
 
         $conversations = COL_ForumConversation::select('id', 'message', 'conversationId')
-        ->where('forumId', $forumId)
-        ->whereNull('deleteDate')
-        ->with([
-            'files:id,conversationId,link,size,type',
-            'responses' => function ($query) {
-                $query->select('id', 'message', 'conversationId')
-                    ->with(['files:id,conversationId,link,size,type', 'responses' => function ($query) {
-                        $query->select('id', 'message', 'conversationId')
-                            ->with(['files:id,conversationId,link,size,type']);
-                    }])
-                    ->orderBy('conversationId', 'asc');
-            }
-        ])
-        ->orderBy('conversationId', 'asc')
-        ->take(1000)
-        ->get();
+            ->where('forumId', $forumId)
+            ->whereNull('deleteDate')
+            ->where('conversationId', 0) // Solo obtener las conversaciones padre
+            ->with([
+                'files:id,conversationId,link,size,type',
+                'children' => function ($query) {
+                    $query->select('id', 'message', 'conversationId')
+                        ->with(['files:id,conversationId,link,size,type', 'children']);
+                }
+            ])
+            ->orderBy('id', 'asc')
+            ->take(1000)
+            ->get();
 
-        return response()->json($conversations);
+        // Función recursiva para construir la estructura de árbol
+        function buildConversationTree($conversations) {
+            $tree = [];
+            foreach ($conversations as $conversation) {
+                $tree[] = [
+                    'id' => $conversation->id,
+                    'message' => $conversation->message,
+                    'files' => $conversation->files,
+                    'children' => buildConversationTree($conversation->children),
+                ];
+            }
+            return $tree;
+        }
+
+        $conversationTree = buildConversationTree($conversations);
+
+        return response()->json($conversationTree);
     }
 
     public function addMessageConversation(Request $request)

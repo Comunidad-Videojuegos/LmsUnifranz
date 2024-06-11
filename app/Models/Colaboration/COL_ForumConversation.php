@@ -34,4 +34,8 @@ class COL_ForumConversation extends Model
     {
         return $this->hasMany(COL_ForumConversation::class, 'conversationId');
     }
+    public function children()
+    {
+        return $this->hasMany(self::class, 'conversationId', 'id');
+    }
 }

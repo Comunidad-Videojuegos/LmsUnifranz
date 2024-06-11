@@ -38,11 +38,13 @@ class HelloMail extends Mailable
      */
     public function content(): Content
     {
+
         return new Content(
             view: 'mail.hello',
             with: [
+                'user_name' => $this->messageContent['user_name'],
+                'msg' => $this->messageContent['message'],
                 'name' => $this->messageContent['name'],
-                'message' => $this->messageContent['message'],
             ],
         );
     }

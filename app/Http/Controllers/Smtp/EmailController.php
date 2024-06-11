@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\HelloMail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Users\USR_Info;
 
 class EmailController extends Controller
 {
@@ -23,10 +24,30 @@ class EmailController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        $user = USR_Info::find($request->input('userId'));
+
+        if ($user) {
+            $studentName = $user->firstName . ' ' . $user->dadLastName . ' ' . $user->momLastName;
+        } else {
+            $studentName = 'Usuario no encontrado';
+        }
+
+        // Formatear el mensaje
+        $rawMessage = $request->input('message');
+        $formattedMessage = nl2br(e($rawMessage)); // Convertir \n a <br> y escapar el contenido
+
+        // Reemplazar el enlace por una etiqueta <a>
+        $formattedMessage = preg_replace(
+            '/(http?:\/\/[^\s]+)/',
+            '<a href="$1">Enlace de actividad</a>',
+            $formattedMessage
+        );
+
         $messageContent = [
-            'name' => $request->input('user'),
+            'user_name' => $studentName,
+            'name' => $request->input('name'),
             'title' => $request->input('title'),
-            'message' => $request->input('message'),
+            'message' => $formattedMessage,
         ];
 
         Mail::to($request->input('user'))->send(new HelloMail($messageContent));
@@ -48,7 +69,7 @@ class EmailController extends Controller
         }
 
         $messageContent = [
-            'name' => $request->input('user'),
+            'name' => $request->input('name'),
             'title' => $request->input('title'),
             'message' => $request->input('message'),
         ];

@@ -10,10 +10,13 @@ use App\Models\Content\CON_TaskDeliveryFile;
 use App\Models\Content\CON_Task;
 use App\Models\Content\CON_TaskFile;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-// COL_ForumConversationFile
+use App\Models\Content\CON_CourseSection;
 
 class TaskController extends Controller
 {
+    private $host = "127.0.0.1:8000";
+    private $host_lms = "http://lmsunifranz.online:8000";
+    private $service_email = "/api/mail/";
     public function tasksDeliveried(Request $request)
     {
         $studentId = $request->input('studentId');
@@ -106,11 +109,39 @@ class TaskController extends Controller
                 }
             }
 
-            // Confirmar la transacción
             DB::commit();
 
+
+            $courseId = CON_CourseSection::find($courseSectionId)->courseId;
+            // ENVIO DE CORREO ELECTRONICO
+            try
+            {
+                // Data to send to the other service
+                $data = [
+                    'user' => "callelazodeynarluis@gmail.com",
+                    'name' => "",
+                    'title' => "El docente a agregado una nueva tarea",
+                    'message' => "
+                        Se agrego una tarea, para poder ver esa tarea ingresa al siguiente enlace\n
+                        $host_lms/dashboard/courses/$courseId/sections/$courseSectionId/tasks/".$task->id,
+                    'userId' => 4
+                ];
+                $url = $this->host . $this->service_email . "notification";
+                $response = $this->callOtherService($url, $data);
+
+                // Check response from the other service
+                if ($response['status'] !== 200) {
+                    return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'], 200);
+                }
+
+
+            }catch(\Exception $e)
+            {
+
+            }
+
             // Respuesta exitosa
-            return response()->json(["message" => "Agregado correctamente"], 200);
+            return response()->json(["message" => "Agregado correctamente, y correo enviado"], 200);
         } catch (\Exception $e) {
             // Si hay un error, revertir la transacción
             DB::rollBack();
@@ -196,5 +227,25 @@ class TaskController extends Controller
         $taskId = $request->input('taskId');
 
         return response()->json(["message" => "Eliminado con exito"], 200);
+    }
+
+    private function callOtherService($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return [
+            'status' => $httpCode,
+            'response' => json_decode($response, true)
+        ];
     }
 }

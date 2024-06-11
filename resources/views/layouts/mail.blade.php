@@ -19,19 +19,14 @@
 </head>
 <body>
     <div class="header">
-        <div style="text-align: center; padding: 20px;">
-            <img src="{{ asset('imgs/unifranz.jpeg') }}" alt="Logo Aula Virtual" style="max-width: 150px;">
+        <div style="text-align: center; padding: 10px;">
+            <img src="https://res.cloudinary.com/dm0aq4bey/image/upload/v1718124295/Course.png" alt="Logo Aula Virtual" style="max-width: 200px;">
             <h1 style="margin: 0;">Aula Virtual</h1>
         </div>
     </div>
 
     <div class="content">
-        <div style="padding: 20px;">
-            <h2 style="color: #333;">Hola, {{ $name }}</h2>
-            <p style="font-size: 16px; color: #555;">
-                {{ $message }}
-            </p>
-        </div>
+        @yield('content-mail')
     </div>
 
     <div class="footer">

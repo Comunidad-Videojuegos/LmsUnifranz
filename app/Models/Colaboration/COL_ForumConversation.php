@@ -38,4 +38,9 @@ class COL_ForumConversation extends Model
     {
         return $this->hasMany(self::class, 'conversationId', 'id');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'conversationId', 'id');
+    }
 }

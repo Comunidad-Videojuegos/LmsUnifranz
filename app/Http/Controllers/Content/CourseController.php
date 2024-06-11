@@ -8,7 +8,9 @@ use App\Models\Integration\INP_Course;
 use App\Models\Integration\INP_CourseInscribed;
 use App\Models\Content\CON_CourseSection;
 use App\Models\Content\CON_Task;
+use App\Models\Content\CON_TaskFile;
 use App\Models\Colaboration\COL_Forum;
+use App\Models\Colaboration\COL_ForumFile;
 use Illuminate\Support\Facades\DB;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class CourseController extends Controller
@@ -112,22 +114,33 @@ class CourseController extends Controller
     public function taskForumOfSection(Request $request)
     {
         $sectionId = $request->input('sectionId');
-
         // Obtener los resultados de CON_Task
         $taskResults = CON_Task::select('id', 'valoration', 'orderNumber', 'name', 'description')
-        ->where('courseSectionId', $sectionId)
-        ->selectRaw("'TAREA' as type");
+            ->where('courseSectionId', $sectionId)
+            ->selectRaw("'TAREA' as type");
 
         // Obtener los resultados de COL_Forum
         $forumResults = COL_Forum::select('id', 'valoration', 'orderNumber', 'header', 'content')
-        ->where('courseSectionId', $sectionId)
-        ->selectRaw("'FORO' as type");
+            ->where('courseSectionId', $sectionId)
+            ->selectRaw("'FORO' as type");
 
         // Combinar los resultados
         $results = $taskResults->union($forumResults)->orderBy('orderNumber')->get();
 
+        // Agregar el campo files a cada tarea y foro
+        $enhancedResults = $results->map(function ($item) {
+            if ($item->type == 'TAREA') {
+                $files = CON_TaskFile::where('taskId', $item->id)->get();
+            } else {
+                $files = COL_ForumFile::where('forumId', $item->id)->get();
+            }
+
+            $item->files = $files;
+            return $item;
+        });
+
         // Devolver los resultados en formato JSON
-        return response()->json($results);
+        return response()->json($enhancedResults);
     }
 
     public function addSection(Request $request)

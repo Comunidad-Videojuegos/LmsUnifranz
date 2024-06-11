@@ -135,8 +135,7 @@ class TaskController extends Controller
                 'taskId' => $taskId,
                 'studentId' => $studentId,
                 'viewed' => 0,
-                'reviewed' => 0,
-                'calification' => 0.0
+                'reviewed' => 0
             ]);
 
             // Si se han adjuntado archivos
@@ -144,7 +143,7 @@ class TaskController extends Controller
 
                 $filePaths = [];
                 foreach ($files as $file) {
-                    $filePaths[] = $file->store('uploads');     
+                    $filePaths[] = $file->store('uploads');
                 }
 
                 for ($i=0; $i < count($filePaths); $i++)

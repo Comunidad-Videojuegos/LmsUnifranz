@@ -64,6 +64,7 @@ class CourseController extends Controller
             ->where('INP_CourseInscribed.studentId', $studentId)
             ->where('INP_Course.gestionId', $gestionId)
             ->whereYear('INP_CourseInscribed.createDate', 2024)
+            ->distinct()
             ->get();
 
         // Array de nombres de materias

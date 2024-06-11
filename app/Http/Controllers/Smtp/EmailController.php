@@ -49,7 +49,6 @@ class EmailController extends Controller
             'title' => $request->input('title'),
             'message' => $formattedMessage,
         ];
-
         Mail::to($request->input('user'))->send(new HelloMail($messageContent));
         return response()->json(['message' => 'Notification Email Sent Successfully']);
     }

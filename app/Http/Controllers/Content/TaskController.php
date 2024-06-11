@@ -11,10 +11,14 @@ use App\Models\Content\CON_Task;
 use App\Models\Content\CON_TaskFile;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Models\Content\CON_CourseSection;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HelloMail;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Users\USR_Info;
 
 class TaskController extends Controller
 {
-    private $host = "127.0.0.1:8000";
+    private $host = "http://127.0.0.1:8000";
     private $host_lms = "http://lmsunifranz.online:8000";
     private $service_email = "/api/mail/";
     public function tasksDeliveried(Request $request)
@@ -116,22 +120,18 @@ class TaskController extends Controller
             // ENVIO DE CORREO ELECTRONICO
             try
             {
-                // Data to send to the other service
-                $data = [
-                    'user' => "callelazodeynarluis@gmail.com",
-                    'name' => "",
-                    'title' => "El docente a agregado una nueva tarea",
-                    'message' => "
-                        Se agrego una tarea, para poder ver esa tarea ingresa al siguiente enlace\n
-                        $host_lms/dashboard/courses/$courseId/sections/$courseSectionId/tasks/".$task->id,
-                    'userId' => 4
-                ];
-                $url = $this->host . $this->service_email . "notification";
-                $response = $this->callOtherService($url, $data);
+                $req_user = "callelazodeynarluis@gmail.com";
+                $req_title= "El docente a agregado una nueva tarea";
+                $req_name = "HAY TAREA NUEVA!";
+                $req_msg = " Se agrego una tarea, para poder ver esa tarea ingresa al siguiente enlace\n
+                        http://lmsunifranz.online:8000/dashboard/courses/$courseId/sections/$courseSectionId/tasks/".$task->id;
+
+                $this->sendNotification($req_user, $req_title, $req_name, $req_msg);
 
             }catch(\Exception $e)
             {
-                return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'], 200);
+                $errorMessage = $e->getMessage();
+                return response()->json(['message' => $errorMessage], 200);
             }
 
             // Respuesta exitosa
@@ -218,22 +218,12 @@ class TaskController extends Controller
         // ENVIO DE CORREO ELECTRONICO
         try
         {
-            // Data to send to the other service
-            $data = [
-                'user' => "callelazodeynarluis@gmail.com",
-                'name' => "",
-                'title' => "El docente a calificado la tarea",
-                'message' => "Se agrego una tarea, para poder ver esa tarea ingresa al siguiente enlace",
-                'userId' => 3
-            ];
-            $url = $this->host . $this->service_email . "notification";
-            $response = $this->callOtherService($url, $data);
+            $req_user = "callelazodeynarluis@gmail.com";
+            $req_title= "El docente a calificado la tarea";
+            $req_name = "LA CALIFICACION A LLEGADO";
+            $req_msg = "Tu nota en esta tarea fue de: ". $request->input('calification');
 
-            // Check response from the other service
-            if ($response['status'] !== 200) {
-                return response()->json(['message' => 'Agregado, pero no se pudo enviar el correo'. $url], 200);
-            }
-
+            $this->sendNotification($req_user, $req_title, $req_name, $req_msg);
 
         }catch(\Exception $e)
         {
@@ -244,6 +234,30 @@ class TaskController extends Controller
         return response()->json(["message" => "Actualizado con exito"], 200);
     }
 
+    private function sendNotification($req_user, $req_title, $req_name, $req_msg)
+    {
+
+        // Formatear el mensaje
+        $rawMessage = $req_msg;
+        $formattedMessage = nl2br(e($rawMessage)); // Convertir \n a <br> y escapar el contenido
+
+        // Reemplazar el enlace por una etiqueta <a>
+        $formattedMessage = preg_replace(
+            '/(http?:\/\/[^\s]+)/',
+            '<a href="$1">Enlace de actividad</a>',
+            $formattedMessage
+        );
+
+        $messageContent = [
+            'user_name' => "Deynar Luis Calle Lazo",
+            'name' => $req_name,
+            'title' => $req_title,
+            'message' => $formattedMessage,
+        ];
+        Mail::to($req_user)->send(new HelloMail($messageContent));
+        return true;
+    }
+
     public function deleteTask(Request $request)
     {
         // QUERY URL
@@ -252,23 +266,4 @@ class TaskController extends Controller
         return response()->json(["message" => "Eliminado con exito"], 200);
     }
 
-    private function callOtherService($url, $data)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json'
-        ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        return [
-            'status' => $httpCode,
-            'response' => json_decode($response, true)
-        ];
-    }
 }

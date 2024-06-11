@@ -18,9 +18,6 @@ use App\Models\Users\USR_Info;
 
 class TaskController extends Controller
 {
-    private $host = "http://127.0.0.1:8000";
-    private $host_lms = "http://lmsunifranz.online:8000";
-    private $service_email = "/api/mail/";
     public function tasksDeliveried(Request $request)
     {
         $studentId = $request->input('studentId');

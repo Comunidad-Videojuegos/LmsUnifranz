@@ -147,12 +147,14 @@ class CourseController extends Controller
     {
         // BODY JSON
         $initDate = $request->input('initDate');
+        $valoration = $request->input('valoration');
         $endDate = $request->input('endDate');
         $courseId = $request->input('courseId');
         $assistance = $request->input('assistance'); // para saber si colocar un campo de assistencia
         $name = $request->input('name');
 
         $delivery = CON_CourseSection::create([
+            'valoration' => $valoration,
             'initDate' => $initDate,
             'endDate' => $endDate,
             'courseId' => $courseId,

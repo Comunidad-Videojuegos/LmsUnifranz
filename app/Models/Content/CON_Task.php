@@ -18,6 +18,7 @@ class CON_Task extends Model
         'missing',
         'valoration',
         'orderNumber',
+        'expirationDate',
         'createDate',
         'updateDate',
         'deleteDate',

@@ -121,6 +121,7 @@ return new class extends Migration
             $table->boolean('missing');
             $table->decimal('valoration');
             $table->integer('orderNumber');
+            $table->dateTime('expirationDate');
             $table->dateTime('createDate')->useCurrent();
             $table->timestamp('updateDate')->nullable();
             $table->timestamp('deleteDate')->nullable();

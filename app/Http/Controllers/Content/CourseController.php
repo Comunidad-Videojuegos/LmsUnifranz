@@ -22,7 +22,7 @@ class CourseController extends Controller
         $totalCareers = INP_Course::count();
         $totalPages = ceil($totalCareers / $perPage);
 
-        $courses = INP_Course::select('id', 'name', 'initials')
+        $courses = INP_Course::select('id', 'image', 'name', 'initials')
             ->skip($offset)
             ->take($perPage)
             ->get();

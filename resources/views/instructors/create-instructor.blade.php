@@ -61,5 +61,6 @@
         await axiosInstance.post(`/admin-general/instructor`, {
             firstName, email, ci, dadLastName, momLastName, age, type, speciality
         });
+        location.reload();
     }
 </script>

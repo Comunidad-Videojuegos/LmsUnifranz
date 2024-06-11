@@ -19,5 +19,6 @@
         axiosInstance.setMessageSuccess("Se modifico correctamente los roles");
 
         await axiosInstance.put(`/admin-general/roles/admin?idUser=${idUser}`, { roles: selectedRoles });
+        location.reload();
     }
 </script>

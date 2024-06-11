@@ -2,10 +2,11 @@
 @extends('layouts.app')
 
 @php
-    $titles = ['Nombre', 'Iniciales', 'Editar', 'Eliminar'];
+    $titles = ['Imagen', 'Nombre', 'Iniciales', 'Editar', 'Eliminar'];
     $fields = $courses->map(function($course) {
         return [
             $course->id,
+            $course->image,
             $course->name,
             $course->initials,
         ];
@@ -33,7 +34,7 @@
         </div>
         <div class="h-[80vh] relative overflow-auto py-7 px-5">
             <div class="rounded-2xl">
-                <x-table :titles="$titles" :fields="$fields" :buttons="$buttons" :hasIcon=false
+                <x-table :titles="$titles" :fields="$fields" :buttons="$buttons" :hasIcon=true
                     :pageNumber="$pageNumber" link="courses" :totalPages="$totalPages" />
             </div>
         </div>

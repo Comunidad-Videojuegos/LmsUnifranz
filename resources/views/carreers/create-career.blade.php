@@ -36,5 +36,6 @@
         await axiosInstance.post(`/admin-general/career`, {
             name, description, initials, duration
         });
+        location.reload();
     }
 </script>

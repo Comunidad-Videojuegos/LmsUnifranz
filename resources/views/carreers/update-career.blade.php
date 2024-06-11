@@ -37,5 +37,6 @@
         await axiosInstance.put(`/admin-general/career?id=${idCareer}`, {
             name, description, initials, duration
         });
+        location.reload();
     }
 </script>

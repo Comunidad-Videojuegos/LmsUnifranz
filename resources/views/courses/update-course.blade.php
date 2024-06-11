@@ -60,5 +60,6 @@
         }
 
         await axiosInstance.postFormData(`/content/course?id=${idCourse}`, formData);
+        location.reload();
     }
 </script>

@@ -49,5 +49,6 @@
         await axiosInstance.put(`/admin-general/user-info?idUser=${idUser}`, {
             firstName, email, ci, dadLastName, momLastName, age
         });
+        location.reload();
     }
 </script>

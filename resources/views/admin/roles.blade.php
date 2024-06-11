@@ -73,6 +73,7 @@
             axiosInstance.setMessageSuccess("Se edito el rol correctamente");
 
             await axiosInstance.put(`/admin-general/rol`, { idRol, name});
+            location.reload();
         }
     </script>
 

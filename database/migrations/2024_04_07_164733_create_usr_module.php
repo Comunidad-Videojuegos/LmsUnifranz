@@ -10,54 +10,42 @@ return new class extends Migration
   // Run the migrations.
   public function up(): void
   {
-    Schema::create('USR_Permission', function (Blueprint $table) {
-      $table->id();
-    });
-    DB::statement("ALTER TABLE USR_Permission ADD name varchar(30)");
-    DB::statement("ALTER TABLE USR_Permission ADD permissionKey varchar(256)");
 
     Schema::create('USR_Rol', function (Blueprint $table) {
       $table->id();
       $table->timestamp('createDate')->useCurrent();
-      $table->timestamp('updateDate')->useCurrent();
-      $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
+      $table->timestamp('updateDate')->nullable();
+      $table->timestamp('deleteDate')->nullable();
     });
-    DB::statement("ALTER TABLE USR_Rol ADD name varchar(20) NOT NULL");
+    DB::statement("ALTER TABLE USR_Rol ADD name varchar(50) NOT NULL");
 
     Schema::create('USR_UserRoles', function (Blueprint $table) {
       $table->id();
       $table ->unsignedBigInteger('rolId');
       $table ->unsignedBigInteger('userId');
       $table->timestamp('createDate')->useCurrent();
-      $table->timestamp('updateDate')->useCurrent();
-      $table->timestamp('deleteDate')->default('0001-01-01 00:00:00');
-    });
-    DB::statement("ALTER TABLE USR_UserRoles ADD color varchar(10) NOT NULL");
-
-    Schema::create('USR_RolPermissions', function (Blueprint $table) {
-      $table->id();
-      $table ->unsignedBigInteger('permissionId');
-      $table ->unsignedBigInteger('rolId');
+      $table->timestamp('updateDate')->nullable();
+      $table->timestamp('deleteDate')->nullable();
     });
 
-    // Relaciones
-    Schema::table('USR_RolPermissions', function (Blueprint $table) {
-      $table->foreign('rolId')->references('id')->on('USR_Rol');
-      $table->foreign('permissionId')->references('id')->on('USR_Permission');
+    Schema::create('USR_Info', function(Blueprint $table)
+    {
+        $table->unsignedBigInteger('id')->primary();
+        $table->string('photo')->nullable();
     });
+    DB::statement("ALTER TABLE USR_Info ADD firstName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD momLastName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD dadLastName varchar(40)");
+    DB::statement("ALTER TABLE USR_Info ADD age int");
+    DB::statement("ALTER TABLE USR_Info ADD ci varchar(15)");
 
-    Schema::table('USR_UserRoles', function (Blueprint $table) {
-      $table->foreign('rolId')->references('id')->on('USR_Rol');
-      $table->foreign('userId')->references('id')->on('users');
-    });
   }
 
   // Reverse the migrations.
   public function down(): void
   {
-    Schema::dropIfExists('USR_RolPermissions');
     Schema::dropIfExists('USR_UserRoles');
     Schema::dropIfExists('USR_Rol');
-    Schema::dropIfExists('USR_Permission');
+    Schema::dropIfExists('USR_Info');
   }
 };

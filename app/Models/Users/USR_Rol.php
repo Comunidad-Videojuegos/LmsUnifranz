@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class USR_Rol extends Model
 {
-  use HasFactory;
   protected $table = 'USR_Rol';
-//   private $date = date('y-m-d');
 
   protected $fillable = ['name', 'createDate', 'updateDate', 'deleteDate'];
 
@@ -20,17 +18,14 @@ class USR_Rol extends Model
     'name' => 'string'
   ];
 
-  protected $attributes = [
-    // 'createDate' => $date
-  ];
-
+  public $timestamps = false;
   public function userRoles()
   {
-    return $this->hasMany(USR_UserRoles::class);
+    return $this->hasMany(UserRoles::class);
   }
 
   public function rolPermissions()
   {
-    return $this->hasMany(USR_RolPermissions::class);
+    return $this->hasMany(RolPermissions::class);
   }
 }

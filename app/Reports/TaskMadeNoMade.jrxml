@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TaskMadeNoMade" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6278d2be-50c9-45c5-bd17-33049c0b34b7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lms-Unifranz"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="TaskStadistics" uuid="692f0851-df47-4314-ad57-b38a80c2e106">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lms-Unifranz"/>
+		<parameter name="InitDate" class="java.lang.String"/>
+		<parameter name="EndDate" class="java.lang.String"/>
+		<parameter name="TaskId" class="java.lang.String"/>
+		<parameter name="Students" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[DECLARE @string VARCHAR(100) = $P{Students}
+DECLARE @taskId int = $P{TaskId}
+
+IF @string <> ''
+BEGIN
+    DECLARE @values TABLE (valor INT);
+
+    INSERT INTO @values (valor)
+    SELECT value FROM STRING_SPLIT(@string, ',')
+    
+    SELECT 
+        RPT.studentId,
+        USI.firstName, 
+        USI.dadLastName, 
+        USI.momLastName, 
+        MAX(RPT.calification) AS Calification,
+        COUNT(RPT.id) AS Entregas
+
+    FROM RPT_TaskDeliveries AS RPT
+    
+	INNER JOIN USR_Info AS USI
+        ON RPT.studentId = USI.id
+
+    WHERE 
+        RPT.taskId = @taskId AND 
+        RPT.studentId IN (SELECT valor FROM @values) AND
+        RPT.createDate BETWEEN $P{InitDate} AND $P{EndDate}
+    GROUP BY RPT.studentId, USI.firstName, USI.dadLastName, USI.momLastName
+
+END
+ELSE
+BEGIN
+    SELECT 
+        RPT.studentId,
+        USI.firstName, 
+        USI.dadLastName, 
+        USI.momLastName, 
+        MAX(RPT.calification) AS calification,
+        COUNT(RPT.id) AS Entregas
+    FROM RPT_TaskDeliveries AS RPT
+
+    INNER JOIN USR_Info AS USI
+        ON RPT.studentId = USI.id
+
+    WHERE 
+        RPT.taskId = @taskId AND
+        RPT.createDate BETWEEN $P{InitDate} AND $P{EndDate}
+    GROUP BY RPT.studentId, USI.firstName, USI.dadLastName, USI.momLastName
+END]]>
+		</queryString>
+		<field name="studentId" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="studentId"/>
+			<property name="com.jaspersoft.studio.field.label" value="studentId"/>
+		</field>
+		<field name="firstName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="firstName"/>
+			<property name="com.jaspersoft.studio.field.label" value="firstName"/>
+		</field>
+		<field name="dadLastName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="dadLastName"/>
+			<property name="com.jaspersoft.studio.field.label" value="dadLastName"/>
+		</field>
+		<field name="momLastName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="momLastName"/>
+			<property name="com.jaspersoft.studio.field.label" value="momLastName"/>
+		</field>
+		<field name="calification" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="calification"/>
+			<property name="com.jaspersoft.studio.field.label" value="calification"/>
+		</field>
+		<field name="Entregas" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="Entregas"/>
+			<property name="com.jaspersoft.studio.field.label" value="Entregas"/>
+		</field>
+		<group name="studentId">
+			<groupExpression><![CDATA[$F{studentId}]]></groupExpression>
+		</group>
+		<group name="firstName">
+			<groupExpression><![CDATA[$F{firstName}]]></groupExpression>
+		</group>
+		<group name="dadLastName">
+			<groupExpression><![CDATA[$F{dadLastName}]]></groupExpression>
+		</group>
+		<group name="momLastName">
+			<groupExpression><![CDATA[$F{momLastName}]]></groupExpression>
+		</group>
+		<group name="calification">
+			<groupExpression><![CDATA[$F{calification}]]></groupExpression>
+		</group>
+		<group name="Entregas">
+			<groupExpression><![CDATA[$F{Entregas}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="InitDate" class="java.lang.String"/>
+	<parameter name="EndDate" class="java.lang.String"/>
+	<parameter name="TaskId" class="java.lang.String"/>
+	<parameter name="Students" class="java.lang.String"/>
+	<parameter name="EndDateText" class="java.lang.String"/>
+	<parameter name="InitDateText" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 1;]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="270" y="10" width="262" height="30" uuid="bbb335f3-8406-490b-8f38-d32404493672"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADISTICA DE LA TAREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="50" width="30" height="20" uuid="53c96e70-6f52-4e3d-a60d-0a7ca29fec5c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="50" width="30" height="20" uuid="e13c3eec-f09c-4efb-b027-61d23cacea87"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="50" width="120" height="20" uuid="326f6d46-b583-4e65-8775-343ffe048e40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{InitDateText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="50" width="150" height="20" uuid="3c6b6858-b118-4257-b62d-0a4644c3e42d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{EndDateText}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="20" y="5" width="100" height="69" uuid="03ebd0e3-8882-47b9-94ed-fde720dd6998"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="450" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report" renderType="image" theme="default">
+					<reportElement x="0" y="10" width="800" height="420" uuid="0e0289f1-ead8-4054-8d74-2228e5ddbc4e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="TaskStadistics" uuid="133361f1-8cc0-441e-9c4d-276d61ffefe9">
+							<datasetParameter name="InitDate">
+								<datasetParameterExpression><![CDATA[$P{InitDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="EndDate">
+								<datasetParameterExpression><![CDATA[$P{EndDate}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="TaskId">
+								<datasetParameterExpression><![CDATA[$P{TaskId}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="Students">
+								<datasetParameterExpression><![CDATA[$P{Students}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{firstName}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{firstName}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{calification}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</detail>
+</jasperReport>

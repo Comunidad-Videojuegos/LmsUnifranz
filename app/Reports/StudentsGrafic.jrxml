@@ -12,7 +12,7 @@
 			<![CDATA[DECLARE @initDate varchar(40) = $P{InitDate};
 DECLARE @endDate varchar(40) = $P{EndDate};
 
-SELECT DISTINCT 
+SELECT DISTINCT
 	COUNT(INS.id) as students,
 	CRR.name as Carrera
 FROM INP_Student AS INS
@@ -60,7 +60,7 @@ GROUP By CRR.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ESTUDIANTES DE CADA CARRERA]]></text>
+				<text><![CDATA[PACIENTES DE CADA CARRERA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="253" y="50" width="30" height="20" uuid="83edeb96-5e04-43ea-ac63-87b384b7ad82"/>

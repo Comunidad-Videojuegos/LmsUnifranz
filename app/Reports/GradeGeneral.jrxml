@@ -66,9 +66,9 @@
 		<queryString language="SQL">
 			<![CDATA[declare @courseSectionId int = $P{SectionId};
 
-SELECT 
+SELECT
 	CNT.name, CONCAT(USI.firstName, USI.dadLastName, USI.momLastName) as StudentName,
-	COUNT(INS.id) AS Entregas, 
+	COUNT(INS.id) AS Entregas,
 	MAX(RPT.calification) as Calificacion,
 	CNT.valoration as Valoracion,
 	ROUND(CAST((MAX(RPT.calification) / 100) * CNT.Valoration AS DECIMAL(10, 2)), 2) AS Total
@@ -80,7 +80,7 @@ INNER JOIN RPT_TaskDeliveries AS RPT
 	ON INS.id = RPT.studentId
 INNER JOIN CON_Task AS CNT
 	ON CNT.id = RPT.taskId and CNT.courseSectionId = @courseSectionId
-WHERE 
+WHERE
 	CNT.createDate BETWEEN $P{InitDate} and $P{EndDate}
 GROUP BY INS.Id, RPT.taskId, USI.firstName, USI.dadLastName,USI.momLastName, CNT.name, CNT.valoration
 ORDER BY INS.id]]>
@@ -271,7 +271,7 @@ ORDER BY INS.id]]>
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[Estudiante]]></text>
+								<text><![CDATA[Paciente]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">

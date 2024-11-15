@@ -57,7 +57,7 @@
 
 
     {{-- AGREGAR --}}
-    <x-modal width="700px" height="550px" title="Agregar nuevo estudiante" idModal="addModal" idCloseModal="closeAddModal">
+    <x-modal width="700px" height="550px" title="Agregar nuevo paciente" idModal="addModal" idCloseModal="closeAddModal">
         @include('students.create-student')
         <x-slot name="btn_action">
             <x-button-text id="btnAddStudent" color="#fff" bg="#007bff" text="Agregar" function="CreateStudent"/>
@@ -77,7 +77,7 @@
     </x-modal> --}}
 
     {{-- OBTENER REPORTE --}}
-    <x-modal width="450px" height="330px" title="Reporte de estudiantes" idModal="reportModal" idCloseModal="closeReportModal">
+    <x-modal width="450px" height="330px" title="Reporte de pacientes" idModal="reportModal" idCloseModal="closeReportModal">
         @include('admins.report-admin')
         <x-slot name="btn_action">
             <div class="mr-5">
@@ -94,7 +94,7 @@
     </x-modal>
 
     {{-- ELIMINAR --}}
-    <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar el estudiante?" idModal="deleteModal" idCloseModal="closeDeleteModal">
+    <x-modal width="600px" height="140px" title="¿Esta seguro de eliminar el paciente?" idModal="deleteModal" idCloseModal="closeDeleteModal">
         <x-slot name="btn_action">
             <x-button-text id="btnDeleteUser" color="#fff" bg="#007bff" text="Eliminar"/>
         </x-slot>

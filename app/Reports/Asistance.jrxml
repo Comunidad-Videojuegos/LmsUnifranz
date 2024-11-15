@@ -14,7 +14,7 @@
 declare @initDate varchar(50) = $P{InitDate};
 declare @endDate varchar(50) = $P{EndDate};
 
-SELECT 
+SELECT
 	COUNT(*) AS cantidad,
 	CAT.name AS Type
 FROM RPT_CourseAssistance AS RPC
@@ -67,7 +67,7 @@ GROUP BY CAT.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ASISTENCIA DE ESTUDIANTES]]></text>
+				<text><![CDATA[ASISTENCIA DE PACIENTES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="277" y="50" width="30" height="20" uuid="390432b7-4570-497a-a78f-6ab13b88de6e"/>

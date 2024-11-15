@@ -39,7 +39,7 @@
 			<![CDATA[DECLARE @initDate varchar(40) = $P{InitDate};
 DECLARE @endDate varchar(40) = $P{EndDate};
 
-SELECT DISTINCT 
+SELECT DISTINCT
 	CONCAT(usi.firstName, ' ', usi.dadLastName, ' ',usi.momLastName) as Estudiante,
 	U.email as Correo,
 	usi.age AS Edad,
@@ -103,7 +103,7 @@ ORDER BY CRR.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ESTUDIANTES DE CADA CARRERA]]></text>
+				<text><![CDATA[PACIENTES DE CADA CARRERA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="133" y="50" width="30" height="20" uuid="fade3079-6e53-4f76-bc8f-a3a4c439ff4f"/>

@@ -7,12 +7,12 @@
     />
     <x-nav-item
         link="students"
-        title="Estudiantes"
+        title="Pacientes"
         icon="bi bi-people-fill"
     />
     <x-nav-item
         link="instructors"
-        title="Instructores"
+        title="Doctores"
         icon="bi bi-person-circle"
     />
 </div>

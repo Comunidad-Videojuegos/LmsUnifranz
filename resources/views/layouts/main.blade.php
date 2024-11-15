@@ -10,11 +10,11 @@
 </head>
 <body>
   <div class="flex justify-center h-screen items-center flex-col bg-cover"
-    style="background-image: url('{{ asset('imgs/fondo_main2.jpeg') }}')">
+    style="background-image: url('{{ asset('imgs/fondo_main2.jpg') }}')">
     {{-- Cabecera de pagina principal --}}
     <div>
-        <p class="text-3xl font-bold text-white">
-            BIENVENIDO A UNIFRANZ!
+        <p class="text-3xl font-bold text-black">
+            BIENVENIDO A CURSOS PARA TRANSTORNOS DE AUTISMO!
         </p>
     </div>
     <br>
